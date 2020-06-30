@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def math_index(request):
+    return render(request, 'mathematics/index.html')

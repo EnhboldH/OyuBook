@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def ctf_index(request):
+    return render(request, 'ctf/index.html')

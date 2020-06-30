@@ -1,0 +1,451 @@
+{% extends "ctf/layout.html" %}
+{% load static %}
+{% block stylesheets %}
+  <link href="{% static 'css/ctf/index.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<section id="main" class="d-flex align-items-center bg-dark">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <h1>Бодлогууд</h1>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div id="" class="pt-5">
+    <div class="category-header col-md-12 mb-3">
+      <h3>Cryptography</h3>
+    </div>
+    <div class="challenge-category col-md-12">
+      <div class="row ml-3">
+        {% for challenge in fields.ctfchallenges %}
+          {% if challenge.category == 'crypto' %}
+            <div class="challenge-div col-3">
+              <button class="challenge-box btn btn-dark w-100 text-truncate pt-3 pb-3 mb-3" id="challenge_id_{{ challenge.id }}" data-toggle="modal" data-target="#modal_id_{{ challenge.id }}">
+                <p>{{ challenge.name }}</p>
+                <p>{{ challenge.value }}</p>
+              </button>
+            </div>
+
+
+
+
+
+<div class="modal fade" id="modal_id_{{ challenge.id }}">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#challenge">Бодлого</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link challenge-solves" href="#solves">
+              5 Бодсон
+            </a>
+          </li>
+        </ul>
+        <div role="tabpanel">
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade show active" id="challenge">
+              <h2 class="challenge-name pt-3">{{ challenge.name }}</h2>
+              <h3 class="challenge-value">{{ challenge.value }}</h3>
+              <span class="challenge-desc">
+                <p>Here is a zip file full of just the finest little puppers. Can you find the hidden flag in the pile of pupper pictures?</p>
+                <p>Хариулт бол: <code>{{ challenge.flag }}</code></p>
+              </span>
+              <div class="row challenge-files text-center pb-3">
+                <div class="col-md-4 col-sm-4 col-xs-12 file-button-wrapper d-block">
+                  <a class="btn btn-info btn-file mb-1 d-inline-block px-2 w-100 text-truncate" href="">
+                    <i class="fas fa-download"></i>
+                    <small>puppy.zip</small>
+                  </a>
+                </div>
+              </div>
+            <div class="row submit-row">
+              <div class="col-md-9 form-group">
+                <input class="form-control" type="text" name="answer" id="submission-input" placeholder="Flag">
+                <input id="challenge-id" type="hidden" value="2">
+              </div>
+              <div class="col-md-3 form-group key-submit">
+                <button type="submit" id="submit-key" tabindex="0" class="btn btn-md btn-outline-secondary float-right">Шалгах</button>
+              </div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="solves">
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped text-center">
+                  <thead>
+                    <tr>
+                      <td><b>Name</b></td>
+                      <td><b>Date</b></td>
+                    </tr>
+                  </thead>
+                  <tbody id="challenge-solves-names">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div id="" class="pt-5">
+    <div class="category-header col-md-12 mb-3">
+      <h3>Forensics</h3>
+    </div>
+    <div class="challenge-category col-md-12">
+      <div class="row ml-3">
+        {% for challenge in fields.ctfchallenges %}
+          {% if challenge.category == 'forensics' %}
+            <div class="challenge-div col-3">
+              <button class="challenge-box btn btn-dark w-100 text-truncate pt-3 pb-3 mb-3" id="challenge_id_{{ challenge.id }}" data-toggle="modal" data-target="#modal_id_{{ challenge.id }}">
+                <p>{{ challenge.name }}</p>
+                <p>{{ challenge.value }}</p>
+              </button>
+            </div>
+
+
+
+
+
+<div class="modal fade" id="modal_id_{{ challenge.id }}">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#challenge">Бодлого</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link challenge-solves" href="#solves">
+              5 Бодсон
+            </a>
+          </li>
+        </ul>
+        <div role="tabpanel">
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade show active" id="challenge">
+              <h2 class="challenge-name pt-3">{{ challenge.name }}</h2>
+              <h3 class="challenge-value">{{ challenge.value }}</h3>
+              <span class="challenge-desc">
+                <p>Here is a zip file full of just the finest little puppers. Can you find the hidden flag in the pile of pupper pictures?</p>
+                <p>The answer is <code>flag{0h_y0u've_found_me}</code></p>
+              </span>
+              <div class="row challenge-files text-center pb-3">
+                <div class="col-md-4 col-sm-4 col-xs-12 file-button-wrapper d-block">
+                  <a class="btn btn-info btn-file mb-1 d-inline-block px-2 w-100 text-truncate" href="">
+                    <i class="fas fa-download"></i>
+                    <small>puppy.zip</small>
+                  </a>
+                </div>
+              </div>
+            <div class="row submit-row">
+              <div class="col-md-9 form-group">
+                <input class="form-control" type="text" name="answer" id="submission-input" placeholder="Flag">
+                <input id="challenge-id" type="hidden" value="2">
+              </div>
+              <div class="col-md-3 form-group key-submit">
+                <button type="submit" id="submit-key" tabindex="0" class="btn btn-md btn-outline-secondary float-right">Шалгах</button>
+              </div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="solves">
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped text-center">
+                  <thead>
+                    <tr>
+                      <td><b>Name</b></td>
+                      <td><b>Date</b></td>
+                    </tr>
+                  </thead>
+                  <tbody id="challenge-solves-names">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+
+<div id="" class="pt-5">
+    <div class="category-header col-md-12 mb-3">
+      <h3>Reverse engineering</h3>
+    </div>
+    <div class="challenge-category col-md-12">
+      <div class="row ml-3">
+        {% for challenge in fields.ctfchallenges %}
+          {% if challenge.category == 're' %}
+            <div class="challenge-div col-3">
+              <button class="challenge-box btn btn-dark w-100 text-truncate pt-3 pb-3 mb-3" id="challenge_id_{{ challenge.id }}" data-toggle="modal" data-target="#modal_id_{{ challenge.id }}">
+                <p>{{ challenge.name }}</p>
+                <p>{{ challenge.value }}</p>
+              </button>
+            </div>
+
+
+
+
+
+<div class="modal fade" id="modal_id_{{ challenge.id }}">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#challenge">Бодлого</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link challenge-solves" href="#solves">
+              5 Бодсон
+            </a>
+          </li>
+        </ul>
+        <div role="tabpanel">
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade show active" id="challenge">
+              <h2 class="challenge-name pt-3">{{ challenge.name }}</h2>
+              <h3 class="challenge-value">{{ challenge.value }}</h3>
+              <span class="challenge-desc">
+                <p>Here is a zip file full of just the finest little puppers. Can you find the hidden flag in the pile of pupper pictures?</p>
+                <p>The answer is <code>flag{0h_y0u've_found_me}</code></p>
+              </span>
+              <div class="row challenge-files text-center pb-3">
+                <div class="col-md-4 col-sm-4 col-xs-12 file-button-wrapper d-block">
+                  <a class="btn btn-info btn-file mb-1 d-inline-block px-2 w-100 text-truncate" href="">
+                    <i class="fas fa-download"></i>
+                    <small>puppy.zip</small>
+                  </a>
+                </div>
+              </div>
+            <div class="row submit-row">
+              <div class="col-md-9 form-group">
+                <input class="form-control" type="text" name="answer" id="submission-input" placeholder="Flag">
+                <input id="challenge-id" type="hidden" value="2">
+              </div>
+              <div class="col-md-3 form-group key-submit">
+                <button type="submit" id="submit-key" tabindex="0" class="btn btn-md btn-outline-secondary float-right">Шалгах</button>
+              </div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="solves">
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped text-center">
+                  <thead>
+                    <tr>
+                      <td><b>Name</b></td>
+                      <td><b>Date</b></td>
+                    </tr>
+                  </thead>
+                  <tbody id="challenge-solves-names">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+
+
+<div id="" class="pt-5">
+    <div class="category-header col-md-12 mb-3">
+      <h3>Programming</h3>
+    </div>
+    <div class="challenge-category col-md-12">
+      <div class="row ml-3">
+        {% for challenge in fields.ctfchallenges %}
+          {% if challenge.category == 'programming' %}
+            <div class="challenge-div col-3">
+              <button class="challenge-box btn btn-dark w-100 text-truncate pt-3 pb-3 mb-3" id="challenge_id_{{ challenge.id }}" data-toggle="modal" data-target="#modal_id_{{ challenge.id }}">
+                <p>{{ challenge.name }}</p>
+                <p>{{ challenge.value }}</p>
+              </button>
+            </div>
+
+
+
+
+
+<div class="modal fade" id="modal_id_{{ challenge.id }}">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#challenge">Бодлого</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link challenge-solves" href="#solves">
+              5 Бодсон
+            </a>
+          </li>
+        </ul>
+        <div role="tabpanel">
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade show active" id="challenge">
+              <h2 class="challenge-name pt-3">{{ challenge.name }}</h2>
+              <h3 class="challenge-value">{{ challenge.value }}</h3>
+              <span class="challenge-desc">
+                <p>Here is a zip file full of just the finest little puppers. Can you find the hidden flag in the pile of pupper pictures?</p>
+                <p>The answer is <code>flag{0h_y0u've_found_me}</code></p>
+              </span>
+              <div class="row challenge-files text-center pb-3">
+                <div class="col-md-4 col-sm-4 col-xs-12 file-button-wrapper d-block">
+                  <a class="btn btn-info btn-file mb-1 d-inline-block px-2 w-100 text-truncate" href="">
+                    <i class="fas fa-download"></i>
+                    <small>puppy.zip</small>
+                  </a>
+                </div>
+              </div>
+            <div class="row submit-row">
+              <div class="col-md-9 form-group">
+                <input class="form-control" type="text" name="answer" id="submission-input" placeholder="Flag">
+                <input id="challenge-id" type="hidden" value="2">
+              </div>
+              <div class="col-md-3 form-group key-submit">
+                <button type="submit" id="submit-key" tabindex="0" class="btn btn-md btn-outline-secondary float-right">Шалгах</button>
+              </div>
+            </div>
+            <div class="row notification-row">
+              <div class="col-md-12">
+                <div id="result-notification" class="alert alert-dismissable text-center w-100" role="alert" style="display: none;">
+                  <strong id="result-message"></strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="solves">
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped text-center">
+                  <thead>
+                    <tr>
+                      <td><b>Name</b></td>
+                      <td><b>Date</b></td>
+                    </tr>
+                  </thead>
+                  <tbody id="challenge-solves-names">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+{% block scripts %}
+{% endblock %}

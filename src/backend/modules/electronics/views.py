@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def elec_index(request):
+    return render(request, 'electronics/index.html')

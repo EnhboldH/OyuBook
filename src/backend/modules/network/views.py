@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def network_index(request):
+    return render(request, 'network/index.html')
