@@ -1,0 +1,35 @@
+{% extends "ctf/layout.html" %}
+{% block stylesheets %}
+  <link href="{{ url_for('static', filename='css/ctf/scoreboard.css') }}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<section id="main" class="d-flex align-items-center bg-dark">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <h1>Онооны самбар</h1>
+    </div>
+  </div>
+</section>
+<div class="container mt-5">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th id="place">Байр</th>
+        <th id="name">Нэр</th>
+        <th id="score">Оноо</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in fields.users %}
+        <tr>
+          <th scope="row" class="text-center">{{ loop.index }}</th>
+          <td><a href="{{ url_for('users.profile', username=user.username) }}">{{ user.username }}</a></td>
+          <td>{{ user.ctf_point }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+{% block scripts %}
+{% endblock %}
