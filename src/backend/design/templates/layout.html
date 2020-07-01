@@ -26,30 +26,29 @@
   <header id="header" class="fixed-top ">
     <div class="container-fluid">
       <div class="row justify-content-center">
-        <div class="col-xl-10 d-flex align-items-center">
-          <h1 class="logo mr-auto"><a href="{% url 'home-index' %}">OYUBOOK</a></h1>
+        <div class="col-xl-11 d-flex align-items-center">
+          <h1 class="logo mr-auto"><a href="{% url 'home_index' %}">OYUBOOK</a></h1>
           <nav class="nav-menu d-none d-lg-block">
             <ul>
-              <li><a href="{% url 'ctf-index' %}"><i class="fas fa-flag-checkered"></i> CTF - Arena</a></li>
-              <li><a href="{% url 'mathematics-index' %}"><i class="fas fa-square-root-alt"></i> Математик</a></li>
-              <li><a href="{% url 'electronics-index' %}"><i class="fas fa-bolt"></i> Электроник</a></li>
-              <li><a href="{% url 'network-index' %}"><i class="fas fa-network-wired"></i> Сүлжээ</a></li>
+              <li><a href="{% url 'ctf_index' %}"><i class="fas fa-flag-checkered"></i> CTF - Arena</a></li>
+              <li><a href="{% url 'mathematics_index' %}"><i class="fas fa-square-root-alt"></i> Математик</a></li>
+              <li><a href="{% url 'electronics_index' %}"><i class="fas fa-bolt"></i> Электроник</a></li>
+              <li><a href="{% url 'network_index' %}"><i class="fas fa-network-wired"></i> Сүлжээ</a></li>
               {% if user.is_authenticated %}
                 <li class="drop-down">
                   <a href="">{{ user.username }}</a>
                   <ul>
-                    <li><a href="#">Профайл</a></li>
-                    <li><a href="#">Тохиргоо</a></li>
-                    <li><a href="{% url 'user-logout' %}">Гарах</a></li>
+                    <li><a href="{% url 'user_profile' user.slug %}">Профайл</a></li>
+                    <li><a href="{% url 'user_logout' %}">Гарах</a></li>
                   </ul>
                 </li>
               {% endif %}
             </ul>
           </nav>
           {% if request.path == '/user/login/' or request.path == '/user/register/' %}
-            <a href="{% url 'user-login' %}" class="get-started-btn">Нүүр хуудас</a>
+            <a href="{% url 'home_index' %}" class="get-started-btn">Нүүр хуудас</a>
           {% elif not user.is_authenticated %}
-            <a href="{% url 'user-login' %}" class="get-started-btn">Нэвтрэх</a>
+            <a href="{% url 'user_login' %}" class="get-started-btn">Нэвтрэх</a>
           {% endif %}
         </div>
       </div>

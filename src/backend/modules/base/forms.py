@@ -13,6 +13,16 @@ class UserRegistrationForm(ModelForm):
     class Meta:
         model = OyuUser
         fields = ['username', 'email', 'password']
+        error_messages = {
+            'username': {
+                'required': 'Нэрээ оруулна уу',
+                'unique': 'Нэр давхардаж байна',
+            },
+            'email': {
+                'required': 'Имэйлээ оруулна уу',
+                'unique': 'Имэйл давхардаж байна',
+            },
+        }
 
     def __init__(self, *args, **kwargs):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)

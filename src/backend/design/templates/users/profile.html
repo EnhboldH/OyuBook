@@ -1,1 +1,13 @@
-profile
+{% extends "layout.html" %}
+{% block content %}
+<section id="main" class="d-flex">
+  <div class="container">
+    <marquee behavior="scroll" direction="right" style="color: white;">
+      {{ user.username }}
+    </marquee>
+    <marquee behavior="scroll" direction="left" style="color: white;">
+      {{ user.email }}
+    </marquee>
+  </div>
+</section>
+{% endblock %}

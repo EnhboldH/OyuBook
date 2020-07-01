@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 from django.contrib.auth import views
-from django.views.generic.edit import FormView
 from django.views.generic import TemplateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.db.models import Q
 
@@ -20,14 +21,14 @@ from .models import OyuUser
 
 class HomeView(View):
     context = {
-        'title': 'OyuBook - Нүүр хуудас',
+        'title': 'Нүүр хуудас | OyuBook',
     }
 
     def get(self, request, *args, **kwargs):
         return render(request, 'home/index.html', self.context)
 
 
-class UserCreateView(FormView):
+class UserCreateView(UserPassesTestMixin, FormView):
     template_name = 'users/register.html'
     model = OyuUser
     form_class = UserRegistrationForm
@@ -50,9 +51,16 @@ class UserCreateView(FormView):
             user.set_password(user_data.get('password'))
             user.save()
         return super().form_valid(form)
+        
+    # Хэрэглэгч нэвтэрсэн үед /login хуудсыг дуудахгүй шууд /home дуудна
+    # гэхдээ одоогийн байдлаар 403 өгнө
+    def test_func(self):
+        if self.request.user.is_authenticated:
+            return False
+        else:
+            return True
 
-
-class UserLoginView(views.LoginView):
+class UserLoginView(UserPassesTestMixin, views.LoginView):
     form_class = LoginForm
     template_name = 'users/login.html'
     extra_context = {
@@ -60,8 +68,15 @@ class UserLoginView(views.LoginView):
     }
 
     def get_success_url(self):
-        return reverse('home-index')
+        return reverse('home_index')
 
+    # Хэрэглэгч нэвтэрсэн үед /login хуудсыг дуудахгүй шууд /home дуудна
+    # гэхдээ одоогийн байдлаар 403 өгнө
+    def test_func(self):
+        if self.request.user.is_authenticated:
+            return False
+        else:
+            return True
 
 class UserLogoutView(views.LogoutView):
     next_page = '/'
@@ -69,13 +84,9 @@ class UserLogoutView(views.LogoutView):
         'title': 'Гарах | OyuBook'
     }
 
-class UserBlaBlaView(LoginRequiredMixin, TemplateView):
-
-    template_name = "users/mdkue.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = "Mdkueshdee yu iin ene"
-        print (self.request.user)
-        context['current_user'] = self.request.user
-        return context
+class UserProfileView(DetailView):
+    model = OyuUser
+    template_name = 'users/profile.html'
+    extra_context = {
+        'title': 'Хэрэглэгч'
+    }
