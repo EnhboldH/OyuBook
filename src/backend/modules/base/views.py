@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.views import View
 from django.contrib.auth import views
 from django.views.generic.edit import FormView
@@ -31,11 +32,9 @@ class UserCreateView(FormView):
     model = OyuUser
     form_class = UserRegistrationForm
     success_url = '/user/login/'
-
-    def get_context_data(self, *args, **kwargs):
-        data = super(UserCreateView, self).get_context_data(*args, **kwargs)
-        data['title'] = 'Бүртгүүлэх | OyuBook'
-        return data
+    extra_context = {
+        'title': 'Бүртгүүлэх | OyuBook'
+    }
 
     def form_valid(self, form):
         user_data = form.cleaned_data
@@ -54,19 +53,21 @@ class UserCreateView(FormView):
 
 
 class UserLoginView(views.LoginView):
-    # Одоохондоо Session байхгүй ч ингэсгээд үлдээлээ.
     form_class = LoginForm
     template_name = 'users/login.html'
+    extra_context = {
+        'title': 'Нэвтрэх | OyuBook'
+    }
+
+    def get_success_url(self):
+        return reverse('home-index')
 
 
-class FrontLogoutView(views.LogoutView):
-    template_name = 'users/logout.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = "You kicked out."
-        return context
-
+class UserLogoutView(views.LogoutView):
+    next_page = '/'
+    extra_context = {
+        'title': 'Гарах | OyuBook'
+    }
 
 class UserBlaBlaView(LoginRequiredMixin, TemplateView):
 
