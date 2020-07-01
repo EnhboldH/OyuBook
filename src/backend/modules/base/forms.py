@@ -18,6 +18,9 @@ class UserRegistrationForm(ModelForm):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)
 
         self.fields['username'].widget.attrs.update({'autofocus': 'autofocus'})
+        self.fields['username'].widget.attrs['placeholder'] = u"Бүртгүүлэх нэр"
+        self.fields['email'].widget.attrs['placeholder'] = u"Имэйл хаяг"
+        self.fields['password'].widget.attrs['placeholder'] = u"Нууц үг"
 
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control login-input'
@@ -25,10 +28,15 @@ class UserRegistrationForm(ModelForm):
 
 class LoginForm(AuthenticationForm):
 
+    """
+    Энэ дээр mail ээр нэвтрээд зөв ажиллаад байгаа мөртлөө username field
+    ашиглаад HTML дээр username хийнэ гэж харагдаж байна.
+    Fix: username -> mail 
+    """
     def __init__(self, request=None, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs['class'] = "form-control placeholder-no-fix"
-        self.fields['password'].widget.attrs['class'] = "form-control placeholder-no-fix"
+        self.fields['username'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
+        self.fields['password'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
         self.fields['username'].widget.attrs['placeholder'] = u"Имэйл хаяг"
         self.fields['password'].widget.attrs['placeholder'] = u"Нууц үг"
 
