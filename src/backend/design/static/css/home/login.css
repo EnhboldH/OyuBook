@@ -344,7 +344,7 @@ h1, h2, h3, h4, h5, h6 {
 #main {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.9) 100%), url("../../img/codelines.svg") center center no-repeat;
+  background: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.9) 100%), url("../../img/base/codelines.svg") center center no-repeat;
   background-size: cover;
 }
 
