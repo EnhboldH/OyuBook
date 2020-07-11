@@ -8,7 +8,9 @@ from modules.base.views import (
     UserCreateView,
     UserProfileView,
 )
-from modules.ctf.views import ctf_index
+from modules.ctf.views import (
+    CTFHomeView
+)
 from modules.mathematics.views import math_index
 from modules.electronics.views import elec_index
 from modules.network.views import network_index
@@ -24,7 +26,7 @@ urlpatterns = [
     path('user/register/', UserCreateView.as_view(), name='user_register'),
     path('user/profile/<slug:slug>', UserProfileView.as_view(), name='user_profile'),
     # CTF
-    path('ctf/', ctf_index, name='ctf_index'),
+    path('ctf/', CTFHomeView.as_view(), name='ctf_index'),
     # Mathematics
     path('mathematics/', math_index, name='mathematics_index'),
     # Electronics

@@ -20,6 +20,8 @@
   <link href="{% static 'css/layout.css' %}" rel="stylesheet">
   {% block stylesheets %}
   {% endblock %}
+  {% block style %}
+  {% endblock %}
 </head>
 
 <body>
@@ -46,9 +48,9 @@
             </ul>
           </nav>
           {% if request.path == '/user/login/' or request.path == '/user/register/' %}
-            <a href="{% url 'home_index' %}" class="get-started-btn">Нүүр хуудас</a>
+            <a href="{% url 'home_index' %}" class="get-btn">Нүүр хуудас</a>
           {% elif not user.is_authenticated %}
-            <a href="{% url 'user_login' %}" class="get-started-btn">Нэвтрэх</a>
+            <a href="{% url 'user_login' %}" class="get-btn">Нэвтрэх</a>
           {% endif %}
         </div>
       </div>
@@ -64,7 +66,8 @@
   <script src="{% static 'vendor/aos/aos.js' %}"></script>
 
   <script src="{% static 'js/main.js' %}"></script>
-
+  {% block scripts %}
+  {% endblock %}
 </body>
 
 </html>
