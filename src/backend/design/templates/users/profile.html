@@ -1,23 +1,21 @@
 {% extends "layout.html" %}
 {% load static %}
-{% block stylesheets %}
+{% block style %}
 <style>
   * {
     color: white;
   }
-  #main {
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.5) 100%), url("/static/img/base/wallpaper.jpg") center center no-repeat;
+  body {
+    background-image: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.5) 100%), url("/static/img/base/wallpaper.jpg");
     background-size: cover;
   }
 </style>
 {% endblock %}
 {% block content %}
 <section id="main" class="d-flex">
-  <div class="container">
-    <div class="row _app">
-      <div class="col-5 _profile">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-5">
         <div class="row">
           <div class="col-4 mt-3">
             <img src="{% static '/img/users/default.jpg' %}" class="rounded" style="width: 150px; height: 150px;">
@@ -204,6 +202,8 @@
 </section>
 {% block scripts %}
   <script src="{% static 'vendor/chartjs/js/chart.js' %}"></script>
+{% endblock %}
+{% block script %}
   <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
