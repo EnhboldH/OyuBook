@@ -16,7 +16,7 @@ class OyuUser(AbstractUser, models.Model):
 
     email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=100, unique=True)
-    image_file = models.CharField(max_length=100, default='default.jpg')
+    image_file = models.CharField(max_length=100, default='default.png')
     user_type = models.CharField(max_length=100, default=USER_TYPE_NORMAL, choices=USER_TYPE_CHOICES)
     slug = models.SlugField(null=False, unique=True)
 

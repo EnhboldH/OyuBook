@@ -24,12 +24,10 @@
           <nav class="nav-menu d-none d-lg-block">
             <ul>
               <li><a href="{% url 'ctf_index' %}"><i class="fas fa-flag-checkered"></i> CTF - Arena</a></li>
-              <li><a href="{% url 'mathematics_index' %}"><i class="fas fa-square-root-alt"></i> Математик</a></li>
-              <li><a href="{% url 'electronics_index' %}"><i class="fas fa-bolt"></i> Электроник</a></li>
-              <li><a href="{% url 'network_index' %}"><i class="fas fa-network-wired"></i> Сүлжээ</a></li>
               {% if user.is_authenticated %}
                 <li class="drop-down">
-                  <a href="">{{ user.username }}</a>
+                  <img src="/static/img/users/{{ user.image_file }}" class="rounded-circle float-left _profile-nav">
+                  <a class="ml-5" href="#">{{ user.username }}</a>
                   <ul>
                     <li><a href="{% url 'user_profile' user.slug %}">Профайл</a></li>
                     <li><a href="{% url 'user_logout' %}">Гарах</a></li>

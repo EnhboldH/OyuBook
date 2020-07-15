@@ -1,0 +1,59 @@
+* {
+    color: white;
+}
+body {
+  background-image: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.5) 100%), url("/static/img/base/wallpaper.jpg");
+  background-size: cover;
+}
+._profile {
+  background-color:rgba(0, 0, 0, 0.3);
+}
+._profile-image {
+  width: 150px;
+  height: 150px;
+}
+._profile-fullname {
+  font-size: 21px !important;
+}
+._profile-username {
+  margin-top: -10px !important;
+  font-size: 14px !important;
+}
+._profile-general {
+  font-size: 13px; 
+  opacity: 0.5
+}
+._profile-general-detail {
+  font-size: 32px !important;
+}
+._profile-status {
+  margin-top: -100px;
+}
+._profile-status-header {
+  font-size: 15px; 
+  opacity: 0.9;
+}
+._profile-summary b {
+  color: yellow;
+}
+._profile-summary span {
+  font-size: 14px;
+}
+._profile-general-detail:hover {
+  transform: translateX(25%);
+  transition: 0.5s;
+}
+._profile-topcorner {
+  width: 90%;
+}
+table td a {
+  color: rgba(255, 255, 255, 0.8);
+}
+._profile-contacticon:hover {
+  color: rgba(52, 60, 209, 0.9);
+  transition: 0.3s;
+}
+._profile-recentaction td:hover {
+  background-color: rgba(47, 144, 204, 0.3);
+  transition: 0.3s;
+}
