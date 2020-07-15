@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 {% load static %}
+{% block stylesheets %}
+  <link href="{% static 'css/users/profile.css' %}" rel="stylesheet">
+{% endblock %}
 {% block style %}
 <style>
   * {
@@ -12,8 +15,8 @@
 </style>
 {% endblock %}
 {% block content %}
-<section id="main" class="d-flex">
-  <div class="container mt-5">
+<section id="main">
+  <div class="container mt-5 rounded" style="background-color:rgba(0, 0, 0, 0.3);">
     <div class="row">
       <div class="col-5">
         <div class="row">
@@ -52,10 +55,10 @@
     <div class="row">
       <div class="col-5" style="height: 350px;">
         <div style="height: 320px;">
-          <table class="table table-hover table-borderless">
+          <table class="table table-hover table-borderless _recent-action">
             <tbody>
               <tr>
-                <td>Бодсон <b>Can you bypass me ?</b></td>
+                <td><a href="#">Бодсон <b>Can you bypass me ?</b></a></td>
               </tr>
               <tr>
                 <td>Нэмсэн <b>Can you bypass me ?</b></td>
@@ -192,9 +195,9 @@
               </div>
             </div>
           </div>
-        <i class="fab fa-facebook fa-2x ml-3 mt-2 float-right"></i>
-        <i class="fab fa-twitter fa-2x ml-3 mt-2 float-right"></i>
-        <i class="fab fa-instagram fa-2x ml-3 mt-2 float-right"></i>
+        <i class="fab fa-facebook fa-2x ml-3 mt-2 float-right _contact-icon"></i>
+        <i class="fab fa-twitter fa-2x ml-3 mt-2 float-right _contact-icon"></i>
+        <i class="fab fa-instagram fa-2x ml-3 mt-2 float-right _contact-icon"></i>
         </div>
       </div>
     </div>
@@ -211,7 +214,7 @@
         data: {
             labels: ['Crypto', 'Misc', 'Web', 'Forensics', 'Pwn', 'OSINT'],
             datasets: [{
-                data: [7, 12, 14, 6, 11, 15],
+                data: [7, 3, 14, 6, 11, 15],
                 backgroundColor: 'rgba(0,119,204,0.4)',
                 borderColor: 'rgba(0,119,204, 0.4)',
                 borderWidth: 1,

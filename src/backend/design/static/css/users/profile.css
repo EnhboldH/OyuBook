@@ -1,0 +1,7 @@
+._contact-icon:hover {
+  color: rgba(52, 60, 209, 0.9);
+}
+._recent-action td:hover {
+  background-color: rgba(47, 144, 204, 0.3);
+  transition: 0.3s;
+}
