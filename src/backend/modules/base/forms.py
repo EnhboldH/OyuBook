@@ -19,8 +19,8 @@ class UserRegistrationForm(ModelForm):
                 'unique': 'Нэр давхардаж байна',
             },
             'email': {
-                'required': 'Имэйлээ оруулна уу',
-                'unique': 'Имэйл давхардаж байна',
+                'required': 'Е-мэйл оруулна уу',
+                'unique': 'Е-мэйл давхардаж байна',
             },
         }
 
@@ -29,7 +29,7 @@ class UserRegistrationForm(ModelForm):
 
         self.fields['username'].widget.attrs.update({'autofocus': 'autofocus'})
         self.fields['username'].widget.attrs['placeholder'] = u"Бүртгүүлэх нэр"
-        self.fields['email'].widget.attrs['placeholder'] = u"Имэйл хаяг"
+        self.fields['email'].widget.attrs['placeholder'] = u"Е-мэйл хаяг"
         self.fields['password'].widget.attrs['placeholder'] = u"Нууц үг"
 
         for visible in self.visible_fields():
@@ -47,7 +47,7 @@ class LoginForm(AuthenticationForm):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
         self.fields['password'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
-        self.fields['username'].widget.attrs['placeholder'] = u"Имэйл хаяг"
+        self.fields['username'].widget.attrs['placeholder'] = u"Е-мэйл хаяг"
         self.fields['password'].widget.attrs['placeholder'] = u"Нууц үг"
 
     def clean_username(self, ):

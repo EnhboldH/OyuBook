@@ -7,7 +7,6 @@
 <section id="main" class="d-flex align-items-center">
   <div class="container-fluid" data-aos="fade-up">
     <div class="row justify-content-center">
-
       <div class="col-xl-4 col-lg-6 order-1 order-lg-1 main-img">
         <img src="{% static 'img/logo/syscotech.png' %}" class="img-fluid animated" alt="Logo Image">
       </div>
@@ -32,12 +31,12 @@
             <div class="form-row">
               {% if form.errors %}
                 <div class="alert alert-dismissible col-md-12 text-center" role="alert">
-                  <span class="text-danger">Имэйл хаяг эсвэл нууц үг тохирохгүй байна !</span>
+                  <span class="text-warning">Имэйл хаяг эсвэл нууц үг тохирохгүй байна</span>
                 </div>
               {% endif %}
               <div class="col-md-12 form-group mt-3">
-                <a href="{% url 'user_register' %}" class="get-started-btn register-submit ">Бүртгүүлэх</a>
-                <button type="submit" class="btn get-started-btn float-right">Нэвтрэх</button>
+                <a href="{% url 'user_register' %}" class="get-btn register-submit float-left">Бүртгүүлэх</a>
+                <button type="submit" class="btn get-btn float-right">Нэвтрэх</button>
               </div>
             </div>
           </form>
