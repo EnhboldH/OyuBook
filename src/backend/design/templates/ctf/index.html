@@ -2,247 +2,152 @@
 {% block style %}
 <style>
   * {
-    color: white;
+    color: #fff;
+  }
+  ._card-category {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  ._card-category:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  ._challenge .card-header {
+    padding: 0;
+  }
+  ._challenge-card {
+    background-color: rgba(50, 56, 62, 1);
+  }
+  ._challenge-title {
+    color: #fff;
+  }
+  ._challenge-title:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  ._challenge-button {
+    text-decoration: none !important;
+    width: 100%;
   }
 
 </style>
 {% endblock %}
 {% block content %}
 <section id="main" class="d-flex">
-  <div class="container-fluid ml-5 mr-5">
-    <div class="row border" style="height: 550px">
-      <div class="col-md-3 border" style="height: 550px;">
+  <div class="container-fluid ml-5 mr-5 mt-4">
+    <div class="row">
+      <div class="col-md-3">
         <div class="row">
           <div class="col-12">
             <div class="row">
               <div class="col-12">
-                <table class="table table-bordered table-sm">
-                  <h2 class="text-center">Оноо</h2>
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Нэр</th>
-                      <th scope="col">Оноо</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>500</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>400</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Jacob</td>
-                      <td>300</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>Jacob</td>
-                      <td>300</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">5</th>
-                      <td>Jacob</td>
-                      <td>300</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div class="card bg-dark">
+                  <div class="card-header">Төрлүүд</div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-dark">
+                      <a class="ml-3 _card-category" href="#">Cryptography
+                      <span class="badge badge-secondary float-right" style="margin-top: 3px;">13</span>
+                      </a>
+                    </li>
+                    <li class="list-group-item bg-dark">
+                      <a class="ml-3 _card-category" href="#">Forensics
+                      <span class="badge badge-secondary float-right" style="margin-top: 3px;">13</span>
+                      </a>
+                    </li>
+                    <li class="list-group-item bg-dark">
+                      <a class="ml-3 _card-category" href="#">Forensics
+                      <span class="badge badge-secondary float-right" style="margin-top: 3px;">13</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-9 border" style="height: 550px;">
-        <div class="row">
-          <div class="col-2">
-            <div class="border">
-              <span>Web</span>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="border">
-              <span>Web</span>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="border">
-              <span>Web</span>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="border">
-              <span>Web</span>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="border">
-              <span>Web</span>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="border">
-              <span>Web</span>
-            </div>
-          </div>
-        </div>
-        <div class="border">
-          <table class="table table-sm table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
+      <div class="col-md-9 _challenge">
+        <div class="accordion" id="accordionExample">
 
-            </tbody>
-          </table>
+          <div class="card rounded _challenge-card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link _challenge-button" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <div class="row" style="padding: 0px;">
+                    <span class="col-8 _challenge-title" style="text-align: left;">Lets Warm Up - 50</span>
+                    <div class="col-4 row" style="padding: 0px;">
+                      <div class="col-6">
+                        <span class="badge badge-info">Cryptography</span>
+                      </div>
+                      <div class="col-2">
+                        <span class="badge badge-secondary">55085</span>
+                      </div>
+                      <div class="col-4">
+                        <span class="badge badge-success">Solved</span>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+                <small>This program executes any shellcode that you give it. Can you spawn a shell and use that to read the flag.txt? You can find the program in /problems/handy-shellcode_5_d1b3658f284f442eac06607b8ac4d1f5 on the shell server. Source.</small>
+              </div>
+            </div>
+          </div>
+          <div class="card mt-3 rounded _challenge-card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed _challenge-button" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <div class="row" style="padding: 0px;">
+                    <span class="col-8 _challenge-title" style="text-align: left;">Insp3ct0r - 50</span>
+                    <div class="col-4 row" style="padding: 0px;">
+                      <div class="col-6">
+                        <span class="badge badge-info">Web Exploitation</span>
+                      </div>
+                      <div class="col-2">
+                        <span class="badge badge-secondary">29626</span>
+                      </div>
+                      <div class="col-4">
+                        <span class="badge badge-success">Solved</span>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div class="card-body">
+                <small>Can you convert the number 42 (base 10) to binary (base 2)?</small>
+              </div>
+            </div>
+          </div>
+          <div class="card mt-3 rounded _challenge-card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed _challenge-button" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <div class="row" style="padding: 0px;">
+                    <span class="col-8 _challenge-title" style="text-align: left;">The Factory's Secret - 100</span>
+                    <div class="col-4 row" style="padding: 0px;">
+                      <div class="col-6">
+                        <span class="badge badge-info">General Skills</span>
+                      </div>
+                      <div class="col-2">
+                        <span class="badge badge-secondary">3516</span>
+                      </div>
+                      <div class="col-4">
+                        <span class="badge badge-danger">Unsolved</span>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+              <div class="card-body">
+                <small>Your mission is to enter Dr. Evil's laboratory and retrieve the blueprints for his Doomsday Project. The laboratory is protected by a series of locked vault doors. Each door is controlled by a computer and requires a password to open. Unfortunately, our undercover agents have not been able to obtain the secret passwords for the vault doors, but one of our junior agents obtained the source code for each vault's computer! You will need to read the source code for each level to figure out what the password is for that vault door. As a warmup, we have created a replica vault in our training facility. The source code for the training vault is here: <VaultDoorTraining class="java"></VaultDoorTraining></small>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
