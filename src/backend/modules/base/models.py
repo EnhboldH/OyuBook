@@ -10,6 +10,8 @@ from modules.base.consts import USER_BADGE_TYPE_CHOICES
 from modules.base.consts import USER_BADGE_TYPE_NORMAL
 from modules.base.consts import BACKGROUND_IMG_LINK
 from modules.base.consts import AVATAR_IMG_LINK
+from modules.base.consts import USER_CHALLENGE_STATUS_CHOICES
+from modules.base.consts import USER_CHALLENGE_STATUS_ATTEMPTED
 
 from django.template.defaultfilters import slugify
 
@@ -49,19 +51,6 @@ class OyuUser(AbstractUser, models.Model):
         return reverse('user_profile', kwargs={'slug': self.slug})
 
 
-class CtfChallenge (models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    description = models.TextField()
-    value = models.IntegerField()
-    category = models.CharField(max_length=100, choices=CTF_CHALLENGE_CATEGORY_CHOICES, null=True)
-    state = models.CharField(max_length=100, null=True, default='active')
-    flag = models.CharField(max_length=100, null=False)
-    solved_users_count = models.IntegerField(null=True, default=0)
-
-    def __str__(self):
-        return f'{self.name} | {self.category}'
-
-
 class OyuUserProfile(models.Model):
     REQUIRED_FIELDS = ["oyu_user"]
 
@@ -92,3 +81,27 @@ class OyuUserProfile(models.Model):
         self.last_updated_date = datetime.datetime.now()
 
         return super(OyuUserProfile, self).save(*args, **kwargs)
+
+
+class CtfChallenge(models.Model):
+    title = models.CharField("Гарчиг", max_length=100, unique=True)
+    description = models.TextField("Бодлогын өгүүлбэр", max_length=10000)
+    value = models.PositiveIntegerField("Бодлогын оноо", default=0)
+    category = models.CharField("Төрөл", max_length=100, choices=CTF_CHALLENGE_CATEGORY_CHOICES, null=True)
+    state = models.CharField("Төлөв", max_length=100, null=True, default='active')
+    flag = models.CharField("Flag", max_length=100, null=False)
+    solved_users_count = models.PositiveIntegerField("Бодсон хэрэглэгчдийн тоо", null=True, default=0)
+
+    def __str__(self):
+        return "%s | %s" % (self.title, self.category)
+
+
+class UserChallenge(models.Model):
+    REQUIRED_FIELDS = ["oyu_user", "challenge"]
+
+    oyu_user = models.ForeignKey(OyuUser, verbose_name="Хэрэглэгч", on_delete=models.DO_NOTHING)
+    challenge = models.ForeignKey(CtfChallenge, verbose_name="Challenge", on_delete=models.DO_NOTHING)
+    status = models.CharField("Төлөв", max_length=100, choices=USER_CHALLENGE_STATUS_CHOICES, default=USER_CHALLENGE_STATUS_ATTEMPTED)
+
+    def __str__(self):
+        return "%s | %s" % (self.oyu_user.__str__(), self.challenge.__str__())
