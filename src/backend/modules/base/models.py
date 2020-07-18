@@ -92,3 +92,4 @@ class OyuUserProfile(models.Model):
         self.last_updated_date = datetime.datetime.now()
 
         return super(OyuUserProfile, self).save(*args, **kwargs)
+        

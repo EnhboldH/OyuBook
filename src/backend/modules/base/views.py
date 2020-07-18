@@ -138,3 +138,9 @@ class UserProfileEditView(UpdateView):
             raise Http404(_("No %(verbose_name)s found matching the query") %
                           {'verbose_name': queryset.model._meta.verbose_name})
         return obj
+
+    def form_valid(self, form):
+        user_data = form.cleaned_data
+        print(user_data)
+        print(self.request.user)
+        return super().form_valid(form)

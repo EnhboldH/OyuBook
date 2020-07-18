@@ -32,7 +32,7 @@ urlpatterns = [
     path('user/logout/', UserLogoutView.as_view(), name='user_logout'),
     path('user/register/', UserCreateView.as_view(), name='user_register'),
     path('user/profile/<slug:slug>', UserProfileView.as_view(), name='user_profile'),
-    path('user/profile/<slug:slug>/update/', UserProfileEditView.as_view(), name='user_profile_update'),
+    path('user/profile/update/<slug:slug>/', UserProfileEditView.as_view(), name='user_profile_update'),
     # CTF
     path('ctf/', CTFHomeView.as_view(), name='ctf_index'),
     # Mathematics
