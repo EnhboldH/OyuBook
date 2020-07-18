@@ -17,6 +17,7 @@ from .forms import (
 
 # Models
 from .models import OyuUser
+from .models import OyuUserProfile
 
 
 class HomeView(View):
@@ -50,6 +51,11 @@ class UserCreateView(FormView):
             user.username = user_data.get('username')
             user.set_password(user_data.get('password'))
             user.save()
+
+            OyuUserProfile.objects.create(
+                oyu_user=user,
+                fullname=user.username,
+            ).save()
         return super().form_valid(form)
         
 

@@ -5,10 +5,16 @@ from django.contrib.auth.models import AbstractUser
 
 from modules.base.consts import USER_TYPE_NORMAL
 from modules.base.consts import USER_TYPE_CHOICES
+from modules.base.consts import CTF_CHALLENGE_CATEGORY_CHOICES
+from modules.base.consts import USER_BADGE_TYPE_CHOICES
+from modules.base.consts import USER_BADGE_TYPE_NORMAL
+from modules.base.consts import BACKGROUND_IMG_LINK
+from modules.base.consts import AVATAR_IMG_LINK
 
 from django.template.defaultfilters import slugify
 
 from django.urls import reverse
+
 
 class OyuUser(AbstractUser, models.Model):
     USERNAME_FIELD = "email"
@@ -42,22 +48,47 @@ class OyuUser(AbstractUser, models.Model):
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'slug': self.slug})
 
+
 class CtfChallenge (models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
     value = models.IntegerField()
-    category_choices = (
-        ('miscellaneous', 'misc'),
-        ('cryptography', 'crypto'),
-        ('forensics', 'forensics'),
-        ('reverse engineering', 're'),
-        ('web exploitation', 'web'),
-        ('binary exploitation', 'pwn')
-    )
-    category = models.CharField(max_length=100, choices=category_choices, null=True)
+    category = models.CharField(max_length=100, choices=CTF_CHALLENGE_CATEGORY_CHOICES, null=True)
     state = models.CharField(max_length=100, null=True, default='active')
     flag = models.CharField(max_length=100, null=False)
     solved_users_count = models.IntegerField(null=True, default=0)
 
     def __str__(self):
         return f'{self.name} | {self.category}'
+
+
+class OyuUserProfile(models.Model):
+    REQUIRED_FIELDS = ["oyu_user"]
+
+    oyu_user = models.ForeignKey(OyuUser, verbose_name="Oyu User", on_delete=models.DO_NOTHING)
+    fullname = models.CharField("Бүтэн нэр", max_length=50)
+    region = models.CharField("Харьяа", max_length=100, blank=True, null=True, help_text="Сургууль эсвэл ажилладаг газар.")
+    respected = models.PositiveIntegerField("Хүндлэгдсэн", default=0)
+    solved_problem = models.PositiveIntegerField("Бодсон бодлогын тоо", default=0)
+    score = models.PositiveIntegerField("Цуглуулсан оноо", default=0)
+    badge_type = models.CharField("Цол", max_length=50, choices=USER_BADGE_TYPE_CHOICES, default=USER_BADGE_TYPE_NORMAL)
+    first_blood = models.PositiveIntegerField("Түрүүлж бодсон", default=0)
+    accepted_problem = models.PositiveIntegerField("Оруулсан бодлогын тоо", default=0)
+
+    facebook_link = models.CharField("Facebook link", max_length=128, blank=True, null=True)
+    insta_link = models.CharField("Insta link", max_length=128, blank=True, null=True)
+    github_link = models.CharField("Github link", max_length=128, blank=True, null=True)
+
+    background_link = models.CharField("Background Img link", max_length=128, default=BACKGROUND_IMG_LINK)
+    avatar_link = models.CharField("Avatar Img link", max_length=128, default=AVATAR_IMG_LINK)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+    last_updated_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.oyu_user.__str__()
+
+    def save(self, *args, **kwargs):
+        self.last_updated_date = datetime.datetime.now()
+
+        return super(OyuUserProfile, self).save(*args, **kwargs)

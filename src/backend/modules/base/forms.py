@@ -38,16 +38,11 @@ class UserRegistrationForm(ModelForm):
 
 class LoginForm(AuthenticationForm):
 
-    """
-    Энэ дээр mail ээр нэвтрээд зөв ажиллаад байгаа мөртлөө username field
-    ашиглаад HTML дээр username хийнэ гэж харагдаж байна.
-    Fix: username -> mail 
-    """
     def __init__(self, request=None, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
         self.fields['password'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
-        self.fields['username'].widget.attrs['placeholder'] = u"Е-мэйл хаяг"
+        self.fields['username'].widget.attrs['placeholder'] = u"Хэрэглэгчийн нэр"
         self.fields['password'].widget.attrs['placeholder'] = u"Нууц үг"
 
     def clean_username(self, ):
