@@ -23,5 +23,4 @@ class CTFHomeView(View):
         return render(request, 'ctf/index.html', self.context)
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
         return render(request, 'ctf/index.html', self.context)

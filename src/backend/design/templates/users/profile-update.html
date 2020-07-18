@@ -18,7 +18,7 @@
             <img src="/static/img/users/{{ object.image_file }}" class="rounded _profile-image">
           </div>
           <div class="col-8">
-            <h1 class="mt-3 _profile-fullname">Byambadalai Sumiya</h1>
+            <h1 class="mt-3 _profile-fullname">Update View</h1>
             <h2 class="_profile-username">@{{ object.username }}</h2>
             <span class="font-weight-bold">Харъя: <a href="#">ШУТИС-МХТС</a></span>
             <div class="mt-3">
@@ -194,7 +194,7 @@
         <a href=""><i class="fab fa-twitter fa-2x ml-4 mt-4 mb-3 float-right _profile-contacticon"></i></a>
         {% if user.is_authenticated %}
           {% if user.username == object.username %}
-              <a href="{% url 'user_profile_update' user.slug %}"><i class="fas fa-cog fa-2x ml-4 mt-4 float-right _profile-contacticon"></i></a>
+              <a href=""><i class="fas fa-cog fa-2x ml-4 mt-4 float-right _profile-contacticon"></i></a>
           {% endif %}
         {% else %}
         {% endif %}
