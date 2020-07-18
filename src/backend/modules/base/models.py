@@ -41,3 +41,23 @@ class OyuUser(AbstractUser, models.Model):
 
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'slug': self.slug})
+
+class CtfChallenge (models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField()
+    value = models.IntegerField()
+    category_choices = (
+        ('miscellaneous', 'misc'),
+        ('cryptography', 'crypto'),
+        ('forensics', 'forensics'),
+        ('reverse engineering', 're'),
+        ('web exploitation', 'web'),
+        ('binary exploitation', 'pwn')
+    )
+    category = models.CharField(max_length=100, choices=category_choices, null=True)
+    state = models.CharField(max_length=100, null=True, default='active')
+    flag = models.CharField(max_length=100, null=False)
+    solved_users_count = models.IntegerField(null=True, default=0)
+
+    def __str__(self):
+        return f'{self.name} | {self.category}'
