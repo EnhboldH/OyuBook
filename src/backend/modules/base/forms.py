@@ -57,3 +57,15 @@ class UserProfileUpdateForm(ModelForm):
     class Meta:
         model = OyuUserProfile
         fields = ['fullname', 'region', 'facebook_link', 'insta_link', 'github_link', 'background_link', 'avatar_link']
+
+    def __init__(self, request=None, *args, **kwargs):
+        super(UserProfileUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['fullname'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
+        self.fields['region'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
+        self.fields['region'].widget.attrs['placeholder'] = 'Enter your region'
+        self.fields['fullname'].widget.attrs['placeholder'] = 'Enter your username'
+
+    def clean(self):
+        # print(self.data)
+        # print(self.cleaned_data)
+        return self.cleaned_data
