@@ -18,7 +18,7 @@
             <img src="/static/img/users/{{ object.image_file }}" class="rounded _profile-image">
           </div>
           <div class="col-8">
-            <h1 class="mt-3 _profile-fullname">Byambadalai Sumiya</h1>
+            <h1 class="mt-3 _profile-fullname">{{ profile.fullname }}</h1>
             <h2 class="_profile-username">@{{ object.username }}</h2>
             <span class="font-weight-bold">Харъя: <a href="#">ШУТИС-МХТС</a></span>
             <div class="mt-3">
@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-4">
             <span class="text-uppercase _profile-general" style="f">Цуглуулсан оноо</span>
-            <h1 class="_profile-general-detail">3,085</h1>
+            <h1 class="_profile-general-detail"> {{profile.score}} </h1>
           </div>
           <div class="col-4">
             <span class="text-uppercase _profile-general">Өнгөрүүлсэн өдөр</span>

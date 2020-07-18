@@ -83,6 +83,7 @@ class UserProfileView(DetailView):
         context = super().get_context_data(**kwargs)
         obj = self.get_object()
         context['title'] = obj.username
+        context['profile'] = self.get_profile_data(oyu_user=obj)
         return context
 
     def get_object(self, queryset=None):
@@ -105,6 +106,13 @@ class UserProfileView(DetailView):
             raise Http404(_("No %(verbose_name)s found matching the query") %
                           {'verbose_name': queryset.model._meta.verbose_name})
         return obj
+
+    def get_profile_data(self, oyu_user):
+
+        profile = OyuUserProfile.objects.filter(oyu_user=oyu_user).first()
+        if not profile:
+            return {}
+        return profile
 
 
 class UserProfileEditView(UpdateView):
