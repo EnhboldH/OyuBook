@@ -148,7 +148,15 @@ class UserProfileEditView(UpdateView):
         return obj
 
     def form_valid(self, form):
-        user_data = form.cleaned_data
-        print(user_data)
-        print(self.request.user)
+        valid_data = form.cleaned_data
+        user_profile = OyuUserProfile.objects.filter(oyu_user=self.request.user).first()
+        if user_profile:
+            user_profile.fullname = valid_data.get('fullname', None)
+            user_profile.region = valid_data.get('region', None)
+            user_profile.facebook_link = valid_data.get('facebook_link', None)
+            user_profile.insta_link = valid_data.get('insta_link', None)
+            user_profile.github_link = valid_data.get('github_link', None)
+            user_profile.background_link = valid_data.get('background_link', None)
+            user_profile.avatar_link = valid_data.get('avatar_link', None)
+            user_profile.save()
         return super().form_valid(form)
