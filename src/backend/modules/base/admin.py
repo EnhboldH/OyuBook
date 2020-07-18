@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import (
-    OyuUser
+    OyuUser,
+    CtfChallenge,
 )
 
 admin.site.register(OyuUser)
+admin.site.register(CtfChallenge)
