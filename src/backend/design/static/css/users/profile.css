@@ -2,7 +2,7 @@
   color: white;
 }
 body {
-   background: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.5) 100%), url("/static/img/base/wallpaper6.jpg") no-repeat center center fixed; 
+   background: linear-gradient(45deg, rgba(20, 30, 56, 0.1) 0%, rgba(6, 26, 66, 0.5) 100%), url("/static/img/base/wallpaper2.jpg") no-repeat center center fixed; 
 
   background-size: cover;
 }

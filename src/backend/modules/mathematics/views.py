@@ -1,5 +1,9 @@
 from django.shortcuts import render
+from django.views import View
 
-
-def math_index(request):
-    return render(request, 'mathematics/index.html')
+class MathematicsView(View):
+    context = {
+        'title': 'Математик | OyuBook',
+    }
+    def get(self, request, *args, **kwargs):
+      return render(request, 'mathematics/index.html', self.context)

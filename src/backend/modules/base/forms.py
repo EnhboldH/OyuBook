@@ -55,3 +55,6 @@ class LoginForm(AuthenticationForm):
         if uname:
             uname = uname.strip()
         return uname
+
+class UserProfileUpdateForm(ModelForm):
+    pass
