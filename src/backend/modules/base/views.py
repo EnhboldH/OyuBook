@@ -58,7 +58,7 @@ class UserCreateView(FormView):
                 fullname=user.username,
             ).save()
         return super().form_valid(form)
-        
+
 
 class UserLoginView(views.LoginView):
     form_class = LoginForm
@@ -67,11 +67,13 @@ class UserLoginView(views.LoginView):
         'title': 'Нэвтрэх | OyuBook'
     }
 
+
 class UserLogoutView(views.LogoutView):
     next_page = '/'
     extra_context = {
         'title': 'Гарах | OyuBook'
     }
+
 
 class UserProfileView(DetailView):
     model = OyuUser
@@ -103,6 +105,7 @@ class UserProfileView(DetailView):
             raise Http404(_("No %(verbose_name)s found matching the query") %
                           {'verbose_name': queryset.model._meta.verbose_name})
         return obj
+
 
 class UserProfileEditView(UpdateView):
     model = OyuUser

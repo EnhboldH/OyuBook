@@ -3,7 +3,8 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import AuthenticationForm
 
 from .models import (
-    OyuUser
+    OyuUser,
+    OyuUserProfile,
 )
 
 class UserRegistrationForm(ModelForm):
@@ -52,4 +53,7 @@ class LoginForm(AuthenticationForm):
         return uname
 
 class UserProfileUpdateForm(ModelForm):
-    pass
+
+    class Meta:
+        model = OyuUserProfile
+        fields = ['fullname', 'region', 'facebook_link', 'insta_link', 'github_link', 'background_link', 'avatar_link']
