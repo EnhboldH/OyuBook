@@ -32,6 +32,21 @@ USER_BADGE_TYPE_CHOICES = (
     (USER_BADGE_TYPE_SPONSER, "Ивээн тэтгэгч"),
 )
 
+USER_REGION_MUST = "must"
+USER_REGION_MUST_SICT = "must-sict"
+USER_REGION_NUM = "num"
+USER_REGION_STUDENT = "student"
+USER_REGION_EMPLOYEE = "employee"
+
+USER_REGION_CHOICES = (
+    (USER_REGION_MUST, "ШУТИС"),
+    (USER_REGION_MUST_SICT, "ШУТИС-МХТС"),
+    (USER_REGION_NUM, "МУИС"),
+    (USER_REGION_STUDENT, "Сурагч"),
+    (USER_REGION_EMPLOYEE, "Ажилчин"),
+)
+
+
 
 USER_CHALLENGE_STATUS_SOLVED = "solved"
 USER_CHALLENGE_STATUS_ATTEMPTED = "attempted"

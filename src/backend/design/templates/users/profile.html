@@ -18,13 +18,27 @@
             <img src="/static/img/users/{{ object.image_file }}" class="rounded _profile-image">
           </div>
           <div class="col-8">
-            <h1 class="mt-3 _profile-fullname">{{ profile.fullname }}</h1>
-            <h2 class="_profile-username">@{{ object.username }}</h2>
-            <span class="font-weight-bold">Харъя: <a href="#">ШУТИС-МХТС</a></span>
             <div class="mt-3">
-              <span data-toggle="tooltip" data-placement="bottom" title="Одоогийн байр"><i class="fas fa-trophy ml-2"></i> #3</span>
-              <span data-toggle="tooltip" data-placement="bottom" title="Хүндэтгэсэн хэрэглэгчид"><i class="fas fa-star ml-4"></i> 12</span>
-              <span data-toggle="tooltip" data-placement="bottom" title="Бодсон бодлого"><i class="fas fa-flag ml-4"></i> 25</span>
+              <h1 class="_profile-fullname">{{ profile.fullname }}</h1>
+            </div>
+            <h2 class="_profile-username">@{{ object.username }}</h2>
+            {% if profile.region %}
+              <span class="font-weight-bold">
+                {% if profile.region == 'must-sict' %}
+                  <a href="must-sict.mn" style="color: white;">Харъя: ШУТИС - МХТС</a>
+                {% elif profile.region == 'num' %}
+                  <a href="num.mn" style="color: white;">Харъя: МУИС</a>
+                {% elif profile.region == 'student' %}
+                  <a href="num.mn" style="color: white;">Харъя: Сурагч</a>
+                {% elif profile.region == 'employee' %}
+                  <a href="num.mn" style="color: white;">Харъя: Ажилчин</a>
+                {% endif %}
+              </span>
+            {% endif %}
+            <div class="mt-3">
+              <span data-toggle="tooltip" data-placement="bottom" title="Хүндэтгэсэн хэрэглэгчид"><i class="fas fa-star ml-4"></i> {{ profile.respected }}</span>
+              <span data-toggle="tooltip" data-placement="bottom" title="Хүндэтгэсэн хэрэглэгчид"><i class="fas fa-star ml-4"></i> {{ profile.respected }}</span>
+              <span data-toggle="tooltip" data-placement="bottom" title="Бодсон бодлого"><i class="fas fa-flag ml-4"></i> {{ profile.solved_problem }}</span>
             </div>
           </div>
         </div>
@@ -33,7 +47,7 @@
         <div class="row">
           <div class="col-4">
             <span class="text-uppercase _profile-general" style="f">Цуглуулсан оноо</span>
-            <h1 class="_profile-general-detail"> {{profile.score}} </h1>
+            <h1 class="_profile-general-detail"> {{ profile.score }} </h1>
           </div>
           <div class="col-4">
             <span class="text-uppercase _profile-general">Өнгөрүүлсэн өдөр</span>
@@ -41,7 +55,17 @@
           </div>
           <div class="col-4">
             <span class="text-uppercase _profile-general">Хэрэглэгч төрөл</span>
-            <h1 class="_profile-general-detail"><i class="far fa-gem"></i></h1>
+            <h1 class="_profile-general-detail">
+              {% if profile.badge_type == 'normal' %}
+                <i class="far fa-user"></i>
+              {% elif profile.badge_type == 'sponser' %}
+                <i class="far fa-gem"></i>
+              {% elif profile.badge_type == 'admin' %}
+                <i class="fas fa-crown"></i>
+                <!-- <i class="fas fa-user-ninja"></i> -->
+                <!-- <i class="fas fa-user-secret"></i> -->
+              {% endif %}
+            </h1>
           </div>
         </div>
       </div>
@@ -88,7 +112,7 @@
                 <div class="col-12 mt-3">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>3</b></span>
+                      <span><b>{{ profile.first_blood }}</b></span>
                     </div>
                     <div class="col-9">
                       <span>Түрүүлж бодсон</span>
@@ -98,7 +122,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>12</b></span>
+                      <span><b>{{ profile.accepted_problem }}</b></span>
                     </div>
                     <div class="col-9">
                       <span>Бодлого нэмсэн</span>
@@ -108,10 +132,10 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>5</b></span>
+                      <span><b>{{ profile.given_money }}</b></span>
                     </div>
                     <div class="col-9">
-                      <span>Хүндэлсэн</span>
+                      <span>Хандив өгсөн</span>
                     </div>
                   </div>
                 </div>
@@ -119,7 +143,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>31</b></span>
+                      <span><b>1731</b></span>
                     </div>
                     <div class="col-9">
                       <span>Коммент</span>
@@ -129,13 +153,14 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>37'300</b></span>
+                      <span><b>1731</b></span>
                     </div>
                     <div class="col-9">
-                      <span>Хандив өгсөн</span>
+                      <span>Коммент</span>
                     </div>
                   </div>
                 </div>
+
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">

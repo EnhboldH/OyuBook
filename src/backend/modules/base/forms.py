@@ -66,6 +66,4 @@ class UserProfileUpdateForm(ModelForm):
         self.fields['fullname'].widget.attrs['placeholder'] = 'Enter your username'
 
     def clean(self):
-        # print(self.data)
-        # print(self.cleaned_data)
         return self.cleaned_data
