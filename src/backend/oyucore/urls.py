@@ -7,7 +7,7 @@ from modules.base.views import (
     UserLogoutView,
     UserCreateView,
     UserProfileView,
-    UserProfileEditView,
+    UserProfileUpdateView,
 )
 from modules.ctf.views import (
     CTFHomeView
@@ -22,6 +22,8 @@ from modules.network.views import (
     NetworkView
 )
 
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +34,7 @@ urlpatterns = [
     path('user/logout/', UserLogoutView.as_view(), name='user_logout'),
     path('user/register/', UserCreateView.as_view(), name='user_register'),
     path('user/profile/<slug:slug>', UserProfileView.as_view(), name='user_profile'),
-    path('user/profile/update/<slug:slug>/', UserProfileEditView.as_view(), name='user_profile_update'),
+    path('user/profile/update/<slug:slug>/', UserProfileUpdateView.as_view(), name='user_profile_update'),
     # CTF
     path('ctf/', CTFHomeView.as_view(), name='ctf_index'),
     # Mathematics
@@ -42,3 +44,6 @@ urlpatterns = [
     # Network
     path('network/', NetworkView.as_view(), name='network_index'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
