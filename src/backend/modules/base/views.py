@@ -115,7 +115,7 @@ class UserProfileView(DetailView):
         return profile
 
 
-class UserProfileEditView(UpdateView):
+class UserProfileUpdateView(UpdateView):
     model = OyuUser
     template_name = 'users/profile-update.html'
     form_class = UserProfileUpdateForm
@@ -156,7 +156,7 @@ class UserProfileEditView(UpdateView):
             user_profile.facebook_link = valid_data.get('facebook_link', None)
             user_profile.insta_link = valid_data.get('insta_link', None)
             user_profile.github_link = valid_data.get('github_link', None)
-            user_profile.background_link = valid_data.get('background_link', None)
-            user_profile.avatar_link = valid_data.get('avatar_link', None)
+            user_profile.background_image = valid_data.get('background_image', None)
+            user_profile.avatar_image = valid_data.get('avatar_image', None)
             user_profile.save()
         return super().form_valid(form)

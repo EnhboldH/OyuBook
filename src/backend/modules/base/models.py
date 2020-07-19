@@ -11,13 +11,14 @@ from modules.base.consts import USER_BADGE_TYPE_CHOICES
 from modules.base.consts import USER_BADGE_TYPE_NORMAL
 from modules.base.consts import USER_REGION_CHOICES
 from modules.base.consts import CTF_CHALLENGE_CATEGORY_CHOICES
-from modules.base.consts import BACKGROUND_IMG_LINK
-from modules.base.consts import AVATAR_IMG_LINK
+from modules.base.consts import BACKGROUND_IMG_DEFAULT
+from modules.base.consts import AVATAR_IMG_DEFAULT
 
 from django.template.defaultfilters import slugify
 
 from django.urls import reverse
 
+from PIL import Image
 
 class OyuUser(AbstractUser, models.Model):
     USERNAME_FIELD = "email"
@@ -25,8 +26,9 @@ class OyuUser(AbstractUser, models.Model):
 
     email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=100, unique=True)
-    image_file = models.CharField(max_length=100, default='default.png')
     user_type = models.CharField(max_length=100, default=USER_TYPE_NORMAL, choices=USER_TYPE_CHOICES)
+    avatar_image = models.CharField(max_length=100, default='default.png')
+    background_image = models.CharField(max_length=100, default='default.svg')
     slug = models.SlugField(null=False, unique=True)
 
     created_date = models.DateTimeField(auto_now_add=True)
@@ -55,7 +57,7 @@ class OyuUser(AbstractUser, models.Model):
 class OyuUserProfile(models.Model):
     REQUIRED_FIELDS = ["oyu_user"]
 
-    oyu_user = models.ForeignKey(OyuUser, verbose_name="Oyu User", on_delete=models.DO_NOTHING)
+    oyu_user = models.ForeignKey(OyuUser, verbose_name="Oyu User", on_delete=models.CASCADE)
     fullname = models.CharField("Бүтэн нэр", max_length=20)
     region = models.CharField("Харьяа", max_length=100, blank=True, null=True, choices=USER_REGION_CHOICES, help_text="Сургууль эсвэл ажилладаг газар.")
     respected = models.PositiveIntegerField("Хүндлэгдсэн", default=0)
@@ -71,8 +73,8 @@ class OyuUserProfile(models.Model):
     insta_link = models.CharField("Insta link", max_length=128, blank=True, null=True)
     github_link = models.CharField("Github link", max_length=128, blank=True, null=True)
 
-    background_link = models.CharField("Background Img link", max_length=128, default=BACKGROUND_IMG_LINK)
-    avatar_link = models.CharField("Avatar Img link", max_length=128, default=AVATAR_IMG_LINK)
+    background_image = models.ImageField("Background Img", max_length=128, default=BACKGROUND_IMG_DEFAULT, upload_to='img/users/background')
+    avatar_image = models.ImageField("Avatar Img", max_length=128, default=AVATAR_IMG_DEFAULT, upload_to='img/users/avatar')
 
     created_date = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(auto_now=True)
@@ -81,9 +83,15 @@ class OyuUserProfile(models.Model):
         return self.oyu_user.__str__()
 
     def save(self, *args, **kwargs):
-        self.last_updated_date = datetime.datetime.now()
+        # super().save()
+        # avt_img = Image.open(self.avatar_image.path)
+        # if avt_img.height > 300 or avt_img.width > 300:
+        #     avt_img.thumbnail((300, 300))
+        #     avt_img.save(self.avatar_image.path)
 
-        return super(OyuUserProfile, self).save(*args, **kwargs)
+        # self.last_updated_date = datetime.datetime.now()
+
+        super(OyuUserProfile, self).save(*args, **kwargs)
 
 
 class CtfChallenge(models.Model):

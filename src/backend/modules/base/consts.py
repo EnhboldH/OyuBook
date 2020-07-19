@@ -57,5 +57,5 @@ USER_CHALLENGE_STATUS_CHOICES = (
 )
 
 
-BACKGROUND_IMG_LINK = "default.svg"
-AVATAR_IMG_LINK = "default.png"
+BACKGROUND_IMG_DEFAULT = "img/users/background/default.svg"
+AVATAR_IMG_DEFAULT = "img/users/avatar/default.png"
