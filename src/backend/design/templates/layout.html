@@ -29,7 +29,6 @@
               <li><a href="{% url 'network_index' %}"><i class="fas fa-network-wired"></i> Сүлжээ</a></li>
               {% if user.is_authenticated %}
                 <li class="drop-down">
-                  {{ user.avatar_image }}
                   <img src="/media/{{ user.avatar_image }}" class="rounded-circle float-left _profile-nav">
                   <a class="ml-5" href="#">{{ user.username }}</a>
                   <ul>
