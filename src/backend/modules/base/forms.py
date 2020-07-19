@@ -54,9 +54,12 @@ class LoginForm(AuthenticationForm):
 
 class UserProfileUpdateForm(ModelForm):
 
+    background_image = forms.ImageField(label="Background Img", max_length=128, required=True)
+    avatar_image = forms.ImageField(label="Avatar Img", max_length=128, required=True)
+
     class Meta:
         model = OyuUserProfile
-        fields = ['fullname', 'region', 'facebook_link', 'insta_link', 'github_link', 'background_image', 'avatar_image']
+        fields = ['fullname', 'region', 'facebook_link', 'insta_link', 'github_link']
 
     def __init__(self, request=None, *args, **kwargs):
         super(UserProfileUpdateForm, self).__init__(*args, **kwargs)

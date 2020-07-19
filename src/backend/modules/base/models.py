@@ -18,7 +18,6 @@ from django.template.defaultfilters import slugify
 
 from django.urls import reverse
 
-from PIL import Image
 
 class OyuUser(AbstractUser, models.Model):
     USERNAME_FIELD = "email"
@@ -27,9 +26,10 @@ class OyuUser(AbstractUser, models.Model):
     email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=100, unique=True)
     user_type = models.CharField(max_length=100, default=USER_TYPE_NORMAL, choices=USER_TYPE_CHOICES)
-    avatar_image = models.CharField(max_length=100, default='default.png')
-    background_image = models.CharField(max_length=100, default='default.svg')
     slug = models.SlugField(null=False, unique=True)
+
+    background_image = models.ImageField("Background Img", max_length=128, default=BACKGROUND_IMG_DEFAULT, upload_to='img/users/background')
+    avatar_image = models.ImageField("Avatar Img", max_length=128, default=AVATAR_IMG_DEFAULT, upload_to='img/users/avatar')
 
     created_date = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(auto_now=True)
@@ -68,13 +68,9 @@ class OyuUserProfile(models.Model):
     accepted_problem = models.PositiveIntegerField("Оруулсан бодлогын тоо", default=0)
     given_money = models.PositiveIntegerField("Хандив", default=0)
 
-
     facebook_link = models.CharField("Facebook link", max_length=128, blank=True, null=True)
     insta_link = models.CharField("Insta link", max_length=128, blank=True, null=True)
     github_link = models.CharField("Github link", max_length=128, blank=True, null=True)
-
-    background_image = models.ImageField("Background Img", max_length=128, default=BACKGROUND_IMG_DEFAULT, upload_to='img/users/background')
-    avatar_image = models.ImageField("Avatar Img", max_length=128, default=AVATAR_IMG_DEFAULT, upload_to='img/users/avatar')
 
     created_date = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(auto_now=True)
@@ -83,14 +79,7 @@ class OyuUserProfile(models.Model):
         return self.oyu_user.__str__()
 
     def save(self, *args, **kwargs):
-        # super().save()
-        # avt_img = Image.open(self.avatar_image.path)
-        # if avt_img.height > 300 or avt_img.width > 300:
-        #     avt_img.thumbnail((300, 300))
-        #     avt_img.save(self.avatar_image.path)
-
-        # self.last_updated_date = datetime.datetime.now()
-
+        self.last_updated_date = datetime.datetime.now()
         super(OyuUserProfile, self).save(*args, **kwargs)
 
 
