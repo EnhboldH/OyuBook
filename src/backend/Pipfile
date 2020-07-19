@@ -15,6 +15,7 @@ sqlparse = "==0.3.1"
 psycopg2-binary = "==2.8.5"
 Django = "==3.0.7"
 pillow = "*"
+django-cleanup = "*"
 
 [requires]
 python_version = "3.6"

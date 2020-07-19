@@ -5,7 +5,11 @@
 {% endblock %}
 {% block style %}
 <style>
-
+  {% if object.background_image != 'default.svg' %}
+    body {
+      background: linear-gradient(45deg, rgba(20, 30, 56, 0.1) 0%, rgba(6, 26, 66, 0.5) 100%), url("/media/img/users/background/{{ object.background_image }}") no-repeat center center fixed;
+    }
+  {% endif %}
 </style>
 {% endblock %}
 {% block content %}
@@ -15,7 +19,7 @@
       <div class="col-5">
         <div class="row">
           <div class="col-4 mt-3">
-            <img src="/media/{{ profile.avatar_image }}" class="rounded _profile-image">
+            <img src="/media/img/users/avatar/{{ object.avatar_image }}" class="rounded _profile-image">
           </div>
           <div class="col-8">
             <div class="mt-3">

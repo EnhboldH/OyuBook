@@ -13,7 +13,8 @@ from django.db.models import Q
 from .forms import (
     UserRegistrationForm,
     UserProfileUpdateForm,
-    LoginForm,
+    UserUpdateForm,
+    UserLoginForm,
 )
 
 # Models
@@ -61,7 +62,7 @@ class UserCreateView(FormView):
 
 
 class UserLoginView(views.LoginView):
-    form_class = LoginForm
+    form_class = UserLoginForm
     template_name = 'users/login.html'
     extra_context = {
         'title': 'Нэвтрэх | OyuBook'
@@ -119,12 +120,26 @@ class UserProfileUpdateView(UpdateView):
     model = OyuUser
     template_name = 'users/profile-update.html'
     form_class = UserProfileUpdateForm
-
+    form_class_user = UserUpdateForm
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         obj = self.get_object()
-        context['title'] = obj.username
+        context['title'] = obj.username + ' | OyuBook'
+        context['form2'] = self.form_class_user(self.request.GET, instance=self.request.user)
         return context
+
+    def get(self, request, *args, **kwargs):
+        super(UserProfileUpdateView, self).get(request, *args, **kwargs)
+        form = self.form_class
+        form2 = self.form_class_user
+        return self.render_to_response(self.get_context_data(object=self.object, form=form, form2=form2))
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(request.POST)
+        form2 = self.form_class_user(request.POST)
+        
+        print(form['fullname'].data)
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -149,14 +164,22 @@ class UserProfileUpdateView(UpdateView):
 
     def form_valid(self, form):
         valid_data = form.cleaned_data
+        print(valid_data)
+        input()
         user_profile = OyuUserProfile.objects.filter(oyu_user=self.request.user).first()
         if user_profile:
-            user_profile.fullname = valid_data.get('fullname', None)
-            user_profile.region = valid_data.get('region', None)
+            if user_profile.fullname != valid_data.get('fullname', None):
+                user_profile.fullname = valid_data.get('fullname')
+            if user_profile.region != valid_data.get('region', None):
+                user_profile.region = valid_data.get('region')
             user_profile.facebook_link = valid_data.get('facebook_link', None)
             user_profile.insta_link = valid_data.get('insta_link', None)
             user_profile.github_link = valid_data.get('github_link', None)
-            user_profile.background_image = valid_data.get('background_image', None)
-            user_profile.avatar_image = valid_data.get('avatar_image', None)
+            if user_profile.background_image != valid_data.get('background_image', None):
+                user_profile.background_image = valid_data.get('background_image')
+            if user_profile.background_image_always != valid_data.get('background_image_always', None):
+                user_profile.background_image_always = valid_data.get('background_image_always')
+            if user_profile.avatar_image != valid_data.get('avatar_image', None):
+                user_profile.avatar_image = valid_data.get('avatar_image')
             user_profile.save()
         return super().form_valid(form)

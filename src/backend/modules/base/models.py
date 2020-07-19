@@ -3,16 +3,18 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-from modules.base.consts import USER_TYPE_NORMAL
-from modules.base.consts import USER_TYPE_CHOICES
-from modules.base.consts import USER_CHALLENGE_STATUS_CHOICES
-from modules.base.consts import USER_CHALLENGE_STATUS_ATTEMPTED
-from modules.base.consts import USER_BADGE_TYPE_CHOICES
-from modules.base.consts import USER_BADGE_TYPE_NORMAL
-from modules.base.consts import USER_REGION_CHOICES
-from modules.base.consts import CTF_CHALLENGE_CATEGORY_CHOICES
-from modules.base.consts import BACKGROUND_IMG_DEFAULT
-from modules.base.consts import AVATAR_IMG_DEFAULT
+from modules.base.consts import (
+    USER_TYPE_NORMAL,
+    USER_TYPE_CHOICES,
+    USER_CHALLENGE_STATUS_CHOICES,
+    USER_CHALLENGE_STATUS_ATTEMPTED,
+    USER_BADGE_TYPE_CHOICES,
+    USER_BADGE_TYPE_NORMAL,
+    USER_REGION_CHOICES,
+    CTF_CHALLENGE_CATEGORY_CHOICES,
+    AVATAR_IMG_DEFAULT,
+    BACKGROUND_IMG_DEFAULT
+)
 
 from django.template.defaultfilters import slugify
 
@@ -27,8 +29,9 @@ class OyuUser(AbstractUser, models.Model):
     email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=100, unique=True)
     user_type = models.CharField(max_length=100, default=USER_TYPE_NORMAL, choices=USER_TYPE_CHOICES)
-    avatar_image = models.CharField(max_length=100, default='default.png')
-    background_image = models.CharField(max_length=100, default='default.svg')
+    avatar_image = models.ImageField("Avatar Img", max_length=128, default=AVATAR_IMG_DEFAULT, upload_to='img/users/avatar')
+    background_image = models.ImageField(max_length=100, default=BACKGROUND_IMG_DEFAULT, upload_to='img/users/background')
+    background_image_always = models.BooleanField("Background Img Always", default=False)
     slug = models.SlugField(null=False, unique=True)
 
     created_date = models.DateTimeField(auto_now_add=True)
@@ -72,9 +75,6 @@ class OyuUserProfile(models.Model):
     facebook_link = models.CharField("Facebook link", max_length=128, blank=True, null=True)
     insta_link = models.CharField("Insta link", max_length=128, blank=True, null=True)
     github_link = models.CharField("Github link", max_length=128, blank=True, null=True)
-
-    background_image = models.ImageField("Background Img", max_length=128, default=BACKGROUND_IMG_DEFAULT, upload_to='img/users/background')
-    avatar_image = models.ImageField("Avatar Img", max_length=128, default=AVATAR_IMG_DEFAULT, upload_to='img/users/avatar')
 
     created_date = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(auto_now=True)

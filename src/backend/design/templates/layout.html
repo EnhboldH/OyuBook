@@ -13,6 +13,9 @@
   {% block stylesheets %}
   {% endblock %}
   {% block style %}
+    <style>
+      /*background: linear-gradient(45deg, rgba(20, 30, 56, 0.1) 0%, rgba(6, 26, 66, 0.5) 100%), url("/static/img/base/wallpaper2.jpg") no-repeat center center fixed; */
+    </style>
   {% endblock %}
 </head>
 <body>
@@ -29,11 +32,7 @@
               <li><a href="{% url 'network_index' %}"><i class="fas fa-network-wired"></i> Сүлжээ</a></li>
               {% if user.is_authenticated %}
                 <li class="drop-down">
-                  {% if profile %}
-                    <img src="/media/{{ profile.avatar_image }}" class="rounded-circle float-left _profile-nav">
-                  {% else %}
-                    <img src="/media/img/users/avatar/{{ user.avatar_image }}" class="rounded-circle float-left _profile-nav">
-                  {% endif %}
+                  <img src="/media/img/users/avatar/{{ user.avatar_image }}" class="rounded-circle float-left _profile-nav">
                   <a class="ml-5" href="#">{{ user.username }}</a>
                   <ul>
                     <li><a href="{% url 'user_profile' user.slug %}">Профайл</a></li>

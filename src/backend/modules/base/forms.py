@@ -37,7 +37,7 @@ class UserRegistrationForm(ModelForm):
             visible.field.widget.attrs['class'] = 'form-control login-input'
 
 
-class LoginForm(AuthenticationForm):
+class UserLoginForm(AuthenticationForm):
 
     def __init__(self, request=None, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
@@ -56,7 +56,7 @@ class UserProfileUpdateForm(ModelForm):
 
     class Meta:
         model = OyuUserProfile
-        fields = ['fullname', 'region', 'facebook_link', 'insta_link', 'github_link', 'background_image', 'avatar_image']
+        fields = ['fullname', 'region', 'facebook_link', 'insta_link', 'github_link']
 
     def __init__(self, request=None, *args, **kwargs):
         super(UserProfileUpdateForm, self).__init__(*args, **kwargs)
@@ -66,4 +66,18 @@ class UserProfileUpdateForm(ModelForm):
         self.fields['fullname'].widget.attrs['placeholder'] = 'Enter your username'
 
     def clean(self):
+        print(self.cleaned_data)
+        return self.cleaned_data
+
+class UserUpdateForm(ModelForm):
+
+    class Meta:
+        model = OyuUser
+        fields = ['email', 'avatar_image', 'background_image', 'background_image_always']
+
+    def __init__(self, request=None, *args, **kwargs):
+        super(UserUpdateForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        print(self.cleaned_data)
         return self.cleaned_data

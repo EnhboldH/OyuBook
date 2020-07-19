@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'modules.electronics',
     'modules.mathematics',
     'modules.network',
+    
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
