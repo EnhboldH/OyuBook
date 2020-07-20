@@ -59,7 +59,7 @@ class UserProfileUpdateForm(ModelForm):
 
     class Meta:
         model = OyuUserProfile
-        fields = ['fullname', 'region', 'facebook_link', 'insta_link', 'github_link']
+        fields = ['fullname', 'region', 'facebook_link', 'insta_link', 'github_link', 'background_image', 'avatar_image']
 
     def __init__(self, request=None, *args, **kwargs):
         super(UserProfileUpdateForm, self).__init__(*args, **kwargs)

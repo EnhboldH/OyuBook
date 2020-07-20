@@ -5,7 +5,12 @@
 {% endblock %}
 {% block style %}
 <style>
-
+  body {
+  {% if object.background_image == 'img/users/background/default.svg' %}
+    background: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.9) 100%), url("/static/img/base/default.svg") no-repeat center center fixed; 
+  {% else %}
+    background: linear-gradient(45deg, rgba(20, 30, 56, 0.1) 0%, rgba(6, 26, 66, 0.9) 100%), url("/media/{{ object.background_image }}") no-repeat center center fixed; 
+  {% endif %}
 </style>
 {% endblock %}
 {% block content %}

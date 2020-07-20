@@ -147,12 +147,13 @@ class UserProfileUpdateView(UpdateView):
                           {'verbose_name': queryset.model._meta.verbose_name})
         return obj
 
-    def form_valid(self, form):
+    def form_valid(self, form): 
         valid_data = form.cleaned_data
 
         oyu_user = self.request.user
         oyu_user.background_image = valid_data.get('background_image', None)
         oyu_user.avatar_image = valid_data.get('avatar_image', None)
+        print(oyu_user.background_image)
         oyu_user.save()
 
         user_profile = OyuUserProfile.objects.filter(oyu_user=oyu_user).first()
