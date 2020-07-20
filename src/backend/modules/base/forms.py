@@ -63,10 +63,17 @@ class UserProfileUpdateForm(ModelForm):
 
     def __init__(self, request=None, *args, **kwargs):
         super(UserProfileUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['fullname'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
-        self.fields['region'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
-        self.fields['region'].widget.attrs['placeholder'] = 'Enter your region'
-        self.fields['fullname'].widget.attrs['placeholder'] = 'Enter your username'
+        self.fields['fullname'].widget.attrs['class'] = "form-control profile-input"
+        self.fields['region'].widget.attrs['class'] = "form-control profile-input"
+        self.fields['facebook_link'].widget.attrs['class'] = "form-control profile-input"
+        self.fields['insta_link'].widget.attrs['class'] = "form-control profile-input"
+        self.fields['github_link'].widget.attrs['class'] = "form-control profile-input"
+        self.fields['avatar_image'].widget.attrs['class'] = "form-control-file"
+        self.fields['background_image'].widget.attrs['class'] = "form-control-file"
 
+        self.fields['fullname'].widget.attrs['placeholder'] = "Бүтэн нэр эсвэл өөрийн хоч"
+        self.fields['facebook_link'].widget.attrs['placeholder'] = "ID гаа оруулна уу"
+        self.fields['insta_link'].widget.attrs['placeholder'] = "ID гаа оруулна уу"
+        self.fields['github_link'].widget.attrs['placeholder'] = "ID гаа оруулна уу"
     def clean(self):
         return self.cleaned_data

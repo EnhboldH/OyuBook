@@ -1,39 +1,180 @@
 {% extends "layout.html" %}
 {% load static %}
 {% block stylesheets %}
-  <link href="{% static 'css/users/profile.css' %}" rel="stylesheet">
+  <link href="{% static 'css/users/profile-update.css' %}" rel="stylesheet">
 {% endblock %}
 {% block style %}
 <style>
-* {
+body {
   color: white;
+}
+
+._profile {
+  background-color:rgba(0, 0, 0, 0.3);
+}
+.text-accent {
+    color: #9acc14;
+}
+.profile-input {
+  box-shadow: none;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #394147;
+  border: none;
+}
+.profile-input:focus {
+  box-shadow: none;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #394147;
+  border: none;
+}
+
+.link-input {
+  height: 30px;
 }
 </style>
 {% endblock %}
 {% block content %}
-<section id="main">
-  <!-- sda  -->
-  <div class="container mt-4 _profile">
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="form-group">
-        <label>Full username</label>
-        {{ form.fullname }}
+<section id="main" class="d-flex">
+  <div class="container-fluid ml-5 mr-5 mt-4">
+    <div class="row">
+      <div class="col-6">
+        <div class="card bg-dark">
+          <div class="card-header">
+            <div class="d-flex">
+              <i class="fas fa-user-circle fa-2x"></i>
+              <div class="ml-2 align-self-center">
+                <span>Хэрэглэгч</span>
+              </div>
+              <div class="ml-auto align-self-center">
+                <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
+                  <i class="fas fa-info-circle text-info"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label>
+                  <span style="font-family: Ubuntu, Monospace;">Бүтэн нэр</span>
+                </label>
+                {{ form.fullname }}
+              </div>
+              <div class="form-group">
+                <label class="control-label">
+                  <span style="font-family: Ubuntu, Monospace;">Бүтэн нэр</span>
+                </label>
+                {{ form.region }}
+              </div>
+            </form>
+            <div class="form-group">
+              <label class="control-label">
+                <span style="font-family: Ubuntu, Monospace;">Е-мэйл хаяг</span>
+              </label>
+              {{ form.fullname }}
+            </div>
+            <div class="form-group">
+              <label class="control-label">
+                <span style="font-family: Ubuntu, Monospace;">Нууц үг</span>
+              </label>
+              {{ form.fullname }}
+            </div>
+          </div>
+          <div class="card-footer text-muted text-center">
+            2 өдрийн өмнө шинэчилсэн
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Region</label>
-        {{ form.region }}
+      <div class="col-6">
+        <div class="card bg-dark">
+          <div class="card-header">
+            <div class="d-flex">
+              <i class="fas fa-heart fa-2x"></i>
+              <div class="ml-2 align-self-center">
+                <span>Сошиал хаяг</span>
+              </div>
+              <div class="ml-auto align-self-center">
+                <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
+                  <i class="fas fa-info-circle text-info"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-group col-6">
+                  <label class="control-label">
+                    <span>
+                      <i class="fab fa-github"></i> Github
+                    </span>
+                  </label>
+                  {{ form.github_link }}
+                </div>
+                <div class="form-group col-6">
+                  <label class="control-label">
+                    <span>
+                      <i class="fab fa-instagram"></i> Instagram
+                    </span>
+                  </label>
+                  {{ form.insta_link }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-6">
+                  <label class="control-label">
+                    <span>
+                      <i class="fab fa-facebook"></i> Facebook
+                    </span>
+                  </label>
+                  {{ form.github_link }}
+                </div>
+                <div class="form-group col-6">
+                  <label class="control-label">
+                    <span>
+                      <i class="fab fa-linkedin"></i> Linkedin
+                    </span>
+                  </label>
+                  {{ form.insta_link }}
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card bg-dark mt-3">
+          <div class="card-header">
+            <div class="d-flex">
+              <i class="fas fa-cog fa-2x"></i>
+              <div class="ml-2 align-self-center">
+                <span>Систем</span>
+              </div>
+              <div class="ml-auto align-self-center">
+                <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
+                  <i class="fas fa-info-circle text-info"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-group col-8">
+                  <button class="btn btn-block btn-outline-success"><span class="text-success">Биднийг дэмжих</span></button>
+                </div>
+                <div class="form-group col-4">
+                  <button class="btn btn-block btn-outline-danger"><span class="text-danger">Хаягаа устгах</span></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Background Image</label>
-        {{ form.background_image }}
-      </div>
-      <div class="form-group">
-        <label>Avatar Image</label>
-        {{ form.avatar_image }}
-      </div>
-      <button type="submit" class="btn btn-primary float-right">Submit</button>
-    </form>
+    </div>
   </div>
 </section>
 {% block scripts %}
