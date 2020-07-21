@@ -6,11 +6,7 @@
 {% block content %}
 <section id="main" class="d-flex mb-5">
   <div class="container-fluid ml-5 mr-5 mt-4">
-    <form action="#" id="profile-update" class="secure" method="POST" novalidate>{% csrf_token %}
-      {{ form.non_field_errors }} 
-      {% for f in form %}
-        {{f.label}} {{f.errors}}
-      {% endfor %}
+    <form  method="post">{% csrf_token %}
       <div class="row">
         <div class="col-6">
           <div class="card">
