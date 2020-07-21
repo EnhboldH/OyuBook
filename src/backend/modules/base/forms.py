@@ -54,8 +54,8 @@ class LoginForm(AuthenticationForm):
 
 class UserProfileUpdateForm(ModelForm):
 
-    background_image = forms.ImageField(label="Background Img", max_length=128, required=True)
-    avatar_image = forms.ImageField(label="Avatar Img", max_length=128, required=True)
+    background_image = forms.ImageField(label="Background Img", max_length=128, )
+    avatar_image = forms.ImageField(label="Avatar Img", max_length=128, )
 
     class Meta:
         model = OyuUserProfile
@@ -72,8 +72,8 @@ class UserProfileUpdateForm(ModelForm):
         self.fields['background_image'].widget.attrs['class'] = "form-control-file"
 
         self.fields['fullname'].widget.attrs['placeholder'] = "Бүтэн нэр эсвэл өөрийн хоч"
-        self.fields['facebook_link'].widget.attrs['placeholder'] = "ID гаа оруулна уу"
-        self.fields['insta_link'].widget.attrs['placeholder'] = "ID гаа оруулна уу"
-        self.fields['github_link'].widget.attrs['placeholder'] = "ID гаа оруулна уу"
+        self.fields['facebook_link'].widget.attrs['placeholder'] = ". . ."
+        self.fields['insta_link'].widget.attrs['placeholder'] = ". . ."
+        self.fields['github_link'].widget.attrs['placeholder'] = ". . ."
     def clean(self):
         return self.cleaned_data
