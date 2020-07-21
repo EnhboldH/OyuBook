@@ -7,6 +7,8 @@ from .models import (
     OyuUserProfile,
 )
 
+from .consts import USER_REGION_CHOICES
+
 class UserRegistrationForm(ModelForm):
 
     password = forms.CharField(widget=forms.PasswordInput)
@@ -52,28 +54,30 @@ class LoginForm(AuthenticationForm):
             uname = uname.strip()
         return uname
 
-class UserProfileUpdateForm(ModelForm):
+class UserProfileUpdateForm(forms.Form):
 
-    background_image = forms.ImageField(label="Background Img", max_length=128, )
-    avatar_image = forms.ImageField(label="Avatar Img", max_length=128, )
+    email = forms.EmailField(label="Е-мэйл хаяг", max_length=100, required=False)
+    password = forms.CharField(label="Нууц үг", widget=forms.PasswordInput, required=False)
+    background_image = forms.ImageField(label="Арын зураг", max_length=128, required=False)
+    avatar_image = forms.ImageField(label="Нүүр зураг", max_length=128, required=False)
 
-    class Meta:
-        model = OyuUserProfile
-        fields = ['fullname', 'region', 'facebook_link', 'insta_link', 'github_link', 'background_image', 'avatar_image']
+    fullname = forms.CharField(label="Бүтэн нэр", max_length=20, required=False)
+    region = forms.ChoiceField(label="Харьяа", choices=USER_REGION_CHOICES, help_text="Сургууль эсвэл ажилладаг газар.", required=False)
+    facebook_link = forms.CharField(label="Facebook link", max_length=128, required=False)
+    insta_link = forms.CharField(label="Insta link", max_length=128, required=False)
+    github_link = forms.CharField(label="Github link", max_length=128, required=False)
 
     def __init__(self, request=None, *args, **kwargs):
         super(UserProfileUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['fullname'].widget.attrs['class'] = "form-control profile-input"
-        self.fields['region'].widget.attrs['class'] = "form-control profile-input"
-        self.fields['facebook_link'].widget.attrs['class'] = "form-control profile-input"
-        self.fields['insta_link'].widget.attrs['class'] = "form-control profile-input"
-        self.fields['github_link'].widget.attrs['class'] = "form-control profile-input"
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = "form-control profile-input"
+            self.fields[field].widget.attrs['placeholder'] = ". . ."
+
         self.fields['avatar_image'].widget.attrs['class'] = "form-control-file"
         self.fields['background_image'].widget.attrs['class'] = "form-control-file"
 
-        self.fields['fullname'].widget.attrs['placeholder'] = "Бүтэн нэр эсвэл өөрийн хоч"
-        self.fields['facebook_link'].widget.attrs['placeholder'] = ". . ."
-        self.fields['insta_link'].widget.attrs['placeholder'] = ". . ."
-        self.fields['github_link'].widget.attrs['placeholder'] = ". . ."
     def clean(self):
+
+        # print ("Raw Data:", self.data)
+        # print ("Raw files:", self.files)
         return self.cleaned_data

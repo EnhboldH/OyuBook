@@ -9,6 +9,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.db.models import Q
 
+from django.http import Http404
+from django.http import HttpResponseRedirect
+
 # Forms
 from .forms import (
     UserRegistrationForm,
@@ -115,40 +118,45 @@ class UserProfileView(DetailView):
         return profile
 
 
-class UserProfileUpdateView(UpdateView):
-    model = OyuUser
+class UserProfileUpdateView(FormView):
     template_name = 'users/profile-update.html'
     form_class = UserProfileUpdateForm
 
+    def view_prepare(self, request, *args, **kwargs):
+        oyu_user = OyuUser.objects.filter(slug=self.kwargs.get('slug', None)).first()
+        user_profile = OyuUserProfile.objects.filter(oyu_user=oyu_user).first()
+        if not oyu_user or not user_profile:
+            raise Http404("Хэрэглэгч олдсонгүй.")
+        self.object = oyu_user
+        self.user_profile = user_profile
+
+    def get(self, request, *args, **kwargs):
+        self.view_prepare(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.view_prepare(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        obj = self.get_object()
-        context['title'] = obj.username
+        context['object'] = self.object
+        context['title'] = self.object.username
         return context
 
-    def get_object(self, queryset=None):
-        if queryset is None:
-            queryset = self.get_queryset()
-        pk = self.kwargs.get(self.pk_url_kwarg)
-        slug = self.kwargs.get(self.slug_url_kwarg)
-        if pk is not None:
-            queryset = queryset.filter(pk=pk)
-        if slug is not None and (pk is None or self.query_pk_and_slug):
-            slug_field = self.get_slug_field()
-            queryset = queryset.filter(**{slug_field: slug})
-        if pk is None and slug is None:
-            raise AttributeError("Generic detail view %s must be called with "
-                                 "either an object pk or a slug."
-                                 % self.__class__.__name__)
-        try:
-            obj = queryset.get()
-        except queryset.model.DoesNotExist:
-            raise Http404(_("No %(verbose_name)s found matching the query") %
-                          {'verbose_name': queryset.model._meta.verbose_name})
-        return obj
+    def get_initial(self):
+        return {
+            'fullname': self.user_profile.fullname,
+            'region': self.user_profile.region,
+            'email': self.object.email,
+            'github_link': self.user_profile.github_link,
+            'facebook_link': self.user_profile.facebook_link,
+            'insta_link': self.user_profile.insta_link,
+        }
 
-    def form_valid(self, form): 
+    def form_valid(self, form):
         valid_data = form.cleaned_data
+        # print ("\nvalid_data:", valid_data)
 
         oyu_user = self.request.user
         oyu_user.background_image = valid_data.get('background_image', None)
@@ -164,4 +172,4 @@ class UserProfileUpdateView(UpdateView):
             user_profile.github_link = valid_data.get('github_link', None)
             user_profile.save()
 
-        return super().form_valid(form)
+        return HttpResponseRedirect(reverse('user_profile', kwargs={'slug': self.object.slug}))
