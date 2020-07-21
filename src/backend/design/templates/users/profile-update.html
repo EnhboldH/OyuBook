@@ -6,235 +6,232 @@
 {% block content %}
 <section id="main" class="d-flex mb-5">
   <div class="container-fluid ml-5 mr-5 mt-4">
-    <div class="row">
-      <div class="col-6">
-        <div class="card">
-          <div class="card-header">
-            <div class="d-flex">
-              <i class="fas fa-user-circle fa-2x"></i>
-              <div class="ml-2 align-self-center">
-                <span>Хэрэглэгч</span>
-              </div>
-              <div class="ml-auto align-self-center">
-                <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
-                  <i class="fas fa-info-circle text-info"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="form-group">
-              <label>
-                <span class="input-label">Бүтэн нэр</span>
-              </label>
-              {{ form.fullname }}
-            </div>
-            <div class="form-group">
-              <label class="control-label">
-                <span class="input-label">Харья</span>
-              </label>
-              {{ form.region }}
-            </div>
-            <div class="form-group">
-              <label class="control-label">
-                <span class="input-label">Е-мэйл хаяг</span>
-              </label>
-              <input type="text" name="asd" maxlength="128" class="form-control profile-input" placeholder="Е-мэйл ээ оруулна уу" id="asd">
-            </div>
-            <div class="form-group">
-              <label class="control-label">
-                <span class="input-label">Нууц үг</span>
-              </label>
-              <input type="password" class="form-control profile-input" placeholder="*******************">
-            </div>
-            <div class="row">
-              <div class="form-group col-6">
-                <label class="control-label" for="avatar">
-                  <span class="input-label">Профайл зураг</span>
-                </label> 
-                <span class="_help-text">(багадаа 1x1)</span>
-                <br> 
-                <label class="btn btn-outline-light"> 
-                  <input id="avatar" type="file" onchange="$('#upload-file-avatar').text($(this).val());" class="form-control-file">Зураг сонгох
-                </label> 
-                <span class="label label-default" id="upload-file-avatar"></span> 
-              </div>
-              <div class="form-group col-6">
-                <label class="control-label" for="background_image">
-                  <span class="input-label">Арын зураг</span>
-                </label> 
-                <span class="_help-text">(ихдээ 1000x1000)</span>
-                <label class="btn btn-outline-light" for="background_image"> 
-                  <input class="form-control-file" id="background_image" name="background_image" type="file" onchange="$('#upload-file-background').text($(this).val());">Зураг сонгох
-                </label>
-                <span class="label label-default" id="upload-file-background"></span> 
-              </div>
-            </div>
-          </div>
-          <div class="card-footer">
-            <a href="" class="btn get-btn float-left _back-btn">Буцах</a>
-            <button type="submit" class="btn get-btn float-right">Шинэчлэх</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="card">
-          <div class="card-header">
-            <div class="d-flex">
-              <i class="fas fa-heart fa-2x"></i>
-              <div class="ml-2 align-self-center">
-                <span>Сошиал хаяг</span>
-              </div>
-              <div class="ml-auto align-self-center">
-                <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
-                  <i class="fas fa-info-circle text-info"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="form-group col-6">
-                <label class="control-label">
-                  <span class="input-label">Github</span>
-                </label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fab fa-github-square"></i></span>
-                  </div>
-                  {{ form.github_link }}
+    <form action="#" id="profile-update" class="secure" method="POST" novalidate>{% csrf_token %}
+      {{ form.non_field_errors }} 
+      {% for f in form %}
+        {{f.label}} {{f.errors}}
+      {% endfor %}
+      <div class="row">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-header">
+              <div class="d-flex">
+                <i class="fas fa-user-circle fa-2x"></i>
+                <div class="ml-2 align-self-center">
+                  <span>Хэрэглэгч</span>
                 </div>
-              </div>
-              <div class="form-group col-6">
-                <label class="control-label">
-                  <span class="input-label">Instagram</span>
-                </label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fab fa-instagram"></i></span>
-                  </div>
-                  {{ form.insta_link }}
+                <div class="ml-auto align-self-center">
+                  <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
+                    <i class="fas fa-info-circle text-info"></i>
+                  </span>
                 </div>
               </div>
             </div>
-            <div class="row mt-n3 mb-n3">
-              <div class="form-group col-6">
+            <div class="card-body">
+              <div class="form-group">
                 <label class="control-label">
-                  <span class="input-label">Facebook</span>
+                  <span class="input-label">{{ form.fullname.label }}</span>
                 </label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fab fa-facebook"></i></span>
-                  </div>
-                  {{ form.facebook_link }}
+                {{ form.fullname }}
+              </div>
+              <div class="form-group">
+                <label class="control-label">
+                  <span class="input-label">{{ form.region.label }}</span>
+                </label>
+                {{ form.region }}
+              </div>
+              <div class="form-group">
+                <label class="control-label">
+                  <span class="input-label">{{ form.email.label }}</span>
+                </label>
+                {{ form.email }}
+              </div>
+              <div class="form-group">
+                <label class="control-label">
+                  <span class="input-label">{{ form.password.label }}</span>
+                </label>
+                {{ form.password }}
+              </div>
+              <div class="row">
+                <div class="form-group col-6">
+                  <label class="control-label">
+                    <span class="input-label">{{ form.avatar_image.label }}</span>
+                  </label>
+                  {{ form.avatar_image }}
+                </div>
+                <div class="form-group col-6">
+                  <label class="control-label">
+                    <span class="input-label">{{ form.background_image.label }}</span>
+                  </label>
+                  {{ form.background_image }}
                 </div>
               </div>
-              <div class="form-group col-6">
-                <label class="control-label">
-                  <span class="input-label">Linkedin</span>
-                </label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fab fa-linkedin"></i></span>
-                  </div>
-                  <input type="text" name="linkedlin_link" maxlength="128" class="form-control profile-input" placeholder=". . ." id="id_linkedin_link">
-                </div>
-              </div>
+            </div>
+            <div class="card-footer">
+              <a href="" class="btn get-btn float-left _back-btn">Буцах</a>
+              <button type="submit" class="btn get-btn float-right">Шинэчлэх</button>
             </div>
           </div>
         </div>
-        <div class="card mt-3">
-          <div class="card-header">
-            <div class="d-flex">
-              <i class="fas fa-wrench fa-2x"></i>
-              <div class="ml-2 align-self-center">
-                <span>Тохиргоо</span>
+        <div class="col-6">
+          <div class="card">
+            <div class="card-header">
+              <div class="d-flex">
+                <i class="fas fa-heart fa-2x"></i>
+                <div class="ml-2 align-self-center">
+                  <span>Сошиал хаяг</span>
+                </div>
+                <div class="ml-auto align-self-center">
+                  <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
+                    <i class="fas fa-info-circle text-info"></i>
+                  </span>
+                </div>
               </div>
-              <div class="ml-auto align-self-center">
-                <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
-                  <i class="fas fa-info-circle text-info"></i>
-                </span>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="form-group col-6">
+                  <label class="control-label">
+                    <span class="input-label">Github</span>
+                  </label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fab fa-github-square"></i></span>
+                    </div>
+                    {{ form.github_link }}
+                  </div>
+                </div>
+                <div class="form-group col-6">
+                  <label class="control-label">
+                    <span class="input-label">Instagram</span>
+                  </label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                    </div>
+                    {{ form.insta_link }}
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-n3 mb-n3">
+                <div class="form-group col-6">
+                  <label class="control-label">
+                    <span class="input-label">Facebook</span>
+                  </label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fab fa-facebook"></i></span>
+                    </div>
+                    {{ form.facebook_link }}
+                  </div>
+                </div>
+                <div class="form-group col-6">
+                  <label class="control-label">
+                    <span class="input-label">Linkedin</span>
+                  </label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fab fa-linkedin"></i></span>
+                    </div>
+                    <input type="text" name="linkedlin_link" maxlength="128" class="form-control profile-input" placeholder=". . ." id="id_linkedin_link">
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="form-group col-6">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1">
-                    <span class="input-label">Нийтийн профайл <i>(public)</i></span>
-                  </label>
+          <div class="card mt-3">
+            <div class="card-header">
+              <div class="d-flex">
+                <i class="fas fa-wrench fa-2x"></i>
+                <div class="ml-2 align-self-center">
+                  <span>Тохиргоо</span>
                 </div>
-              </div>
-              <div class="form-group col-6">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                  <label class="form-check-label" for="defaultCheck2">
-                    <span class="input-label">Е-мэйл хүлээж авах</span>
-                  </label>
+                <div class="ml-auto align-self-center">
+                  <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
+                    <i class="fas fa-info-circle text-info"></i>
+                  </span>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="form-group col-6">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                  <label class="form-check-label" for="defaultCheck3">
-                    <span class="input-label">Арын зураг <i>(үргэлж)</i></span>
-                  </label>
+            <div class="card-body">
+              <div class="row">
+                <div class="form-group col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                      <span class="input-label">Нийтийн профайл <i>(public)</i></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                    <label class="form-check-label" for="defaultCheck2">
+                      <span class="input-label">Е-мэйл хүлээж авах</span>
+                    </label>
+                  </div>
                 </div>
               </div>
-              <div class="form-group col-6">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                  <label class="form-check-label" for="defaultCheck3">
-                    <span class="input-label">Өөр нэг тохиргоо</span>
-                  </label>
+              <div class="row">
+                <div class="form-group col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                    <label class="form-check-label" for="defaultCheck3">
+                      <span class="input-label">Арын зураг <i>(үргэлж)</i></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                    <label class="form-check-label" for="defaultCheck3">
+                      <span class="input-label">Өөр нэг тохиргоо</span>
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card mt-3">
-          <div class="card-header">
-            <div class="d-flex">
-              <i class="fas fa-cog fa-2x"></i>
-              <div class="ml-2 align-self-center">
-                <span>Систем</span>
-              </div>
-              <div class="ml-auto align-self-center">
-                <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
-                  <i class="fas fa-info-circle text-info"></i>
-                </span>
+          <div class="card mt-3">
+            <div class="card-header">
+              <div class="d-flex">
+                <i class="fas fa-cog fa-2x"></i>
+                <div class="ml-2 align-self-center">
+                  <span>Систем</span>
+                </div>
+                <div class="ml-auto align-self-center">
+                  <span data-toggle="tooltip" data-html="true" title="Нэмэлт мэдээлэл">
+                    <i class="fas fa-info-circle text-info"></i>
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="form-group col-4">
-                <button class="btn btn-block btn-primary">
-                  <i class="fas fa-tools mr-1"></i>
-                  <span class="input-label">Санал, хүсэлт</span>
-                </button>
-              </div>
-              <div class="form-group col-4">
-                <button class="btn btn-block btn-success">
-                  <i class="fas fa-gem mr-1"></i>
-                  <span class="input-label">Дэмжих</span>
-                </button>
-              </div>
-              <div class="form-group col-4">
-                <button class="btn btn-block btn-danger">
-                  <i class="fas fa-exclamation-triangle mr-1"></i>
-                  <span class="input-label">Хаягаа устгах</span>
-                </button>
+            <div class="card-body">
+              <div class="row">
+                <div class="form-group col-4">
+                  <button class="btn btn-block btn-primary">
+                    <i class="fas fa-tools mr-1"></i>
+                    <span class="input-label">Санал, хүсэлт</span>
+                  </button>
+                </div>
+                <div class="form-group col-4">
+                  <button class="btn btn-block btn-success">
+                    <i class="fas fa-gem mr-1"></i>
+                    <span class="input-label">Дэмжих</span>
+                  </button>
+                </div>
+                <div class="form-group col-4">
+                  <button class="btn btn-block btn-danger">
+                    <i class="fas fa-exclamation-triangle mr-1"></i>
+                    <span class="input-label">Хаягаа устгах</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </section>
 {% block scripts %}
