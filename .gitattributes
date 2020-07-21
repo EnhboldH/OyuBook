@@ -10,3 +10,4 @@
 
 src/backend/design/static/css/* linguist-vendored
 src/backend/design/static/vendor/* linguist-vendored
+src/backend/design/templates/*/* linguist-vendored
