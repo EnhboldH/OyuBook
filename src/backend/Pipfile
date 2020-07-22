@@ -15,6 +15,11 @@ sqlparse = "==0.3.1"
 psycopg2-binary = "==2.8.5"
 Django = "==3.0.7"
 pillow = "*"
+gunicorn = "*"
+dj-database-url = "*"
+whitenoise = "*"
+psycopg2 = "*"
+dj-static = "*"
 
 [requires]
 python_version = "3.6"

@@ -1,0 +1,1 @@
+web: gunicorn oyucore.wsgi --log-file -

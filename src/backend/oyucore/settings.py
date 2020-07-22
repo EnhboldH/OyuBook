@@ -97,6 +97,8 @@ USE_L10N = True
 
 USE_TZ = False
 
+PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
+
 STATIC_URL = '/static/'
 STATICFILES_DIR = [STATIC_DIR]
 

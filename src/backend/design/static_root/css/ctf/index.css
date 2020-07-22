@@ -1,0 +1,74 @@
+body {
+  color: rgba(255, 255, 255, 1);
+}
+.profile-input {
+  box-shadow: none;
+  color: #2d2f31;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: rgba(245, 245, 245, 1);
+  border: none;
+}
+.input-label {
+  font-family: Open Sans, sans-serif; 
+  font-weight: 550;
+}
+._back-btn {
+  border: none;
+}
+._back-btn:hover {
+  color: #bdbade;
+}
+.card {
+  background-color: #3f4e6f; 
+  box-shadow: 14px 14px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-header span {
+  font-family: Open Sans, sans-serif; 
+  font-weight: 700;
+}
+.fa-user-circle:hover {
+  color: #ed4956;
+}
+.fa-heart {
+  color: #ed4956;
+}
+.fa-linkedin {
+  color: #0274b3;
+}
+.fa-github-square {
+  color: #24292e;
+}
+.fa-instagram {
+  color: #db3075;
+}
+.fa-facebook {
+  color: #3b5998;
+}
+.input-group-text {
+  background-color: #e9ecef;
+  border: none;
+}
+.fab {
+  font-size: 22px;
+}
+.border-success {
+  border-width: 2px !important;
+}
+.btn-default {
+  color: #949ba2;
+  background-color: transparent;
+  border-color: #505863;
+}
+.label-default {
+  background-color: #343c41;
+  font-family: Ubuntu Mono,monospace;
+  font-size: 12px;
+}
+._help-text {
+  font-size: 12px; 
+  color: rgba(255, 255, 255, 0.5);
+}
+.form-control-file {
+  display: none;
+}
