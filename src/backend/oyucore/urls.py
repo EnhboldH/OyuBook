@@ -10,7 +10,8 @@ from modules.base.views import (
     UserProfileUpdateView,
 )
 from modules.ctf.views import (
-    CTFHomeView
+    CTFHomeView,
+    CTFChallengesView,
 )
 from modules.mathematics.views import (
     MathematicsView
@@ -37,6 +38,7 @@ urlpatterns = [
     path('user/profile/update/<slug:slug>/', UserProfileUpdateView.as_view(), name='user_profile_update'),
     # CTF
     path('ctf/', CTFHomeView.as_view(), name='ctf_index'),
+    path('ctf/challenges/', CTFChallengesView.as_view(), name='ctf-challenges'),
     # Mathematics
     path('mathematics/', MathematicsView.as_view(), name='mathematics_index'),
     # Electronics
