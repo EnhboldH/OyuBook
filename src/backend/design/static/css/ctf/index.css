@@ -1,24 +1,6 @@
 body {
   color: rgba(255, 255, 255, 1);
 }
-.profile-input {
-  box-shadow: none;
-  color: #2d2f31;
-  font-weight: 600;
-  border-radius: 4px;
-  background-color: rgba(245, 245, 245, 1);
-  border: none;
-}
-.input-label {
-  font-family: Open Sans, sans-serif; 
-  font-weight: 550;
-}
-._back-btn {
-  border: none;
-}
-._back-btn:hover {
-  color: #bdbade;
-}
 .card {
   background-color: #3f4e6f; 
   box-shadow: 14px 14px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -27,48 +9,59 @@ body {
   font-family: Open Sans, sans-serif; 
   font-weight: 700;
 }
-.fa-user-circle:hover {
-  color: #ed4956;
+._font-25 {
+  font-size: 25px !important;
 }
-.fa-heart {
-  color: #ed4956;
+._font-20 {
+  font-size: 20px !important;
 }
-.fa-linkedin {
-  color: #0274b3;
+._font-15 {
+  font-size: 15px !important;
 }
-.fa-github-square {
-  color: #24292e;
+._font-14 {
+  font-size: 14px !important;
 }
-.fa-instagram {
-  color: #db3075;
+._font-12 {
+  font-size: 12px !important;
 }
-.fa-facebook {
-  color: #3b5998;
+._font-700 {
+  font-weight: 700 !important;
 }
-.input-group-text {
-  background-color: #e9ecef;
-  border: none;
+._activeWindow {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px;
 }
-.fab {
-  font-size: 22px;
+._active-users-img {
+  height: 40px;
+  width: 40px;
 }
-.border-success {
-  border-width: 2px !important;
+._profile-image {
+  height: 60px;
+  width: 60px;
 }
-.btn-default {
-  color: #949ba2;
-  background-color: transparent;
-  border-color: #505863;
-}
-.label-default {
-  background-color: #343c41;
-  font-family: Ubuntu Mono,monospace;
+._profile-label {
+  color: rgba(255, 255, 255, 0.9); 
   font-size: 12px;
 }
-._help-text {
-  font-size: 12px; 
-  color: rgba(255, 255, 255, 0.5);
+._profile-ctf {
+  background-color: rgba(62, 46, 61, 0.32);
 }
-.form-control-file {
-  display: none;
+._profile-detail {
+  font-size: 25px;
+}
+._lesson-img {
+  height: 100px;
+  width: 100px;
+}
+#_support-us {
+  color: #fff; 
+  font-weight: 500;
+}
+@media (max-width: 992px) {
+  .secondRow {
+    margin-top: 20px;
+  }
+  #addchallenge {
+    margin-top: 20px;
+  }
 }

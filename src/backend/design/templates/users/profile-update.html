@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% load static %}
-{% block stylesheets %}
+{% block style %}
   <link href="{% static 'css/users/profile-update.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
@@ -8,7 +8,7 @@
   <div class="container-fluid ml-5 mr-5 mt-4">
     <form  method="post">{% csrf_token %}
       <div class="row">
-        <div class="col-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
           <div class="card">
             <div class="card-header">
               <div class="d-flex">
@@ -69,7 +69,7 @@
             </div>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 secondRow">
           <div class="card">
             <div class="card-header">
               <div class="d-flex">
@@ -86,7 +86,7 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="form-group col-6">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
                   <label class="control-label">
                     <span class="input-label">Github</span>
                   </label>
@@ -97,7 +97,7 @@
                     {{ form.github_link }}
                   </div>
                 </div>
-                <div class="form-group col-6">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
                   <label class="control-label">
                     <span class="input-label">Instagram</span>
                   </label>
@@ -110,7 +110,7 @@
                 </div>
               </div>
               <div class="row mt-n3 mb-n3">
-                <div class="form-group col-6">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
                   <label class="control-label">
                     <span class="input-label">Facebook</span>
                   </label>
@@ -121,7 +121,7 @@
                     {{ form.facebook_link }}
                   </div>
                 </div>
-                <div class="form-group col-6">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
                   <label class="control-label">
                     <span class="input-label">Linkedin</span>
                   </label>
@@ -151,15 +151,15 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="form-group col-6">
-                  <div class="form-check">
+                <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-check float-left">
                     <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                     <label class="form-check-label" for="defaultCheck1">
                       <span class="input-label">Нийтийн профайл <i>(public)</i></span>
                     </label>
                   </div>
                 </div>
-                <div class="form-group col-6">
+                <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
                     <label class="form-check-label" for="defaultCheck2">
@@ -169,18 +169,18 @@
                 </div>
               </div>
               <div class="row">
-                <div class="form-group col-6">
-                  <div class="form-check">
+                <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-check float-left">
                     <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
                     <label class="form-check-label" for="defaultCheck3">
                       <span class="input-label">Арын зураг <i>(үргэлж)</i></span>
                     </label>
                   </div>
                 </div>
-                <div class="form-group col-6">
+                <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                    <label class="form-check-label" for="defaultCheck3">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                    <label class="form-check-label" for="defaultCheck4">
                       <span class="input-label">Өөр нэг тохиргоо</span>
                     </label>
                   </div>
@@ -204,19 +204,19 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="form-group col-4">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                   <button class="btn btn-block btn-primary">
                     <i class="fas fa-tools mr-1"></i>
                     <span class="input-label">Санал, хүсэлт</span>
                   </button>
                 </div>
-                <div class="form-group col-4">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                   <button class="btn btn-block btn-success">
                     <i class="fas fa-gem mr-1"></i>
                     <span class="input-label">Дэмжих</span>
                   </button>
                 </div>
-                <div class="form-group col-4">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                   <button class="btn btn-block btn-danger">
                     <i class="fas fa-exclamation-triangle mr-1"></i>
                     <span class="input-label">Хаягаа устгах</span>
@@ -230,6 +230,4 @@
     </form>
   </div>
 </section>
-{% block scripts %}
-{% endblock %}
 {% endblock %}
