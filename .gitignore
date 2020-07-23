@@ -10,4 +10,5 @@
 *.py[co]
 __pycache__
 .DS_Store
+src/backend/design/static_root/
 src/backend/modules/base/migrations
