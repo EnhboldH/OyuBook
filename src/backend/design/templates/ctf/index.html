@@ -2,6 +2,11 @@
 {% load static %}
 {% block style %}
   <link href="{% static 'css/ctf/index.css' %}" rel="stylesheet">
+  <style type="text/css">
+    body {
+      background: linear-gradient(45deg, rgba(20, 30, 56, 0.1) 0%, rgba(6, 26, 66, 0.9) 100%), url("/static/img/base/wallpaper.jpg") no-repeat center center cover;
+    }
+  </style>
 {% endblock %}
 {% block content %}
 <section id="main" class="d-flex mb-5">
