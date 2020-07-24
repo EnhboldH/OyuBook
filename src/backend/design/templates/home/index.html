@@ -28,7 +28,11 @@
       font-weight: 700;
     }
     #about, #faq {
+      margin-top: 100px;
       color: white;
+    }
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 {% endblock %}
@@ -42,12 +46,12 @@
         <div>
           {% if not user.is_authenticated %}
             <a href="{% url 'user_register' %}" class="get-btn">Бүртгүүлэх</a>
-            <a href="{% url 'user_register' %}" class="down-btn">
+            <a href="#about" class="down-btn" style="transition: 0.5s;">
               <span>Бидэнтэй танилцах</span>
               <span class="ml-1"><i class="fas fa-angle-down"></i></span>
             </a>
           {% else %}
-            <a href="{% url 'user_register' %}" class="get-btn">Бидэнтэй танилцах
+            <a href="#about" class="get-btn">Бидэнтэй танилцах
               <span class="ml-1"><i class="fas fa-angle-down"></i></span>
             </a>
           {% endif %}
@@ -61,7 +65,7 @@
     </div>
   </div>
 </section>
-<section id="about" class="mt-5">
+<section id="about">
   <div class="container">
     <div class="row text-center">
       <div class="col-12 mb-5">
@@ -121,30 +125,27 @@
       </div>
     </div>
     <div class="row justify-content-md-center">
-      <div class="col-10 accordion" id="activeUsers">
-        <div class="card">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-7 text-left">
-                <span class="_font-14">Some Text</span>
-              </div>
-              <div class="col-5 text-right">
-                <span data-toggle="collapse" data-target="#activeCollapse" aria-expanded="true" aria-controls="activeCollapse" class="angleSwitchActive _font-20">
-                  <i class="fas fa-angle-up" type="button"></i>
-                </span>
+      <span data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1" class="col-10  angleSwitchActive _font-20" type="button">
+        <div class="accordion" id="activeUsers">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-7 text-left">
+                  <span class="_font-14">Танай клубт элсэхийн тулд яах ёстой вэ?</span>
+                </div>
+                <div class="col-5 text-right">
+                    <i class="fas fa-angle-up" type="button"></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div id="activeCollapse" class="collapse hide" aria-labelledby="headingOne" data-parent="#activeUsers">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12 mt-n2">
-                  <div class="row text-light">
-                    <div class="col-10 ml-n3 align-self-center">
-                      <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
-                    </div>
-                    <div class="col-2 ml-3 align-self-center">
-                      <span class="_font-20"><i class="fas fa-user-circle"></i></span>
+            <div id="collapse1" class="collapse hide" aria-labelledby="headingOne" data-parent="#activeUsers">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 mt-n2">
+                    <div class="row text-light">
+                      <div class="col-12 align-self-center">
+                        <span style="font-size: 15px;">Клубийн зүгээс гаргасан анкетийг бүрэн дэлгэрэнгүй бөглөж өгөх. Тэгснээр бид таны анкетийг харж таныг ярилцлаганд дуудна. Хэрэв та ярилцлаганд тэнцвэл 14 хоног идэвхтэн бус гишүүний статустайгаар клубийн үйл ажиллагаанд оролцоно. Туршилтын хугацаа дууссаны дараагаар таныг клубт албан ёсоор элсүүлэхийг та болон бусад гишүүдийн саналаар шийднэ.</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -152,31 +153,28 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-10 accordion" id="activeUsers">
-        <div class="card">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-7 text-left">
-                <span class="_font-14">Some Text</span>
-              </div>
-              <div class="col-5 text-right">
-                <span data-toggle="collapse" data-target="#activeCollapse" aria-expanded="true" aria-controls="activeCollapse" class="angleSwitchActive _font-20">
-                  <i class="fas fa-angle-up" type="button"></i>
-                </span>
+      </span>
+      <span data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2" class="col-10  angleSwitchActive _font-20" type="button">
+        <div class="accordion" id="activeUsers">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-7 text-left">
+                  <span class="_font-14">Клубт элсэхэд курс, нас мэргэжил харгалзах уу?</span>
+                </div>
+                <div class="col-5 text-right">
+                    <i class="fas fa-angle-up" type="button"></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div id="activeCollapse" class="collapse hide" aria-labelledby="headingOne" data-parent="#activeUsers">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12 mt-n2">
-                  <div class="row text-light">
-                    <div class="col-10 ml-n3 align-self-center">
-                      <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
-                    </div>
-                    <div class="col-2 ml-3 align-self-center">
-                      <span class="_font-20"><i class="fas fa-user-circle"></i></span>
+            <div id="collapse2" class="collapse hide" aria-labelledby="headingOne" data-parent="#activeUsers">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 mt-n2">
+                    <div class="row text-light">
+                      <div class="col-12 align-self-center">
+                        <span style="font-size: 15px;">Манай клуб нь мэдээллийн технологийн чиглэлийн (програм хангамж, аюулгүй байдал, сүлжээ гэх мэт...) мэргэжлийн оюутнуудад зориулан үйл ажиллагаа (сургалт, тэмцээн уралдаан) явуулдаг. Дотогш болон гадагш чиглэсэн үйл ажиллагаа ихтэй учир МХТС-д сурдаг 4-с доош курсийн оюутан байх шаардлагатай.</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -184,31 +182,28 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-10 accordion" id="activeUsers">
-        <div class="card">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-7 text-left">
-                <span class="_font-14">Some Text</span>
-              </div>
-              <div class="col-5 text-right">
-                <span data-toggle="collapse" data-target="#activeCollapse" aria-expanded="true" aria-controls="activeCollapse" class="angleSwitchActive _font-20">
-                  <i class="fas fa-angle-up" type="button"></i>
-                </span>
+      </span>
+      <span data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3" class="col-10  angleSwitchActive _font-20" type="button">
+        <div class="accordion" id="activeUsers">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-7 text-left">
+                  <span class="_font-14">Танай клубт элссэнээр надад ямар хэрэгтэй вэ?</span>
+                </div>
+                <div class="col-5 text-right">
+                    <i class="fas fa-angle-up" type="button"></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div id="activeCollapse" class="collapse hide" aria-labelledby="headingOne" data-parent="#activeUsers">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12 mt-n2">
-                  <div class="row text-light">
-                    <div class="col-10 ml-n3 align-self-center">
-                      <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
-                    </div>
-                    <div class="col-2 ml-3 align-self-center">
-                      <span class="_font-20"><i class="fas fa-user-circle"></i></span>
+            <div id="collapse3" class="collapse hide" aria-labelledby="headingOne" data-parent="#activeUsers">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 mt-n2">
+                    <div class="row text-light">
+                      <div class="col-12 align-self-center">
+                        <span style="font-size: 15px;">Юун түрүүнд дурьдахад бид бол зорилго мөрөөдлөөрөө хөтлөгдөн хамтдаа хөгжихийг зориж буй сайн дурын залуусын нэгдэл. Та бидэнтэй хамт сурч хөгжих хамт олонтой болох, клубийн өрөөг ашиглах ба мэргэжлийн болон бусад хувь хүний ур чадваруудыг өөрийн хичээл зүтгэлээр суралцана.</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -216,31 +211,28 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-10 accordion" id="activeUsers">
-        <div class="card">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-7 text-left">
-                <span class="_font-14">Some Text</span>
-              </div>
-              <div class="col-5 text-right">
-                <span data-toggle="collapse" data-target="#activeCollapse" aria-expanded="true" aria-controls="activeCollapse" class="angleSwitchActive _font-20">
-                  <i class="fas fa-angle-up" type="button"></i>
-                </span>
+      </span>
+      <span data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4" class="col-10  angleSwitchActive _font-20" type="button">
+        <div class="accordion" id="activeUsers">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-7 text-left">
+                  <span class="_font-14">Клубийн сургалтад хэрхэн хамрагдах вэ?</span>
+                </div>
+                <div class="col-5 text-right">
+                    <i class="fas fa-angle-up" type="button"></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div id="activeCollapse" class="collapse hide" aria-labelledby="headingOne" data-parent="#activeUsers">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12 mt-n2">
-                  <div class="row text-light">
-                    <div class="col-10 ml-n3 align-self-center">
-                      <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
-                    </div>
-                    <div class="col-2 ml-3 align-self-center">
-                      <span class="_font-20"><i class="fas fa-user-circle"></i></span>
+            <div id="collapse4" class="collapse hide" aria-labelledby="headingOne" data-parent="#activeUsers">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 mt-n2">
+                    <div class="row text-light">
+                      <div class="col-12 align-self-center">
+                        <span style="font-size: 15px;">Хичээлийн жилийн улирал бүр бид тухайн оюутнуудын судалж буй мэргэжлийн суурь хичээлээс гадна өөрсдийн зүгээс нэмэлт хичээл (Шинэ технологи, хэл, арга барил) заадаг. Сургалт эхлэх үеэр бид зар мэдээллийг тараах ба тухайн зараас мэдэж хамрагдах боломжтой.</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -248,12 +240,55 @@
             </div>
           </div>
         </div>
-      </div>
+      </span>
     </div>
     </div>
   </div>
 </section>
 <section id="footer">
-  
+  <div class="container-fluid border" style="height: 200px;">
+    <div class="row border" style="height: 200px; color: white; background-image: url('static/img/base/footer.png');">
+      <div class="col-3 border d-flex align-items-center">
+        <div style="font-size: 15px;">
+          <span style="display: block;">Copyright © 2020 OyuTech</span>
+          <i class="fab fa-github"></i>
+          <i class="fab fa-facebook"></i>
+          <i class="fas fa-envelope"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fas fa-phone-alt"></i>
+        </div>
+      </div>
+      <div class="col-2 border d-flex align-items-center">
+        <div>
+          <span style="font-weight: 700;">Бидэнтэй холбогдох</span>
+          <ul style="list-style: none; margin-left: -40px;" class="mt-3">
+            <li class="mt-3"><a href="" style="color: rgba(255, 255, 255, 0.5);">Facebook хуудас</a></li>
+            <li class="mt-3"><a href="" style="color: rgba(255, 255, 255, 0.5);">Холбогдох утас</a></li>
+            <li class="mt-3"><a href="" style="color: rgba(255, 255, 255, 0.5);">Хаяг байршил</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-2 border d-flex align-items-center">
+        <div>
+          <span style="font-weight: 700;">Бидэнтэй холбогдох</span>
+          <ul style="list-style: none; margin-left: -40px;" class="mt-3">
+            <li class="mt-3"><a href="" style="color: rgba(255, 255, 255, 0.5);">Facebook хуудас</a></li>
+            <li class="mt-3"><a href="" style="color: rgba(255, 255, 255, 0.5);">Холбогдох утас</a></li>
+            <li class="mt-3"><a href="" style="color: rgba(255, 255, 255, 0.5);">Хаяг байршил</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-2 border d-flex align-items-center">
+        <div>
+          <span style="font-weight: 700;">Бидэнтэй холбогдох</span>
+          <ul style="list-style: none; margin-left: -40px;" class="mt-3">
+            <li class="mt-3"><a href="" style="color: rgba(255, 255, 255, 0.5);">Facebook хуудас</a></li>
+            <li class="mt-3"><a href="" style="color: rgba(255, 255, 255, 0.5);">Холбогдох утас</a></li>
+            <li class="mt-3"><a href="" style="color: rgba(255, 255, 255, 0.5);">Хаяг байршил</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 {% endblock %}
