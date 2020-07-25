@@ -13,6 +13,7 @@ from modules.base.views import (
 from modules.ctf.views import (
     CTFHomeView,
     CTFChallengesView,
+    CTFChallengeAdd,
 )
 from modules.mathematics.views import (
     MathematicsView
@@ -40,6 +41,7 @@ urlpatterns = [
     # CTF
     path('ctf/', CTFHomeView.as_view(), name='ctf_index'),
     path('ctf/challenges/', CTFChallengesView.as_view(), name='ctf-challenges'),
+    path('ctf/challenges/add/', CTFChallengeAdd.as_view(), name='ctf-addchallenge'),
     # Mathematics
     path('mathematics/', MathematicsView.as_view(), name='mathematics_index'),
     # Electronics

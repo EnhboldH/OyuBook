@@ -3,11 +3,9 @@
   font-weight: 300; 
   font-size: 60px;
 }
-
 #main .animated {
   animation: up-down 1.5s ease-in-out infinite alternate-reverse both;
 }
-
 #main .get-btn {
   font-family: "Poppins", sans-serif;
   font-weight: 500;

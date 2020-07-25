@@ -1,6 +1,9 @@
 #main .container, #main .container-fluid {
   padding-top: 84px;
 }
+#main .animated {
+  animation: up-down 1.5s ease-in-out infinite alternate-reverse both;
+}
 .login-form {
   box-shadow: 14px 14px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: #3f4e6f;

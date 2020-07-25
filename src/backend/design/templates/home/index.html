@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
 {% load static %}
+a
 {% block style %}
   <link href="{% static 'css/home/index.css' %}" rel="stylesheet">
   <style>
-    .down-btn {
+    .more-btn {
       color: #fff;
       font-size: 14px;
       font-weight: 600;
@@ -14,8 +15,7 @@
       display: inline-block;
       
     }
-
-    .down-btn:hover {
+    .more-btn:hover {
       box-shadow: 0px 15px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
       color: #fff;
     }
@@ -53,7 +53,7 @@
         <div>
           {% if not user.is_authenticated %}
             <a href="{% url 'user_register' %}" class="get-btn">Бүртгүүлэх</a>
-            <a href="#about" class="down-btn" style="transition: 0.5s;">
+            <a href="#about" class="more-btn" style="transition: 0.5s;">
               <span>Бидэнтэй танилцах</span>
               <span class="ml-1"><i class="fas fa-angle-down"></i></span>
             </a>

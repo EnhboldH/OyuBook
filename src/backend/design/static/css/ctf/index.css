@@ -1,32 +1,6 @@
 body {
   color: rgba(255, 255, 255, 1);
 }
-.card {
-  background-color: #3f4e6f; 
-  box-shadow: 14px 14px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.card-header span {
-  font-family: Open Sans, sans-serif; 
-  font-weight: 700;
-}
-._font-25 {
-  font-size: 25px !important;
-}
-._font-20 {
-  font-size: 20px !important;
-}
-._font-15 {
-  font-size: 15px !important;
-}
-._font-14 {
-  font-size: 14px !important;
-}
-._font-12 {
-  font-size: 12px !important;
-}
-._font-700 {
-  font-weight: 700 !important;
-}
 ._activeWindow {
   color: rgba(255, 255, 255, 0.5);
   font-size: 10px;
