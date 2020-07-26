@@ -3,45 +3,6 @@
 a
 {% block style %}
   <link href="{% static 'css/home/index.css' %}" rel="stylesheet">
-  <style>
-    #about{
-      margin-top: 100px;
-      color: rgba(255, 255, 255, 1);
-    }
-    #faq {
-      margin-top: 150px !important;
-      color: rgba(255, 255, 255, 1);
-    }
-    #footer {
-      color: rgba(255, 255, 255, 1); 
-      margin-top: 200px !important;
-      background: linear-gradient(45deg, rgba(20, 30, 56, 0.3) 15%, rgba(6, 26, 66, 0.6) 40%), url('/static/img/base/footer.png') no-repeat center center fixed;
-    }
-    #footer ul {
-      list-style: none;
-      margin-left: -40px;
-    }
-    #footer ul a {
-      color: rgba(255, 255, 255, 0.5);
-    }
-    #footer ul a:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-    #footer .fa-github:hover {
-      color: rgba(255, 255, 255, 0.4);
-    }
-    #footer .fa-facebook:hover {
-      color: #3b5998;
-    }
-    #footer .fa-envelope:hover {
-      color: #D44638;
-    }
-    #footer .fa-instagram:hover {
-      border-radius: 40px;
-      box-shadow: 0px 3px 10px rgba(0,0,0,.25);
-      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
-    }
-  </style>
 {% endblock %}
 {% block content %}
 <section id="main" class="d-flex align-items-center">
@@ -328,35 +289,5 @@ a
 </section>
 {% endblock %}
 {% block script %}
-<script>
-$(document).ready(function() {
-  var up = "<i class='fas fa-angle-up' type='button'></i>";
-  var down = "<i class='fas fa-angle-down' type='button'></i>";
-
-  $("#acCollapse1").on("hide.bs.collapse", function() {
-    $(".angleSwitch1").html(up);
-  });
-  $("#acCollapse1").on("show.bs.collapse", function() {
-    $(".angleSwitch1").html(down);
-  });
-  $("#acCollapse2").on("hide.bs.collapse", function() {
-    $(".angleSwitch2").html(up);
-  });
-  $("#acCollapse2").on("show.bs.collapse", function() {
-    $(".angleSwitch2").html(down);
-  });
-  $("#acCollapse3").on("hide.bs.collapse", function() {
-    $(".angleSwitch3").html(up);
-  });
-  $("#acCollapse3").on("show.bs.collapse", function() {
-    $(".angleSwitch3").html(down);
-  });
-  $("#acCollapse4").on("hide.bs.collapse", function() {
-    $(".angleSwitch4").html(up);
-  });
-  $("#acCollapse4").on("show.bs.collapse", function() {
-    $(".angleSwitch4").html(down);
-  });
-});
-</script>
+  <script src="{% static 'js/home/index.js' %}"></script>
 {% endblock %}
