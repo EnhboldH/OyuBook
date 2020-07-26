@@ -32,6 +32,21 @@ class HomeView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'home/index.html', self.context)
 
+class PolicyView(View):
+    context = {
+        'title': 'Нууцлалын бодлого | OyuBook',
+    }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'home/policy.html', self.context)
+
+class SupportView(View):
+    context = {
+        'title': 'Биднийг дэмжих | OyuBook',
+    }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'home/support.html', self.context)
 
 class UserCreateView(FormView):
     template_name = 'users/register.html'

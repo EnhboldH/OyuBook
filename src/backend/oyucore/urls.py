@@ -4,6 +4,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from modules.base.views import (
     HomeView,
+    PolicyView,
+    SupportView,
     UserLoginView,
     UserLogoutView,
     UserCreateView,
@@ -32,6 +34,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Home 
     path('', HomeView.as_view(), name='home_index'),
+    path('privacy/', PolicyView.as_view(), name='home_policy'),
+    path('support/', SupportView.as_view(), name='home_support'),
     # Users
     path('user/login/', UserLoginView.as_view(), name='user_login'),
     path('user/logout/', UserLogoutView.as_view(), name='user_logout'),
