@@ -1,6 +1,230 @@
 {% extends "layout.html" %}
 {% load static %}
 {% block style %}
+<style>
+  #main {
+    color: #fff;
+    font-family: "Ubuntu";
+  }
+  #main p, ul, pre {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  #main ._header {
+    line-height: 1em;
+    font-size: 1.7em;
+    font-weight: bold;
+  }
+  ._lesson-img {
+    height: 100px;
+    width: 100px; 
+  }
+</style>
 {% endblock %}
 {% block content %}
+<section id="main" class="d-flex mb-5">
+  <div class="container-fluid ml-5 mr-5">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4 mt-2">
+        <div class="d-flex align-items-center justify-content-center">
+          <img src="{% static 'img/flaticon/heart.png' %}" style="height: 60px; width: 60px;">
+          <span class="_header ml-2">OyuBook Биднийг Дэмжих</span>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-1">
+        <div class="text-center">
+          <p>Хамгийн эхэнд бид үүнийг ямар нэгэн ашиг харж хийгээгүй. Гэхдээ цаашдын хөгжүүлэлтийн ажилд маань туслах, дэм өгөх, хамтран ажиллах боломж нээлттэй. Та одоогоор биднийг 2 аргаар дэмжих боломжтой <strong>Шууд орлого</strong> аль эсвэл <strong>Оюуны орлого</strong> хэмээн ангилж байна.</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-5">
+        <div class="card align-items-center mt-3">
+          <div class="mt-n5">
+            <img src="{% static 'img/flaticon/pig.png' %}" style="width: 130px; height: 130px;">
+          </div>
+          <div class="card-title mt-3">
+            <h4 class="_font-700">Шууд орлого</h4>
+          </div>
+          <div class="card-body text-center">
+            <div>
+              <span class="card-text">Бид таны илгээсэн мөнгийг цаашдын хөгжүүлэлтэд ашиглана. </span>
+              <br><span class="text-primary">TODO</span>
+            </div>
+            <div class="row mt-3">
+              <div class="col-12">
+                <div class="card">
+                  <a href="#" class="stretched-link"></a>
+                  <div class="mt-2 mb-2 d-flex align-items-center">
+                    <div class="col-5">
+                      <div>
+                        <img src="{% static 'img/logo/support/khanbank.png' %}" style="height: 40px;">
+                      </div>
+                    </div>
+                    <div class="col-7">
+                      <div class="ml-3 _font-15 text-left">
+                        <span>Данс эзэмшигч: <strong>Byambadalai Sumiya</strong></span><br>
+                        <span>Дансны дугаар: <strong>5132048312</strong></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="card mt-3">
+                  <a href="#" class="stretched-link"></a>
+                  <div class="mt-2 mb-2 d-flex align-items-center">
+                    <div class="col-5">
+                      <div>
+                        <img src="{% static 'img/logo/support/golomtbank.png' %}" style="height: 40px;">
+                      </div>
+                    </div>
+                    <div class="col-7">
+                      <div class="ml-3 _font-15 text-left">
+                        <span>Данс эзэмшигч: <strong>Byambadalai Sumiya</strong></span><br>
+                        <span>Дансны дугаар: <strong>2705129106</strong></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer col-12">
+            <div class="text-center text-warning">
+              <span>Гүйлгээний утга дээр өөрийн нэрийг бичнэ үү !</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-5">
+        <div class="card align-items-center mt-3">
+          <div class="mt-n5">
+            <img src="{% static 'img/flaticon/brain.png' %}" style="width: 130px; height: 130px;">
+          </div>
+          <div class="card-title mt-3">
+            <h4 class="_font-700">Оюуны орлого <i class="_font-12" style="font-weight: normal;">(тун удахгүй)</i></h4>
+          </div>
+          <div class="card-body text-justify">
+            <span class="card-text">Бидний ирээдүйн <i class="_font-12">(not too far)</i> төлөвлөгөөнд видео болон текст хичээлүүд орох бөгөөд та бүхэн өөрсдийн мэдлэгийг бусадтай хуваалцагч мөн бол бидэнтэй баг болж өөрийн хичээлийг бэлтгэн оруулах юм.</span>
+            <div class="row mt-3">
+              <div class="col-12">
+                <div class="card">
+                  <a href="#" class="stretched-link"></a>
+                  <div class="mt-2 mb-2 d-flex align-items-center">
+                    <div class="col-5">
+                      <div>
+                        <img src="{% static 'img/logo/support/khanbank.png' %}" style="height: 40px;">
+                      </div>
+                    </div>
+                    <div class="col-7">
+                      <div class="ml-3 _font-15 text-left">
+                        <span>Данс эзэмшигч: <strong>Byambadalai Sumiya</strong></span><br>
+                        <span>Дансны дугаар: <strong>5132048312</strong></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="card mt-3">
+                  <a href="#" class="stretched-link"></a>
+                  <div class="mt-2 mb-2 d-flex align-items-center">
+                    <div class="col-5">
+                      <div>
+                        <img src="{% static 'img/logo/support/golomtbank.png' %}" style="height: 40px;">
+                      </div>
+                    </div>
+                    <div class="col-7">
+                      <div class="ml-3 _font-15 text-left">
+                        <span>Данс эзэмшигч: <strong>Byambadalai Sumiya</strong></span><br>
+                        <span>Дансны дугаар: <strong>2705129106</strong></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer col-12">
+            <div class="text-center text-warning">
+              <span>Бид таны хичээлийг зарж борлуулахгүй</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="footer" class="mt-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex align-items-center">
+        <div class="ml-5 _font-20">
+          <span class="_font-15" style="display: block;">Copyright © 2020 <strong>OyuTech</strong></span>
+          <div class="mt-2 ml-1 _font-25">
+            <a href="https://github.com/OyuTech" class="text-light"><i class="fab fa-github"></i></a>
+            <a href="https://www.facebook.com/oyutechnology" class="text-light"><i class="fab fa-facebook ml-3"></i></a>
+            <a href="mailto:oyutech@gmail.com" class="text-light"><i class="far fa-envelope ml-3"></i></a>
+            <a href="https://www.instagram.com/oyutech/" class="text-light"><i class="fab fa-instagram ml-3"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 d-flex align-items-center">
+        <div class="mt-3">
+          <span class="_font-700">Бидэнтэй холбогдох</span>
+          <ul class="mt-3">
+            <li class="mt-3">
+              <a href="tel:+97699344378">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>+976 99344378</span>
+              </a>
+            </li>
+            <li class="mt-2">
+              <a href="https://goo.gl/maps/Qwv3RYvybs8YqJsS8/" target="_blank">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>Хаяг байршил</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 d-flex align-items-center">
+        <div class="mt-3">
+          <span class="_font-700">Дүрэм журам</span>
+          <ul class="mt-3">
+            <li class="mt-3">
+              <a href="{% url 'home_policy' %}">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>Нууцлалын бодлого</span>
+              </a>
+            </li>
+            <li class="mt-2">
+              <a href="{% url 'home_support' %}">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>Биднийг дэмжих</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex align-items-center">
+        <div class="mt-3">
+          <span class="_font-700">Мэдээлэл</span>
+          <ul class="mt-3">
+            <li class="mt-3">
+              <a href="https://www.facebook.com/oyubook" target="_blank">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>Facebook хуудас</span>
+              </a>
+            </li>
+            <li class="mt-2">
+              <a href="#faq">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>Түгээмэл асуулт, хариулт</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
