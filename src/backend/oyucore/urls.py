@@ -15,7 +15,8 @@ from modules.base.views import (
 from modules.ctf.views import (
     CTFHomeView,
     CTFChallengesView,
-    CTFChallengeAdd,
+    CTFChallengeAddView,
+    CTFLeaderboardView,
 )
 from modules.mathematics.views import (
     MathematicsView
@@ -34,7 +35,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Home 
     path('', HomeView.as_view(), name='home_index'),
-    path('privacy/', PolicyView.as_view(), name='home_policy'),
+    path('privacy-policy/', PolicyView.as_view(), name='home_policy'),
     path('support/', SupportView.as_view(), name='home_support'),
     # Users
     path('user/login/', UserLoginView.as_view(), name='user_login'),
@@ -44,8 +45,9 @@ urlpatterns = [
     path('user/profile/update/<slug:slug>/', UserProfileUpdateView.as_view(), name='user_profile_update'),
     # CTF
     path('ctf/', CTFHomeView.as_view(), name='ctf_index'),
+    path('ctf/leaderboard', CTFLeaderboardView.as_view(), name='ctf_leaderboard'),
     path('ctf/challenges/', CTFChallengesView.as_view(), name='ctf-challenges'),
-    path('ctf/challenges/add/', CTFChallengeAdd.as_view(), name='ctf-addchallenge'),
+    path('ctf/challenges/add/', CTFChallengeAddView.as_view(), name='ctf-addchallenge'),
     # Mathematics
     path('mathematics/', MathematicsView.as_view(), name='mathematics_index'),
     # Electronics

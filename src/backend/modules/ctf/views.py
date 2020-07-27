@@ -37,7 +37,7 @@ class CTFChallengesView(View):
     def post(self, request, *args, **kwargs):
         return render(request, 'ctf/challenges.html', self.context)
 
-class CTFChallengeAdd(View):
+class CTFChallengeAddView(View):
     context = {
         'title': 'Capture The Flag | Бодлогууд',
         'challenges': CtfChallenge.objects.all(),
@@ -45,6 +45,17 @@ class CTFChallengeAdd(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'ctf/add-challenge.html', self.context)
+
+    def post(self, request, *args, **kwargs):
+        return render(request, 'ctf/add-challenge.html', self.context)
+
+class CTFLeaderboardView(View):
+    context = {
+        'title': 'Capture The Flag | Бодлогууд',
+    }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'ctf/leaderboard.html', self.context)
 
     def post(self, request, *args, **kwargs):
         return render(request, 'ctf/add-challenge.html', self.context)

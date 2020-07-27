@@ -2,15 +2,181 @@
 {% load static %}
 {% block style %}
   <link href="{% static 'css/ctf/index.css' %}" rel="stylesheet">
+  <style>
+    table {
+      color: white !important;
+    }
+    .test:hover {
+      color: rgba(255, 255, 255, 0.5) !important;
+    }
+  </style>
 {% endblock %}
 {% block content %}
 <section id="main" class="d-flex">
-  
+  <div class="container-fluid ml-5 mr-5 mb-5">
+    <div class="row text-center">
+      <div class="col-12 mb-5 _font-700 _font-15">
+        <span class="text-success text-uppercase _font-700 _font-15">Capture The Flag</span><br>
+        <span class="_font-20">Бодлогууд</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 mt-n3">
+
+        {% for challenge in challenges %}
+          <div class="accordion mt-3" id="challenge-{{ forloop.counter }}">
+            <div class="card">
+              <a data-toggle="collapse" data-target="#challenge-{{ forloop.counter }}-collapse" class="text-light" type="button">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-6">
+                      <span class="_font-16">{{ challenge.title }}</span>
+                    </div>
+                    <div class="col-6 text-right">
+                      <span class="badge badge-pill badge-info">{{ challenge.category }}</span>
+                      <span class="badge badge-pill badge-success">solved</span>
+                      <span class="badge badge-pill badge-secondary">{{ challenge.value }}</span>
+                      <span class="badge badge-pill badge-dark">{{ challenge.solved_users_count }}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <div id="challenge-{{ forloop.counter }}-collapse" class="collapse" aria-labelledby="headingOne" data-parent="#challenge-{{ forloop.counter }}">
+                <div class="card-body">
+                  <div class="col-12">
+                    <span>{{ challenge.description }}</span>
+                  </div>
+                  <div class="mt-3">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-success" type="button">Илгээх</button>
+                      </div>
+                      <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-success" type="button"><i class="far fa-thumbs-up"></i></button>
+                        <button class="btn btn-outline-success" type="button"><i class="far fa-thumbs-down"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="col-4">
+        <div class="row">
+          <div class="col-12">
+            <div class="accordion" id="scoreboard">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-1">
+                      <span class="_font-20">
+                        <i class="fas fa-star"></i>
+                      </span>
+                    </div>
+                    <div class="col-10 align-self-center">
+                      <span class="_font-20">Онооны самбар</span>
+                    </div>
+                    <div class="col-1 ml-n2 align-self-center">
+                      <span data-toggle="collapse" data-target="#scoreboardCollapse" aria-expanded="true" aria-controls="scoreboardCollapse" class="angleSwitchProblems _font-20">
+                        <i class="fas fa-angle-down" type="button"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div id="scoreboardCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#scoreboard">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 mt-n2">
+                        <a href="#">
+                          <div class="row text-light test">
+                            <div class="col-2">
+                              <img src="/media/img/users/avatar/1.jpg" class="rounded-circle _active-users-img">
+                            </div>
+                            <div class="col-7 ml-n3 align-self-center">
+                              <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
+                            </div>
+                            <div class="col-3 align-self-center text-center">
+                              <span class="font-weight-bold _font-15">1'300</span>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#">
+                          <div class="row text-light test mt-2">
+                            <div class="col-2">
+                              <img src="/media/img/users/avatar/1.jpg" class="rounded-circle _active-users-img">
+                            </div>
+                            <div class="col-7 ml-n3 align-self-center">
+                              <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
+                            </div>
+                            <div class="col-3 align-self-center text-center">
+                              <span class="font-weight-bold _font-15">1'300</span>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#">
+                          <div class="row text-light test mt-2">
+                            <div class="col-2">
+                              <img src="/media/img/users/avatar/1.jpg" class="rounded-circle _active-users-img">
+                            </div>
+                            <div class="col-7 ml-n3 align-self-center">
+                              <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
+                            </div>
+                            <div class="col-3 align-self-center text-center">
+                              <span class="font-weight-bold _font-15">1'300</span>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#">
+                          <div class="row text-light test mt-2">
+                            <div class="col-2">
+                              <img src="/media/img/users/avatar/1.jpg" class="rounded-circle _active-users-img">
+                            </div>
+                            <div class="col-7 ml-n3 align-self-center">
+                              <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
+                            </div>
+                            <div class="col-3 align-self-center text-center">
+                              <span class="font-weight-bold _font-15">1'300</span>
+                            </div>
+                          </div>
+                        </a>
+                        <a href="#">
+                          <div class="row text-light test mt-2">
+                            <div class="col-2">
+                              <img src="/media/img/users/avatar/1.jpg" class="rounded-circle _active-users-img">
+                            </div>
+                            <div class="col-7 ml-n3 align-self-center">
+                              <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
+                            </div>
+                            <div class="col-3 align-self-center text-center">
+                              <span class="font-weight-bold _font-15">1'300</span>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <span><a href="{% url 'ctf_leaderboard' %}" class="text-light">Онооны самбар бүтэн үзэх</a></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 {% endblock %}
 {% block script %}
   <script src="{% static 'js/ctf/index.js' %}"></script>
   <script type="text/javascript">
-    alert('challanges page');
   </script>
 {% endblock %}
