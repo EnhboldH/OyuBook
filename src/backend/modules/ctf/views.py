@@ -49,13 +49,11 @@ class CTFChallengeAddView(View):
     def post(self, request, *args, **kwargs):
         return render(request, 'ctf/add-challenge.html', self.context)
 
-class CTFLeaderboardView(View):
+class CTFScoreboardView(View):
     context = {
         'title': 'Capture The Flag | Бодлогууд',
     }
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'ctf/leaderboard.html', self.context)
+        return render(request, 'ctf/scoreboard.html', self.context)
 
-    def post(self, request, *args, **kwargs):
-        return render(request, 'ctf/add-challenge.html', self.context)

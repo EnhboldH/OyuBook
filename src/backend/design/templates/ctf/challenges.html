@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-6 text-right">
                       <span class="badge badge-pill badge-info">{{ challenge.category }}</span>
-                      <span class="badge badge-pill badge-success">solved</span>
+                      <span class="badge badge-pill badge-danger">unsolved</span>
                       <span class="badge badge-pill badge-secondary">{{ challenge.value }}</span>
                       <span class="badge badge-pill badge-dark">{{ challenge.solved_users_count }}</span>
                     </div>
@@ -161,7 +161,7 @@
                   <div class="card-footer">
                     <div class="row">
                       <div class="col-12 text-center">
-                        <span><a href="{% url 'ctf_leaderboard' %}" class="text-light">Онооны самбар бүтэн үзэх</a></span>
+                        <span><a href="{% url 'ctf_scoreboard' %}" class="text-light">Онооны самбар бүтэн үзэх</a></span>
                       </div>
                     </div>
                   </div>

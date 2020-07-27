@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block style %}
+  <link href="{% static 'css/ctf/scoreboard.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<section id="main">
+  <div class="container mb-5">
+    <div class="row text-center">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 _font-700 _font-15">
+        <span class="text-success text-uppercase _font-700 _font-15">Capture The Flag</span><br>
+        <span class="_font-20 text-light">Онооны самбар</span>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mt-3">
+        <div class="card">
+          <div class="card-body">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th class="_place">Байр</th>
+                  <th class="_username">Нэр</th>
+                  <th class="_score">Оноо</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="text-center">1</th>
+                  <td><a href="" class="_font-700 text-light">Mark</a></td>
+                  <td><span class="_font-700">3'100</span></td>
+                </tr>
+                <tr>
+                  <th class="text-center">2</th>
+                  <td><a href="" class="_font-700 text-light">Jacob</a></td>
+                  <td><span class="_font-700">2'600</span></td>
+                </tr>
+                <tr>
+                  <th class="text-center">3</th>
+                  <td><a href="" class="_font-700 text-light">Larry</a></td>
+                  <td><span class="_font-700">1'200</span></td>
+                </tr>
+                <tr>
+                  <th class="text-center">4</th>
+                  <td><a href="" class="_font-700 text-light">Larry</a></td>
+                  <td><span class="_font-700">600</span></td>
+                </tr>
+                <tr>
+                  <th class="text-center">5</th>
+                  <td><a href="" class="_font-700 text-light">Larry</a></td>
+                  <td><span class="_font-700">200</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex align-items-center">
+        <div class="ml-5 _font-20">
+          <span class="_font-15" style="display: block;">Copyright © 2020 <strong>OyuTech</strong></span>
+          <div class="mt-2 ml-1 _font-25">
+            <a href="https://github.com/OyuTech" class="text-light">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.facebook.com/oyutechnology" class="text-light">
+              <i class="fab fa-facebook ml-3"></i>
+            </a>
+            <a href="mailto:oyutech@gmail.com" class="text-light">
+              <i class="far fa-envelope ml-3"></i>
+            </a>
+            <a href="https://www.instagram.com/oyutech/" class="text-light">
+              <i class="fab fa-instagram ml-3"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 d-flex align-items-center">
+        <div class="mt-3">
+          <span class="_font-700">Бидэнтэй холбогдох</span>
+          <ul class="mt-3">
+            <li class="mt-3">
+              <a href="tel:+97699344378">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>+976 99344378</span>
+              </a>
+            </li>
+            <li class="mt-2">
+              <a href="https://goo.gl/maps/Qwv3RYvybs8YqJsS8/" target="_blank">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>Хаяг байршил</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 d-flex align-items-center">
+        <div class="mt-3">
+          <span class="_font-700">Дүрэм журам</span>
+          <ul class="mt-3">
+            <li class="mt-3">
+              <a href="{% url 'home_policy' %}">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>Нууцлалын бодлого</span>
+              </a>
+            </li>
+            <li class="mt-2">
+              <a href="{% url 'home_support' %}">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>Биднийг дэмжих</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex align-items-center">
+        <div class="mt-3">
+          <span class="_font-700">Мэдээлэл</span>
+          <ul class="mt-3">
+            <li class="mt-3">
+              <a href="https://www.facebook.com/oyubook" target="_blank">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>Facebook хуудас</span>
+              </a>
+            </li>
+            <li class="mt-2">
+              <a href="#faq">
+                <span class="_font-10"><i class="fas fa-check"></i></span>
+                <span>Түгээмэл асуулт, хариулт</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

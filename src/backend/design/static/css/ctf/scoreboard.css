@@ -1,0 +1,18 @@
+table {
+  color: #fff !important;
+}
+table tbody tr:hover {
+  color: #fff !important;
+}
+table thead tr ._place {
+  border-top: none;
+  width: 5%;
+}
+table thead tr ._username {
+  border-top: none;
+  width: 80%;
+}
+table thead tr ._score {
+  border-top: none;
+  width: 15%;
+}
