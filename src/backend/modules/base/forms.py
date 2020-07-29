@@ -84,10 +84,17 @@ class UserProfileUpdateForm(forms.Form):
         # print ("Raw files:", self.files)
         return self.cleaned_data
 
-# Change me to model Form
-class CTFAddChallengeForm(forms.Form):
-    title = forms.CharField("Гарчиг", max_length=100, unique=True)
-    description = forms.TextField("Бодлогын өгүүлбэр", max_length=10000)
-    category = forms.CharField("Төрөл", max_length=100, choices=CTF_CHALLENGE_CATEGORY_CHOICES, null=True)
-    solution = forms.CharField("Хэрхэн бодох", max_length=300, null=False)
-    flag = forms.CharField("Flag", max_length=100, null=False)
+class CTFChallengeRequestForm(forms.Form):
+    # Change me to model Form
+    title = forms.CharField(label="Гарчиг", max_length=100)
+    description = forms.CharField(label="Бодлогын өгүүлбэр", max_length=10000)
+    category = forms.ChoiceField(label="Төрөл", choices=CTF_CHALLENGE_CATEGORY_CHOICES)
+    solution = forms.CharField(label="Хэрхэн бодох", max_length=300)
+    flag = forms.CharField(label="Flag", max_length=100)
+
+    def __init__(self, request=None, *args, **kwargs):
+        super(CTFChallengeRequestForm, self).__init__(*args, **kwargs)
+
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control input'
+        self.fields['description'].widget.attrs['class'] = 'form-control desc'

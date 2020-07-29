@@ -15,7 +15,7 @@ from modules.base.models import (
     CtfChallenge,
 )
 from modules.base.forms import (
-    CTFAddChallengeForm,
+    CTFChallengeRequestForm,
 )
 class CTFHomeView(View):
     context = {
@@ -44,10 +44,12 @@ class CTFChallengeRequestView(View):
     # Change me to FormView
 
     context = {
-        'title': 'test'
+        'title': 'Capture The Flag | Бодлого нэмэх',
+        'form': CTFChallengeRequestForm,
     }
     def get(self, request, *args, **kwargs):
         return render(request, 'ctf/challenge-request.html', self.context)
+
 class CTFScoreboardView(View):
     context = {
         'title': 'Capture The Flag | Бодлогууд',
