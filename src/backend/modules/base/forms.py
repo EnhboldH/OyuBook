@@ -7,8 +7,10 @@ from .models import (
     OyuUserProfile,
 )
 
-from .consts import USER_REGION_CHOICES
-
+from .consts import (
+    USER_REGION_CHOICES,
+    CTF_CHALLENGE_CATEGORY_CHOICES,
+)
 class UserRegistrationForm(ModelForm):
 
     password = forms.CharField(widget=forms.PasswordInput)
@@ -81,3 +83,11 @@ class UserProfileUpdateForm(forms.Form):
         # print ("Raw Data:", self.data)
         # print ("Raw files:", self.files)
         return self.cleaned_data
+
+# Change me to model Form
+class CTFAddChallengeForm(forms.Form):
+    title = forms.CharField("Гарчиг", max_length=100, unique=True)
+    description = forms.TextField("Бодлогын өгүүлбэр", max_length=10000)
+    category = forms.CharField("Төрөл", max_length=100, choices=CTF_CHALLENGE_CATEGORY_CHOICES, null=True)
+    solution = forms.CharField("Хэрхэн бодох", max_length=300, null=False)
+    flag = forms.CharField("Flag", max_length=100, null=False)

@@ -95,7 +95,6 @@ class CtfChallenge(models.Model):
     def __str__(self):
         return "%s | %s" % (self.title, self.category)
 
-
 class UserChallenge(models.Model):
     REQUIRED_FIELDS = ["oyu_user", "challenge"]
 

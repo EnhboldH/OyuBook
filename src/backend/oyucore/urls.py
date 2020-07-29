@@ -15,7 +15,7 @@ from modules.base.views import (
 from modules.ctf.views import (
     CTFHomeView,
     CTFChallengesView,
-    CTFChallengeAddView,
+    CTFChallengeRequestView,
     CTFScoreboardView,
 )
 from modules.mathematics.views import (
@@ -33,26 +33,20 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # Home 
     path('', HomeView.as_view(), name='home_index'),
     path('privacy-policy/', PolicyView.as_view(), name='home_policy'),
     path('support/', SupportView.as_view(), name='home_support'),
-    # Users
     path('user/login/', UserLoginView.as_view(), name='user_login'),
     path('user/logout/', UserLogoutView.as_view(), name='user_logout'),
     path('user/register/', UserCreateView.as_view(), name='user_register'),
     path('user/profile/<slug:slug>', UserProfileView.as_view(), name='user_profile'),
     path('user/profile/update/<slug:slug>/', UserProfileUpdateView.as_view(), name='user_profile_update'),
-    # CTF
     path('ctf/', CTFHomeView.as_view(), name='ctf_index'),
     path('ctf/scoreboard', CTFScoreboardView.as_view(), name='ctf_scoreboard'),
-    path('ctf/challenges/', CTFChallengesView.as_view(), name='ctf-challenges'),
-    path('ctf/challenges/add/', CTFChallengeAddView.as_view(), name='ctf-addchallenge'),
-    # Mathematics
+    path('ctf/challenges/', CTFChallengesView.as_view(), name='ctf_challenges'),
+    path('ctf/challenges/add/', CTFChallengeRequestView.as_view(), name='ctf_challenge_request'),
     path('mathematics/', MathematicsView.as_view(), name='mathematics_index'),
-    # Electronics
     path('electronics/', ElectronicsView.as_view(), name='electronics_index'),
-    # Network
     path('network/', NetworkView.as_view(), name='network_index'),
 ]
 

@@ -11,8 +11,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 
 from modules.base.models import (
-  OyuUser,
-  CtfChallenge
+    OyuUser,
+    CtfChallenge,
+)
+from modules.base.forms import (
+    CTFAddChallengeForm,
 )
 class CTFHomeView(View):
     context = {
@@ -37,18 +40,14 @@ class CTFChallengesView(View):
     def post(self, request, *args, **kwargs):
         return render(request, 'ctf/challenges.html', self.context)
 
-class CTFChallengeAddView(View):
+class CTFChallengeRequestView(View):
+    # Change me to FormView
+
     context = {
-        'title': 'Capture The Flag | Бодлогууд',
-        'challenges': CtfChallenge.objects.all(),
+        'title': 'test'
     }
-
     def get(self, request, *args, **kwargs):
-        return render(request, 'ctf/add-challenge.html', self.context)
-
-    def post(self, request, *args, **kwargs):
-        return render(request, 'ctf/add-challenge.html', self.context)
-
+        return render(request, 'ctf/challenge-request.html', self.context)
 class CTFScoreboardView(View):
     context = {
         'title': 'Capture The Flag | Бодлогууд',
