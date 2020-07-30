@@ -2,10 +2,10 @@
 {% load static %}
 {% load martortags %}
 {% block style %}
-  <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-  <link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-  <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-  <link href="{% static 'martor/css/martor.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+  <link href="{% static 'plugins/css/ace.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'plugins/css/semantic.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'plugins/css/resizable.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'martor/css/martor.min.css' %}" rel="stylesheet" />
 <style>
 body {
   font-family: "Open Sans", sans-serif;
@@ -18,14 +18,9 @@ body {
   background-size: cover;
 }
 
-._lbl {
-  font-family: Ubuntu;
-  font-weight: 700;
-}
-.input {
+._inp {
   font-weight: 550;
 }
-
 </style>
 {% endblock %}
 {% block content %}
@@ -44,27 +39,13 @@ body {
             <form method="post">
               {% csrf_token %}
               <div class="form-row">
-                <span class="_lbl">Бодлогын нэр</span>
+                <span class="_font-ubuntu _font-700 _font-16">Бодлогын нэр</span>
                 <div class="col-md-12 form-group mt-2">
                   {{ form.title }}
                 </div>
               </div>
-              {% if form.errors %}
-                <div class="alert alert-danger alert-dismissible col-12 mx-1" role="alert">
-                    <div id="form_errors">
-                        {% for key, value in form.errors.items %}
-                            <span class="fieldWrapper">
-                                {{ key }}:{{ value }}
-                            </span>
-                        {% endfor %}
-                    </div>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                {% endif %}
               <div class="form-row">
-                <span class="_lbl">Бодлогын тайлбар</span>
+                <span class="_font-ubuntu _font-700 _font-16">Бодлогын тайлбар</span>
                 <div class="col-md-12 form-group mt-2">
                   <div class="ui main-container">
                     <div class="ui segment" style="color: #000;">
@@ -74,24 +55,28 @@ body {
                 </div>
               </div>
               <div class="form-row">
-                <span class="_lbl">Бодлогын төрөл</span>
+                <span class="_font-ubuntu _font-700 _font-16">Бодлогын төрөл</span>
                 <div class="col-md-12 form-group mt-2">
                   {{ form.category }}
                 </div>
               </div>
               <div class="form-row">
-                <span class="_lbl">Хэрхэн бодох вэ ?</span>
+                <span class="_font-ubuntu _font-700 _font-16">Хэрхэн бодох вэ ?</span>
                 <div class="col-md-12 form-group mt-2">
                   {{ form.solution }}
                 </div>
               </div>
               <div class="form-row">
-                <span class="_lbl">Бодлогын хариу</span>
+                <span class="_font-ubuntu _font-700 _font-16">Бодлогын хариу</span>
                 <div class="col-md-12 form-group mt-2">
                   {{ form.flag }}
                 </div>
               </div>
-              <button class="btn btn-success fl-right">Болсон</button>
+              <div class="form-row float-right">
+                <div class="col-md-12 form-group">
+                  <button class="btn btn-success">Болсон</button>
+                </div>
+              </div>
             </form>
           </div>
         </div>
@@ -113,10 +98,18 @@ body {
               </div>
             </div>
           </a>
-          <div class="card-body">
-            <span style="font-weight: 550;">Бодлогын нэр, тайлбар нь бусдад харагдах бөгөөд тайлбарыг бичихдээ линк оруулах бол <samp><link>asd</link></samp></span>
+          <div class="card-body text-center">
+            <span class="_font-15 _font-550">Бодлогын нэр, тайлбар нь бусдад харагдана. Тайлбар нь <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">markup</a> дэмжинэ.</span>
           </div>
         </div>
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-success mt-3" role="alert">
+              <strong>Амжилттай</strong><br>
+              <span class="_font-15">{{ message }}</span>
+            </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
   </div>

@@ -26,4 +26,10 @@ $(document).ready(function() {
   $("#acCollapse4").on("show.bs.collapse", function() {
     $(".angleSwitch4").html(down);
   });
+
+  $('.collapse').on('show.bs.collapse', function () {
+    $('.collapse.show').each(function(){
+      $(this).collapse('hide');
+    });
+  });
 });

@@ -1,4 +1,6 @@
 html {
+  position: relative;
+  min-height: 100%;
   scroll-behavior: smooth;
 }
 body {
@@ -193,6 +195,12 @@ h1, h2, h3, h4, h5, h6 {
 ._font-700 {
   font-weight: 700 !important;
 }
+._font-550 {
+  font-weight: 550 !important;
+}
+._font-ubuntu {
+  font-family: Ubuntu;
+}
 .mobile-nav-toggle {
   position: fixed;
   right: 15px;
@@ -338,6 +346,9 @@ h1, h2, h3, h4, h5, h6 {
 #footer {
   color: rgba(255, 255, 255, 1); 
   background: linear-gradient(45deg, rgba(20, 30, 56, 0.3) 15%, rgba(6, 26, 66, 0.6) 40%), url('/static/img/base/footer.png') no-repeat center center fixed;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 #footer ul {
   list-style: none;

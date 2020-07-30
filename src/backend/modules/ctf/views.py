@@ -7,6 +7,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 
 from django.db.models import Q
 
@@ -20,7 +21,7 @@ from modules.base.forms import (
 )
 class CTFHomeView(View):
     context = {
-        'title': 'Capture The Flag | Нүүр Хуудас',
+        'title': 'Нүүр Хуудас | Capture The Flag',
     }
 
     def get(self, request, *args, **kwargs):
@@ -41,13 +42,15 @@ class CTFChallengesView(View):
     def post(self, request, *args, **kwargs):
         return render(request, 'ctf/challenges.html', self.context)
 
-class CTFChallengeRequestView(FormView):
+class CTFChallengeRequestView(SuccessMessageMixin, FormView):
     template_name = 'ctf/challenge-request.html'
     model = CtfChallengeRequest
     form_class = CTFChallengeRequestForm
     success_url = '/ctf/challenge/request'
+    success_message = "Бид таны бодлогыг шалгаж үзээд таньд мэдэгдэх болно"
+
     extra_context = {
-        'title': 'Capture The Flag | Бодлого нэмэх',
+        'title': 'Бодлого нэмэх | Capture The Flag',
     }
 
     def form_valid(self, form):

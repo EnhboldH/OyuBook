@@ -81,9 +81,6 @@ class UserProfileUpdateForm(forms.Form):
         self.fields['background_image'].widget.attrs['class'] = "form-control-file"
 
     def clean(self):
-
-        # print ("Raw Data:", self.data)
-        # print ("Raw files:", self.files)
         return self.cleaned_data
 
 class CTFChallengeRequestForm(ModelForm):
@@ -95,4 +92,8 @@ class CTFChallengeRequestForm(ModelForm):
         super(CTFChallengeRequestForm, self).__init__(*args, **kwargs)
 
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control input'
+            self.fields[field].widget.attrs['class'] = 'form-control _inp'
+
+        self.fields['title'].widget.attrs['placeholder'] = u"Бодлогын нэрийг оруулна уу"
+        self.fields['solution'].widget.attrs['placeholder'] = u"Бид таны бодлогыг шалгахын тулд заавал бөглөнө үү"
+        self.fields['flag'].widget.attrs['placeholder'] = u"Хариу буюу флагаа оруулна уу"
