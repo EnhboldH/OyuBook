@@ -13,6 +13,7 @@ from django.db.models import Q
 from modules.base.models import (
     OyuUser,
     CtfChallenge,
+    CtfChallengeRequest,
 )
 from modules.base.forms import (
     CTFChallengeRequestForm,
@@ -40,15 +41,28 @@ class CTFChallengesView(View):
     def post(self, request, *args, **kwargs):
         return render(request, 'ctf/challenges.html', self.context)
 
-class CTFChallengeRequestView(View):
-    # Change me to FormView
-
-    context = {
+class CTFChallengeRequestView(FormView):
+    template_name = 'ctf/challenge-request.html'
+    model = CtfChallengeRequest
+    form_class = CTFChallengeRequestForm
+    success_url = '/ctf/challenge/request'
+    extra_context = {
         'title': 'Capture The Flag | Бодлого нэмэх',
-        'form': CTFChallengeRequestForm,
     }
-    def get(self, request, *args, **kwargs):
-        return render(request, 'ctf/challenge-request.html', self.context)
+
+    def form_valid(self, form):
+        challenge_data = form.cleaned_data
+        challenge_request = CtfChallengeRequest()
+        challenge_request.title = challenge_data.get('title')
+        challenge_request.description = challenge_data.get('description')
+        challenge_request.category = challenge_data.get('category')
+        challenge_request.solution = challenge_data.get('solution')
+        challenge_request.flag = challenge_data.get('flag')
+        challenge_request.oyu_user = self.request.user
+        challenge_request.save()
+
+        return super().form_valid(form)
+
 
 class CTFScoreboardView(View):
     context = {

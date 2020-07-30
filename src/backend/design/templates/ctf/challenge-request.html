@@ -1,25 +1,35 @@
 {% extends "layout.html" %}
 {% load static %}
+{% load martortags %}
 {% block style %}
+  <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+  <link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+  <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+  <link href="{% static 'martor/css/martor.min.css' %}" type="text/css" media="all" rel="stylesheet" />
 <style>
 body {
+  font-family: "Open Sans", sans-serif;
   color: #fff;
+  background-repeat: no-repeat;
+  background: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.9) 100%), url("/static/img/base/default.svg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
-.form-row span {
+._lbl {
   font-family: Ubuntu;
   font-weight: 700;
 }
 .input {
   font-weight: 550;
 }
-.desc {
-  height: 100px;
-}
+
 </style>
 {% endblock %}
 {% block content %}
-<section id="main" class="mb-5">
+<section id="main">
   <div class="container mb-5">
     <div class="row text-center">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 _font-700 _font-15">
@@ -27,48 +37,100 @@ body {
         <span class="_font-20 text-light">Бодлого нэмэх</span>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mt-3">
+    <div class="row">
+      <div class="col-7 mt-4">
         <div class="card">
           <div class="card-body">
             <form method="post">
               {% csrf_token %}
               <div class="form-row">
-                <span>Бодлогын нэр</span>
+                <span class="_lbl">Бодлогын нэр</span>
                 <div class="col-md-12 form-group mt-2">
                   {{ form.title }}
                 </div>
               </div>
+              {% if form.errors %}
+                <div class="alert alert-danger alert-dismissible col-12 mx-1" role="alert">
+                    <div id="form_errors">
+                        {% for key, value in form.errors.items %}
+                            <span class="fieldWrapper">
+                                {{ key }}:{{ value }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
               <div class="form-row">
-                <span>Бодлогын тайлбар</span>
+                <span class="_lbl">Бодлогын тайлбар</span>
                 <div class="col-md-12 form-group mt-2">
-                  {{ form.description }}
+                  <div class="ui main-container">
+                    <div class="ui segment" style="color: #000;">
+                      {{ form.description }}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-row">
-                <span>Бодлогын төрөл</span>
+                <span class="_lbl">Бодлогын төрөл</span>
                 <div class="col-md-12 form-group mt-2">
                   {{ form.category }}
                 </div>
               </div>
               <div class="form-row">
-                <span>Хэрхэн бодох вэ ?</span>
+                <span class="_lbl">Хэрхэн бодох вэ ?</span>
                 <div class="col-md-12 form-group mt-2">
                   {{ form.solution }}
                 </div>
               </div>
               <div class="form-row">
-                <span>Бодлогын хариу</span>
+                <span class="_lbl">Бодлогын хариу</span>
                 <div class="col-md-12 form-group mt-2">
                   {{ form.flag }}
                 </div>
               </div>
-              <button class="btn btn-success float-right">Болсон</button>
+              <button class="btn btn-success fl-right">Болсон</button>
             </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-5 mt-4">
+        <div class="card">
+          <a type="button">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-7 text-left">
+                  <span><i class="fas fa-bookmark"></i></span>
+                  <span class="ml-2">Мэдэхэд илүүдэхгүй</span>
+                </div>
+                <div class="col-5 text-right">
+                  <span class="angleSwitchActive _font-20">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <div class="card-body">
+            <span style="font-weight: 550;">Бодлогын нэр, тайлбар нь бусдад харагдах бөгөөд тайлбарыг бичихдээ линк оруулах бол <samp><link>asd</link></samp></span>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+{% endblock %}
+{% block script %}
+  <script src="{% static 'plugins/js/ace.js' %}"></script>
+  <script src="{% static 'plugins/js/semantic.min.js' %}"></script>
+  <script src="{% static 'plugins/js/mode-markdown.js' %}"></script>
+  <script src="{% static 'plugins/js/ext-language_tools.js' %}"></script>
+  <script src="{% static 'plugins/js/theme-github.js' %}"></script>
+  <script src="{% static 'plugins/js/typo.js' %}"></script>
+  <script src="{% static 'plugins/js/spellcheck.js' %}"></script>
+  <script src="{% static 'plugins/js/highlight.min.js' %}"></script>
+  <script src="{% static 'plugins/js/resizable.min.js' %}"></script>
+  <script src="{% static 'martor/js/martor.min.js' %}"></script>
 {% endblock %}

@@ -20,6 +20,9 @@ dj-database-url = "*"
 whitenoise = "*"
 psycopg2 = "*"
 dj-static = "*"
+martor = "*"
+markdown = "==3.1"
+requests = "*"
 
 [requires]
 python_version = "3.6"

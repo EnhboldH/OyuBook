@@ -171,7 +171,6 @@ class UserProfileUpdateView(FormView):
 
     def form_valid(self, form):
         valid_data = form.cleaned_data
-        # print ("\nvalid_data:", valid_data)
 
         oyu_user = self.request.user
         oyu_user.background_image = valid_data.get('background_image', None)

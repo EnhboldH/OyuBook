@@ -3,21 +3,23 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-from modules.base.consts import USER_TYPE_NORMAL
-from modules.base.consts import USER_TYPE_CHOICES
-from modules.base.consts import USER_CHALLENGE_STATUS_CHOICES
-from modules.base.consts import USER_CHALLENGE_STATUS_ATTEMPTED
-from modules.base.consts import USER_BADGE_TYPE_CHOICES
-from modules.base.consts import USER_BADGE_TYPE_NORMAL
-from modules.base.consts import USER_REGION_CHOICES
-from modules.base.consts import CTF_CHALLENGE_CATEGORY_CHOICES
-from modules.base.consts import BACKGROUND_IMG_DEFAULT
-from modules.base.consts import AVATAR_IMG_DEFAULT
+from modules.base.consts import (
+    USER_TYPE_NORMAL,
+    USER_TYPE_CHOICES,
+    USER_CHALLENGE_STATUS_CHOICES,
+    USER_CHALLENGE_STATUS_ATTEMPTED,
+    USER_BADGE_TYPE_CHOICES,
+    USER_BADGE_TYPE_NORMAL,
+    USER_REGION_CHOICES,
+    CTF_CHALLENGE_CATEGORY_CHOICES,
+    BACKGROUND_IMG_DEFAULT,
+    AVATAR_IMG_DEFAULT
+)
 
 from django.template.defaultfilters import slugify
 
 from django.urls import reverse
-
+from martor.models import MartorField
 
 class OyuUser(AbstractUser, models.Model):
     USERNAME_FIELD = "email"
@@ -94,6 +96,17 @@ class CtfChallenge(models.Model):
 
     def __str__(self):
         return "%s | %s" % (self.title, self.category)
+
+class CtfChallengeRequest(models.Model):
+    title = models.CharField("Гарчиг", max_length=100, unique=True)
+    oyu_user = models.ForeignKey(OyuUser, verbose_name="Хэрэглэгч", on_delete=models.DO_NOTHING)
+    description = MartorField()
+    category = models.CharField("Төрөл", choices=CTF_CHALLENGE_CATEGORY_CHOICES, max_length=100)
+    solution = models.CharField("Хэрхэн бодох", max_length=300)
+    flag = models.CharField("Flag", max_length=100)
+
+    def __str__(self):
+        return "%s | %s" % (self.oyu_user.__str__(), self.title)
 
 class UserChallenge(models.Model):
     REQUIRED_FIELDS = ["oyu_user", "challenge"]

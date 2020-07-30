@@ -19,13 +19,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',       # Нэмэлт, хэрэглэгч статик файлууд дагаад устана
 
     'modules.base',
     'modules.ctf',
     'modules.electronics',
     'modules.mathematics',
     'modules.network',
+
+    'martor',                           # Нэмэлт, CTF -ийн бодлого нэмэх хэсэг дээр markdown утга авна
 ]
 
 MIDDLEWARE = [
@@ -104,3 +106,28 @@ STATICFILES_DIR = [STATIC_DIR]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# Martur Configs
+MARTOR_ENABLE_CONFIGS = {
+    'emoji': 'false',        # to enable/disable emoji icons.
+    'imgur': 'false',        # to enable/disable imgur/custom uploader.
+    'mention': 'false',     # to enable/disable mention
+    'jquery': 'true',       # to include/revoke jquery (require for admin default django)
+    'living': 'false',      # to enable/disable live updates in preview
+    'spellcheck': 'false',  # to enable/disable spellcheck in form textareas
+    'hljs': 'false',         # to enable/disable hljs highlighting in preview
+}
+
+MARTOR_TOOLBAR_BUTTONS = [
+    'bold', 'italic', 'heading', 'pre-code',
+    'unordered-list', 'link',
+]
+# To setup the martor editor with title label or not (default is False)
+MARTOR_ENABLE_LABEL = False
+MARTOR_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown.extensions.nl2br',
+    'markdown.extensions.smarty',
+    'markdown.extensions.fenced_code',
+]

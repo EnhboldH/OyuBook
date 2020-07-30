@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from modules.base.views import (
@@ -44,10 +44,12 @@ urlpatterns = [
     path('ctf/', CTFHomeView.as_view(), name='ctf_index'),
     path('ctf/scoreboard', CTFScoreboardView.as_view(), name='ctf_scoreboard'),
     path('ctf/challenges/', CTFChallengesView.as_view(), name='ctf_challenges'),
-    path('ctf/challenges/request/', CTFChallengeRequestView.as_view(), name='ctf_challenge_request'),
+    path('ctf/challenge/request/', CTFChallengeRequestView.as_view(), name='ctf_challenge_request'),
     path('mathematics/', MathematicsView.as_view(), name='mathematics_index'),
     path('electronics/', ElectronicsView.as_view(), name='electronics_index'),
     path('network/', NetworkView.as_view(), name='network_index'),
+
+    path('martor/', include('martor.urls')), # Don't delete this if you don't know
 ]
 
 if settings.DEBUG:

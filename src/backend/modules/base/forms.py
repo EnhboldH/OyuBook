@@ -1,10 +1,12 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import AuthenticationForm
+from martor.fields import MartorFormField
 
 from .models import (
     OyuUser,
     OyuUserProfile,
+    CtfChallengeRequest,
 )
 
 from .consts import (
@@ -84,17 +86,13 @@ class UserProfileUpdateForm(forms.Form):
         # print ("Raw files:", self.files)
         return self.cleaned_data
 
-class CTFChallengeRequestForm(forms.Form):
-    # Change me to model Form
-    title = forms.CharField(label="Гарчиг", max_length=100)
-    description = forms.CharField(label="Бодлогын өгүүлбэр", max_length=10000)
-    category = forms.ChoiceField(label="Төрөл", choices=CTF_CHALLENGE_CATEGORY_CHOICES)
-    solution = forms.CharField(label="Хэрхэн бодох", max_length=300)
-    flag = forms.CharField(label="Flag", max_length=100)
+class CTFChallengeRequestForm(ModelForm):
+    class Meta:
+        model = CtfChallengeRequest
+        fields = ['title', 'description', 'category', 'solution', 'flag']
 
     def __init__(self, request=None, *args, **kwargs):
         super(CTFChallengeRequestForm, self).__init__(*args, **kwargs)
 
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control input'
-        self.fields['description'].widget.attrs['class'] = 'form-control desc'
