@@ -110,20 +110,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Martur Configs
 MARTOR_ENABLE_CONFIGS = {
-    'emoji': 'false',        # to enable/disable emoji icons.
-    'imgur': 'false',        # to enable/disable imgur/custom uploader.
-    'mention': 'false',     # to enable/disable mention
-    'jquery': 'true',       # to include/revoke jquery (require for admin default django)
-    'living': 'false',      # to enable/disable live updates in preview
-    'spellcheck': 'false',  # to enable/disable spellcheck in form textareas
-    'hljs': 'false',         # to enable/disable hljs highlighting in preview
+    'emoji': 'false',
+    'imgur': 'false',
+    'mention': 'false',
+    'jquery': 'true',
+    'living': 'false',
+    'spellcheck': 'false',
+    'hljs': 'false',
 }
 
 MARTOR_TOOLBAR_BUTTONS = [
     'bold', 'italic', 'heading', 'pre-code',
     'unordered-list', 'link',
 ]
-# To setup the martor editor with title label or not (default is False)
 MARTOR_ENABLE_LABEL = False
 MARTOR_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.extra',

@@ -10,5 +10,7 @@
 *.py[co]
 __pycache__
 .DS_Store
+src/backend/modules/base/migrations/
 src/backend/design/static_root/
-src/backend/modules/base/migrations
+src/backend/static/admin/
+src/backend/media/
