@@ -17,6 +17,7 @@ from modules.ctf.views import (
     CTFChallengesView,
     CTFChallengeRequestView,
     CTFScoreboardView,
+    CTFAdminChallengeRequestsView,
 )
 from modules.mathematics.views import (
     MathematicsView
@@ -45,6 +46,7 @@ urlpatterns = [
     path('ctf/scoreboard', CTFScoreboardView.as_view(), name='ctf_scoreboard'),
     path('ctf/challenges/', CTFChallengesView.as_view(), name='ctf_challenges'),
     path('ctf/challenge/request/', CTFChallengeRequestView.as_view(), name='ctf_challenge_request'),
+    path('ctf/admin/challenge/requests/', CTFAdminChallengeRequestsView.as_view(), name='ctf_admin_challenge_requests'),
     path('mathematics/', MathematicsView.as_view(), name='mathematics_index'),
     path('electronics/', ElectronicsView.as_view(), name='electronics_index'),
     path('network/', NetworkView.as_view(), name='network_index'),

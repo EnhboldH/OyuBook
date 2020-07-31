@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load markdown_extras %}
+{% block style %}
+  <link href="{% static 'css/ctf/index.css' %}" rel="stylesheet">
+  <style>
+    table {
+      color: white !important;
+    }
+    .test:hover {
+      color: rgba(255, 255, 255, 0.5) !important;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+<section id="main" class="d-flex">
+  <div class="container-fluid ml-5 mr-5 mb-5">
+    <div class="row text-center">
+      <div class="col-12 mb-5 _font-700 _font-15">
+        <span class="text-success text-uppercase _font-700 _font-15">Capture The Flag Admin</span><br>
+        <span class="_font-20">Бодлогын хүсэлтүүд</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-n3 challenges">
+        {% if challenges %}
+          {% for challenge in challenges %}
+            <form method="post">
+              {% csrf_token %}
+              <div class="accordion mt-3" id="challenge-{{ forloop.counter }}">
+                <div class="card">
+                  <a data-toggle="collapse" data-target="#challenge-{{ forloop.counter }}-collapse" class="text-light" type="button">
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="col-6">
+                          <span class="_font-16">{{ challenge.title }}</span>
+                        </div>
+                        <div class="col-6 text-right">
+                          <span class="badge badge-pill badge-info">{{ challenge.category }}</span>
+                          <span class="badge badge-pill badge-success">{{ challenge.oyu_user }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  <div id="challenge-{{ forloop.counter }}-collapse" class="collapse" aria-labelledby="headingOne" data-parent="#challenge-{{ forloop.counter }}">
+                    <div class="card-body">
+                      <div class="col-12">
+                        <span>{{ challenge.description|markdown|safe }}</span>
+                        <hr>
+                        Бодох: <span class="text-success _font-700">{{ challenge.solution }}
+                      </div>
+                      <div class="mt-3">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <button class="btn btn-info" type="button">Хариу</button>
+                          </div>
+                          <input type="text" class="form-control" placeholder="{{ challenge.flag }}" aria-label="" aria-describedby="basic-addon1" disabled="">
+                          <div class="input-group-append">
+                            <button class="btn btn-success" type="submit" value="{{ challenge.id }}" name="challenge">
+                              <span>Нэмэх</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          {% endfor %}
+        {% else %}
+          <div class="card mt-3">
+            <div class="card-header">
+              <span>Одоогоор ямар нэгэн бодлого алга</span>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block script %}
+  <script>
+   $(document).ready(function(){
+      $('.collapse').on('show.bs.collapse', function () {
+        $('.collapse.show').each(function(){
+          $(this).collapse('hide');
+        });
+      });
+    });
+  </script>
+{% endblock %}

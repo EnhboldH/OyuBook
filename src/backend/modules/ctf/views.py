@@ -16,6 +16,7 @@ from modules.base.models import (
     OyuUserProfile,
     CtfChallenge,
     CtfChallengeRequest,
+    UserChallenge,
 )
 from modules.base.forms import (
     CTFChallengeRequestForm,
@@ -28,6 +29,9 @@ class CTFHomeView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             self.context['profile'] = self.get_profile_data(oyu_user=request.user)
+            if request.user.user_type == 'admin':
+                self.context['challenge_request_count'] = CtfChallengeRequest.objects.count()
+
         return render(request, 'ctf/index.html', self.context)
 
     def post(self, request, *args, **kwargs):
@@ -43,11 +47,10 @@ class CTFHomeView(View):
 class CTFChallengesView(View):
     context = {
         'title': 'Capture The Flag | Бодлогууд',
-        'challenges': CtfChallenge.objects.all(),
     }
 
     def get(self, request, *args, **kwargs):
-        print(self.context['challenges'])
+        self.context['challenges'] = CtfChallenge.objects.all()
         return render(request, 'ctf/challenges.html', self.context)
 
     def post(self, request, *args, **kwargs):
@@ -80,9 +83,37 @@ class CTFChallengeRequestView(SuccessMessageMixin, FormView):
 
 class CTFScoreboardView(View):
     context = {
-        'title': 'Capture The Flag | Бодлогууд',
+        'title': 'Онооны самбар | Capture The Flag',
     }
 
     def get(self, request, *args, **kwargs):
         return render(request, 'ctf/scoreboard.html', self.context)
 
+
+class CTFAdminChallengeRequestsView(View):
+    context = {
+        'title': 'Админ | Capture The Flag',
+    }
+
+    def get(self, request, *args, **kwargs):
+        self.context['challenges'] = CtfChallengeRequest.objects.all()
+        return render(request, 'ctf/admin/admin-challenge-requests.html', self.context)
+
+    def post(self, request, *args, **kwargs):
+        challenge_id = request.POST['challenge']
+        challenge = CtfChallengeRequest.objects.get(pk=challenge_id)
+        req_user = challenge.oyu_user
+        CtfChallenge.objects.create(
+            title=challenge.title,
+            description=challenge.description,
+            category=challenge.category,
+            flag=challenge.flag
+        ).save()
+        challenge.delete()
+        ctf_chall = CtfChallenge.objects.last()
+        UserChallenge.objects.create(
+            oyu_user=req_user,
+            challenge=ctf_chall,
+        ).save()
+        self.context['challenges'] = CtfChallengeRequest.objects.all()
+        return render(request, 'ctf/admin/admin-challenge-requests.html', self.context)

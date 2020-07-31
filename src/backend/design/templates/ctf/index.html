@@ -84,13 +84,52 @@
             </div>
           </div>
         </div>
-        <div class="card mt-4">
-          <div class="card-header">
-            <a href="#" class="btn bg-success col-12">
-              <span class="text-uppercase" id="_support-us">Бидэнтэй нэгдэх</span>
-            </a>
+        {% if user.user_type == 'normal' %}
+          <div class="card mt-4">
+            <div class="card-header">
+              <a href="#" class="btn bg-success col-12">
+                <span class="text-uppercase" id="_support-us">Бидэнтэй нэгдэх</span>
+              </a>
+            </div>
           </div>
-        </div>
+        {% elif user.user_type == 'admin' %}
+          <div class="accordion" id="adminPanel">
+            <div class="card mt-4">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-1">
+                    <span class="_font-20"><i class="fas fa-wrench"></i></span>
+                  </div>
+                  <div class="col-9 align-self-center">
+                    <span>Админ панел</span>
+                  </div>
+                  <div class="col-2 align-self-center text-right">
+                    <span data-toggle="collapse" data-target="#adminCollapse" aria-expanded="true" aria-controls="adminCollapse" class="angleSwitchProblems _font-20">
+                      <i class="fas fa-angle-down" type="button"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div id="adminCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#adminPanel">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12 mt-n2">
+                      <div class="row">
+                        <div class="col-12">
+                          <a href="{% url 'ctf_admin_challenge_requests' %}">
+                            <button class="btn btn-success btn-block">
+                              <span>Бодлогын хүсэлтүүд {{ challenge_request_count }}</span>
+                            </button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
         <div class="accordion" id="activeUsers">
           <div class="card mt-4">
             <div class="card-header">
