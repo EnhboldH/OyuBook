@@ -87,7 +87,7 @@ class OyuUserProfile(models.Model):
 
 class CtfChallenge(models.Model):
     title = models.CharField("Гарчиг", max_length=100, unique=True)
-    description = models.TextField("Бодлогын өгүүлбэр", max_length=10000)
+    description = MartorField()
     value = models.PositiveIntegerField("Бодлогын оноо", default=0)
     category = models.CharField("Төрөл", max_length=100, choices=CTF_CHALLENGE_CATEGORY_CHOICES, null=True)
     state = models.CharField("Төлөв", max_length=100, null=True, default='active')

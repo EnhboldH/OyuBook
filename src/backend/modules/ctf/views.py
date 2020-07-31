@@ -13,6 +13,7 @@ from django.db.models import Q
 
 from modules.base.models import (
     OyuUser,
+    OyuUserProfile,
     CtfChallenge,
     CtfChallengeRequest,
 )
@@ -25,10 +26,19 @@ class CTFHomeView(View):
     }
 
     def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            self.context['profile'] = self.get_profile_data(oyu_user=request.user)
         return render(request, 'ctf/index.html', self.context)
 
     def post(self, request, *args, **kwargs):
         return render(request, 'ctf/index.html', self.context)
+
+    def get_profile_data(self, oyu_user):
+
+        profile = OyuUserProfile.objects.filter(oyu_user=oyu_user).first()
+        if not profile:
+            return {}
+        return profile
 
 class CTFChallengesView(View):
     context = {
@@ -37,6 +47,7 @@ class CTFChallengesView(View):
     }
 
     def get(self, request, *args, **kwargs):
+        print(self.context['challenges'])
         return render(request, 'ctf/challenges.html', self.context)
 
     def post(self, request, *args, **kwargs):
