@@ -13,9 +13,11 @@
             <div class="row">
               <div class="col-2">
                 {% if user.is_authenticated %}
-                  <img src="/media/{{ user.avatar_image }}" class="rounded _profile-image">
+                  {% if user.avatar_image == 'img/users/avatar/default.png' %}
+                    <img src="{% static 'img/users/avatar/default.png' %}" class="rounded _profile-image">
+                  {% endif %}
                 {% else %}
-                  <img src="/media/img/users/avatar/anonymous.svg" class="rounded _profile-image">
+                  <img src="{% static 'img/users/avatar/anonymous.svg' %}" class="rounded _profile-image">
                 {% endif %}
               </div>
               <div class="col-7 ml-3 text-left">
@@ -55,7 +57,11 @@
                 <span class="text-uppercase _profile-label">Нийт бодсон</span><br>
                 <span class="text-uppercase _profile-detail">
                   {% if user.is_authenticated %}
-                    {{ profile.solved_problem }}
+                    {% if profile %}
+                      {{ profile.solved_problem }}
+                    {% else %}
+                      <span class="_font-15 text-danger font-weight-bold">No profile</span>
+                    {% endif %}
                   {% else %}
                     0
                   {% endif %}
@@ -65,7 +71,11 @@
                 <span class="text-uppercase _profile-label">Нийт оноо</span><br>
                 <span class="text-uppercase _profile-detail">
                   {% if user.is_authenticated %}
-                    {{ profile.score }}
+                    {% if profile %}
+                      {{ profile.solved_problem }}
+                    {% else %}
+                      <span class="_font-15 text-danger font-weight-bold">No profile</span>
+                    {% endif %}
                   {% else %}
                     0
                   {% endif %}
@@ -75,7 +85,11 @@
                 <span class="text-uppercase _profile-label">Нэмсэн тоо</span><br>
                 <span class="text-uppercase _profile-detail">
                   {% if user.is_authenticated %}
-                    {{ profile.accepted_problem }}
+                    {% if profile %}
+                      {{ profile.solved_problem }}
+                    {% else %}
+                      <span class="_font-15 text-danger font-weight-bold">No profile</span>
+                    {% endif %}
                   {% else %}
                     0
                   {% endif %}
@@ -140,19 +154,19 @@
                 </div>
                 <div class="col-5 text-right">
                   <span data-toggle="collapse" data-target="#activeCollapse" aria-expanded="true" aria-controls="activeCollapse" class="angleSwitchActive _font-20">
-                    <i class="fas fa-angle-down" type="button"></i>
+                    <i class="fas fa-angle-up" type="button"></i>
                   </span>
                 </div>
               </div>
             </div>
-            <div id="activeCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#activeUsers">
+            <div id="activeCollapse" class="collapse" aria-labelledby="headingOne" data-parent="#activeUsers">
               <div class="card-body">
                 <div class="row">
                   <div class="col-12 mt-n2">
                     <a href="#">
                       <div class="row text-light">
                         <div class="col-2">
-                          <img src="/media/img/users/avatar/1.jpg" class="rounded-circle _active-users-img">
+                          <img src="{% static 'img/users/avatar/default.png' %}" class="rounded-circle _active-users-img">
                         </div>
                         <div class="col-8 ml-n3 align-self-center">
                           <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
@@ -165,7 +179,7 @@
                     <a href="#">
                       <div class="row text-light mt-2">
                         <div class="col-2">
-                          <img src="/media/img/users/avatar/1.jpg" class="rounded-circle _active-users-img">
+                          <img src="{% static 'img/users/avatar/default.png' %}" class="rounded-circle _active-users-img">
                         </div>
                         <div class="col-8 ml-n3 align-self-center">
                           <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
@@ -178,7 +192,7 @@
                     <a href="#">
                       <div class="row text-light mt-2">
                         <div class="col-2">
-                          <img src="/media/img/users/avatar/1.jpg" class="rounded-circle _active-users-img">
+                          <img src="{% static 'img/users/avatar/default.png' %}" class="rounded-circle _active-users-img">
                         </div>
                         <div class="col-8 ml-n3 align-self-center">
                           <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
@@ -191,7 +205,7 @@
                     <a href="#">
                       <div class="row text-light mt-2">
                         <div class="col-2">
-                          <img src="/media/img/users/avatar/1.jpg" class="rounded-circle _active-users-img">
+                          <img src="{% static 'img/users/avatar/default.png' %}" class="rounded-circle _active-users-img">
                         </div>
                         <div class="col-8 ml-n3 align-self-center">
                           <span class="font-weight-bold _font-15">Byambadalai Sumiya</span>
@@ -283,12 +297,12 @@
                 </div>
                 <div class="col-1 ml-3 align-self-center text-center">
                   <span data-toggle="collapse" data-target="#learnMoreCollapse" aria-expanded="true" aria-controls="learnMoreCollapse" class="angleSwitchLearn _font-20">
-                    <i class="fas fa-angle-down" type="button"></i>
+                    <i class="fas fa-angle-up" type="button"></i>
                   </span>
                 </div>
               </div>
             </div>
-            <div id="learnMoreCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#learnMore">
+            <div id="learnMoreCollapse" class="collapse" aria-labelledby="headingOne" data-parent="#learnMore">
               <div class="card-body">
                 <div class="row">
                   <div class="col-12">
@@ -376,12 +390,12 @@
                 </div>
                 <div class="col-1 ml-3 align-self-center text-center">
                   <span data-toggle="collapse" data-target="#newsCollapse" aria-expanded="true" aria-controls="newsCollapse" class="angleSwitchNews _font-20">
-                    <i class="fas fa-angle-down" type="button"></i>
+                    <i class="fas fa-angle-up" type="button"></i>
                   </span>
                 </div>
               </div>
             </div>
-            <div id="newsCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#news">
+            <div id="newsCollapse" class="collapse" aria-labelledby="headingOne" data-parent="#news">
               <div class="card-body">
               </div>
             </div>

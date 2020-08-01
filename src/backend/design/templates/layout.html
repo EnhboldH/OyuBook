@@ -27,11 +27,13 @@
               <li><a href="{% url 'network_index' %}"><i class="fas fa-network-wired"></i> Сүлжээ</a></li>
               {% if user.is_authenticated %}
                 <li class="drop-down">
-                  <img src="/media/{{ user.avatar_image }}" class="rounded-circle float-left _profile-nav">
+                  {% if user.avatar_image == 'img/users/avatar/default.png' %}
+                    <img src="{% static 'img/users/avatar/default.png' %}" class="rounded-circle float-left _profile-nav">
+                  {% endif %}
                   <a class="ml-5" href="#">{{ user.username }}</a>
                   <ul>
                     <li><a href="{% url 'user_profile' user.slug %}">Профайл</a></li>
-                    <li><a href="{% url 'user_logout' %}">Гарах</a></li>
+                    <li><a href="{% url 'user_logout' %}?next={{ request.path }}">Гарах</a></li>
                   </ul>
                 </li>
               {% endif %}

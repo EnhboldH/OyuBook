@@ -23,11 +23,11 @@
   font-family:Open Sans, sans-serif; 
   font-weight: 550;
 }
-.login-input {
+form ._input {
   color: #2d2f31;
   font-weight: 600; 
 }
-.login-input:focus {
+form ._input:focus {
   color: #2d2f31;
   font-weight: 600; 
 }

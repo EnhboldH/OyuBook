@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.contrib.auth import views
@@ -33,7 +33,7 @@ class HomeView(View):
         return render(request, 'home/index.html', self.context)
 
 class PolicyView(View):
-    context = {
+    context = { 
         'title': 'Нууцлалын бодлого | OyuBook',
     }
 
@@ -49,12 +49,12 @@ class SupportView(View):
         return render(request, 'home/support.html', self.context)
 
 class UserCreateView(FormView):
-    template_name = 'users/register.html'
+    template_name = 'user/register.html'
     model = OyuUser
     form_class = UserRegistrationForm
     success_url = '/user/login/'
     extra_context = {
-        'title': 'Бүртгүүлэх | OyuBook'
+        'title': 'Шинэ хаяг нээх| OyuBook'
     }
 
     def form_valid(self, form):
@@ -77,25 +77,27 @@ class UserCreateView(FormView):
             ).save()
         return super().form_valid(form)
 
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home_index')
+        return self.render_to_response(self.get_context_data())
+
 
 class UserLoginView(views.LoginView):
     form_class = LoginForm
-    template_name = 'users/login.html'
+    template_name = 'user/login.html'
+    redirect_authenticated_user = True
     extra_context = {
         'title': 'Нэвтрэх | OyuBook'
     }
 
 
 class UserLogoutView(views.LogoutView):
-    next_page = '/'
-    extra_context = {
-        'title': 'Гарах | OyuBook'
-    }
-
+    pass
 
 class UserProfileView(DetailView):
     model = OyuUser
-    template_name = 'users/profile.html'
+    template_name = 'user/profile.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -134,7 +136,7 @@ class UserProfileView(DetailView):
 
 
 class UserProfileUpdateView(FormView):
-    template_name = 'users/profile-update.html'
+    template_name = 'user/profile-update.html'
     form_class = UserProfileUpdateForm
 
     def view_prepare(self, request, *args, **kwargs):

@@ -26,8 +26,8 @@ class UserRegistrationForm(ModelForm):
                 'unique': 'Нэр давхардаж байна',
             },
             'email': {
-                'required': 'Е-мэйл оруулна уу',
-                'unique': 'Е-мэйл давхардаж байна',
+                'required': 'И-мэйл оруулна уу',
+                'unique': 'И-мэйл давхардаж байна',
             },
         }
 
@@ -36,20 +36,20 @@ class UserRegistrationForm(ModelForm):
 
         self.fields['username'].widget.attrs.update({'autofocus': 'autofocus'})
         self.fields['username'].widget.attrs['placeholder'] = u"Бүртгүүлэх нэр"
-        self.fields['email'].widget.attrs['placeholder'] = u"Е-мэйл хаяг"
+        self.fields['email'].widget.attrs['placeholder'] = u"И-мэйл хаяг"
         self.fields['password'].widget.attrs['placeholder'] = u"Нууц үг"
 
         for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control login-input'
+            visible.field.widget.attrs['class'] = 'form-control _input'
 
 
 class LoginForm(AuthenticationForm):
 
     def __init__(self, request=None, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
-        self.fields['password'].widget.attrs['class'] = "form-control login-input placeholder-no-fix"
-        self.fields['username'].widget.attrs['placeholder'] = u"Хэрэглэгчийн нэр"
+        self.fields['username'].widget.attrs['class'] = "form-control _input"
+        self.fields['password'].widget.attrs['class'] = "form-control _input"
+        self.fields['username'].widget.attrs['placeholder'] = u"И-мэйл хаяг"
         self.fields['password'].widget.attrs['placeholder'] = u"Нууц үг"
 
     def clean_username(self, ):
@@ -92,8 +92,16 @@ class CTFChallengeRequestForm(ModelForm):
         super(CTFChallengeRequestForm, self).__init__(*args, **kwargs)
 
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control _inp'
+            self.fields[field].widget.attrs['class'] = 'form-control _input'
 
         self.fields['title'].widget.attrs['placeholder'] = u"Бодлогын нэрийг оруулна уу"
         self.fields['solution'].widget.attrs['placeholder'] = u"Бид таны бодлогыг шалгахын тулд заавал бөглөнө үү"
         self.fields['flag'].widget.attrs['placeholder'] = u"Хариу буюу флагаа оруулна уу"
+
+class CTFChallengeSubmitForm(forms.Form):
+    answer = forms.CharField(label="CTF Хариу", required=False)
+
+    def __init__(self, request=None, *args, **kwargs):
+        super(CTFChallengeSubmitForm, self).__init__(*args, **kwargs)
+        self.fields['answer'].widget.attrs['class'] = "form-control _ans-input"
+        self.fields['answer'].widget.attrs['placeholder'] = "Флагаа оруулна уу"

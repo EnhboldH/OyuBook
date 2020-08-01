@@ -34,6 +34,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Base module
     path('', HomeView.as_view(), name='home_index'),
     path('privacy-policy/', PolicyView.as_view(), name='home_policy'),
     path('support/', SupportView.as_view(), name='home_support'),
@@ -42,15 +43,20 @@ urlpatterns = [
     path('user/register/', UserCreateView.as_view(), name='user_register'),
     path('user/profile/<slug:slug>', UserProfileView.as_view(), name='user_profile'),
     path('user/profile/update/<slug:slug>/', UserProfileUpdateView.as_view(), name='user_profile_update'),
+    # CTF module
     path('ctf/', CTFHomeView.as_view(), name='ctf_index'),
     path('ctf/scoreboard', CTFScoreboardView.as_view(), name='ctf_scoreboard'),
     path('ctf/challenges/', CTFChallengesView.as_view(), name='ctf_challenges'),
     path('ctf/challenge/request/', CTFChallengeRequestView.as_view(), name='ctf_challenge_request'),
     path('ctf/admin/challenge/requests/', CTFAdminChallengeRequestsView.as_view(), name='ctf_admin_challenge_requests'),
+    # Mathematics module
     path('mathematics/', MathematicsView.as_view(), name='mathematics_index'),
+    # Electronics module
     path('electronics/', ElectronicsView.as_view(), name='electronics_index'),
+    # Network module
     path('network/', NetworkView.as_view(), name='network_index'),
 
+    # Third part module
     path('martor/', include('martor.urls')), # Don't delete this if you don't know
 ]
 

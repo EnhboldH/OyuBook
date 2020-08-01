@@ -19,7 +19,7 @@
           <form method="POST">
             {% csrf_token %}
             <div class="form-row">
-              <span>Хэрэглэгчийн нэр</span>
+              <span>Хэрэглэгчийн и-мэйл</span>
               <div class="col-md-12 form-group mt-2">
                 {{form.username}}
               </div>
@@ -32,8 +32,15 @@
             </div>
             <div class="form-row">
               {% if form.errors %}
-                <div class="alert alert-dismissible col-md-12 text-center" role="alert">
-                  <span class="text-warning">Имэйл хаяг эсвэл нууц үг тохирохгүй байна</span>
+                <div class="alert alert-danger col-md-12 text-center" role="alert">
+                  <p class="_font-550">И-мэйл хаяг эсвэл нууц үг тохирохгүй байна</p>
+                </div>
+              {% endif %}
+              {% if messages %}
+                <div class="alert alert-info col-md-12 text-center" role="alert">
+                  {% for msg in messages %}
+                    <p class="_font-550">{{ msg }}</p>
+                  {% endfor %}
                 </div>
               {% endif %}
               <div class="col-md-12 form-group mt-3">
@@ -47,4 +54,7 @@
     </div>
   </div>
 </section>
+{% endblock %}
+{% block script %}
+  <script src="{% static 'js/users/authenticate.js' %}"></script>
 {% endblock %}

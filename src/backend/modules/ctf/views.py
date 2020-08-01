@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
+from django.contrib import messages
 from django.contrib.auth import views
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
@@ -20,6 +21,7 @@ from modules.base.models import (
 )
 from modules.base.forms import (
     CTFChallengeRequestForm,
+    CTFChallengeSubmitForm,
 )
 class CTFHomeView(View):
     context = {
@@ -46,14 +48,35 @@ class CTFHomeView(View):
 
 class CTFChallengesView(View):
     context = {
-        'title': 'Capture The Flag | Бодлогууд',
+        'title': 'Бодлогууд | Capture The Flag',
+        'form': CTFChallengeSubmitForm,
     }
 
     def get(self, request, *args, **kwargs):
         self.context['challenges'] = CtfChallenge.objects.all()
+        self.context['tops'] = OyuUserProfile.objects.order_by('-score')[:5]
         return render(request, 'ctf/challenges.html', self.context)
 
     def post(self, request, *args, **kwargs):
+        self.context['challenges'] = CtfChallenge.objects.all()
+        self.context['tops'] = OyuUserProfile.objects.order_by('-score')[:5]
+        value = request.POST[list(request.POST)[1]]
+        chall_id = list(request.POST)[1].split('-')[1]
+        challenge = CtfChallenge.objects.get(pk=chall_id)
+        if challenge.flag == value:
+            messages.success(request, 'Хариулт зөв байна')
+            challenge.solved_users_count += 1
+            if request.user.is_authenticated:
+                user = OyuUserProfile.objects.filter(oyu_user=request.user).first()
+                user.solved_problem += 1
+                user.score += challenge.value
+                user.save()
+            challenge.save()
+            return render(request, 'ctf/challenges.html', self.context)
+        else:
+            messages.error(request, 'Хариулт буруу байна')
+            return render(request, 'ctf/challenges.html', self.context)
+
         return render(request, 'ctf/challenges.html', self.context)
 
 class CTFChallengeRequestView(SuccessMessageMixin, FormView):
@@ -62,10 +85,15 @@ class CTFChallengeRequestView(SuccessMessageMixin, FormView):
     form_class = CTFChallengeRequestForm
     success_url = '/ctf/challenge/request'
     success_message = "Бид таны бодлогыг шалгаж үзээд таньд мэдэгдэх болно"
-
     extra_context = {
         'title': 'Бодлого нэмэх | Capture The Flag',
     }
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.add_message(request, messages.INFO, 'Бодлого нэмэхийн тулд та нэвтэрнэ үү',fail_silently=True)
+            return redirect('user_login')
+        return self.render_to_response(self.get_context_data())
 
     def form_valid(self, form):
         challenge_data = form.cleaned_data
@@ -81,12 +109,14 @@ class CTFChallengeRequestView(SuccessMessageMixin, FormView):
         return super().form_valid(form)
 
 
+
 class CTFScoreboardView(View):
     context = {
         'title': 'Онооны самбар | Capture The Flag',
     }
 
     def get(self, request, *args, **kwargs):
+        self.context['users'] = OyuUserProfile.objects.order_by('-score')
         return render(request, 'ctf/scoreboard.html', self.context)
 
 

@@ -23,7 +23,7 @@
                 </div>
               </div>
               <div class="form-row">
-                <span>Е-мэйл хаяг</span>
+                <span>И-мэйл хаяг</span>
                 <div class="col-md-12 form-group mt-2">
                   {{ form.email }}
                 </div>
@@ -38,20 +38,20 @@
                 {% if form.errors %}
                   {% if form.username.errors %}
                     {% for error in form.username.errors %}
-                      <div class="alert alert-dismissible col-md-12 text-center" role="alert">
-                        <span class="text-warning">{{ error }}</span>
+                      <div class="alert alert-danger col-md-12 text-center" role="alert">
+                        <p class="_font-550">{{ error }}</p>
                       </div>
                     {% endfor %}
                   {% elif form.email.errors %}
                     {% for error in form.email.errors %}
-                      <div class="alert alert-dismissible col-md-12 text-center" role="alert">
-                        <span class="text-warning">{{ error }}</span>
+                      <div class="alert alert-danger col-md-12 text-center" role="alert">
+                        <p class="_font-550">{{ error }}</p>
                       </div>
                     {% endfor %}
                   {% elif form.password.errors %}
                     {% for error in form.password.errors %}
-                      <div class="alert alert-dismissible col-md-12 text-center" role="alert">
-                        <span class="text-warning">{{ error }}</span>
+                      <div class="alert alert-danger col-md-12 text-center" role="alert">
+                        <p class="_font-550">{{ error }}</p>
                       </div>
                     {% endfor %}
                   {% endif %}
@@ -67,4 +67,7 @@
       </div>
     </div>
   </section>
+{% endblock %}
+{% block script %}
+  <script src="{% static 'js/users/authenticate.js' %}"></script>
 {% endblock %}

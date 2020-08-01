@@ -97,19 +97,6 @@
       }
     });
   });
-  // Alert handler
-  window.setTimeout(function() {
-      $(".alert").fadeTo(300, 0).slideUp(300, function(){
-          $(this).remove();
-          $('.login-form').css('height:100%');
-      });
-  }, 2000);
-  $("#alertClose").click(function(){
-    $(".alert").fadeTo(300, 0).slideUp(300, function(){
-      $(this).remove(); 
-      $('.login-form').css('height:100%');
-    });
-  });
   $(window).scroll(function() {
     if ($(this).scrollTop() > 100) {
       $('#header').addClass('header-scrolled');

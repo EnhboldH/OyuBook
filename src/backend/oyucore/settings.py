@@ -1,4 +1,5 @@
 import os
+from django.contrib.messages import constants as messages
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_URL = os.getenv("STATIC_URL", "/static/")
@@ -84,6 +85,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+ }
+
 AUTH_USER_MODEL = "base.OyuUser"
 
 LOGIN_URL = '/user/login/'
@@ -120,8 +129,7 @@ MARTOR_ENABLE_CONFIGS = {
 }
 
 MARTOR_TOOLBAR_BUTTONS = [
-    'bold', 'italic', 'heading', 'pre-code',
-    'unordered-list', 'link',
+    'bold', 'italic', 'pre-code', 'unordered-list', 'link',
 ]
 MARTOR_ENABLE_LABEL = False
 MARTOR_MARKDOWN_EXTENSIONS = [
