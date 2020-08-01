@@ -97,11 +97,3 @@ class CTFChallengeRequestForm(ModelForm):
         self.fields['title'].widget.attrs['placeholder'] = u"Бодлогын нэрийг оруулна уу"
         self.fields['solution'].widget.attrs['placeholder'] = u"Бид таны бодлогыг шалгахын тулд заавал бөглөнө үү"
         self.fields['flag'].widget.attrs['placeholder'] = u"Хариу буюу флагаа оруулна уу"
-
-class CTFChallengeSubmitForm(forms.Form):
-    answer = forms.CharField(label="CTF Хариу", required=False)
-
-    def __init__(self, request=None, *args, **kwargs):
-        super(CTFChallengeSubmitForm, self).__init__(*args, **kwargs)
-        self.fields['answer'].widget.attrs['class'] = "form-control _ans-input"
-        self.fields['answer'].widget.attrs['placeholder'] = "Флагаа оруулна уу"

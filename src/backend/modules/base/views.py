@@ -20,9 +20,10 @@ from .forms import (
 )
 
 # Models
-from .models import OyuUser
-from .models import OyuUserProfile
-
+from .models import (
+    OyuUser,
+    OyuUserProfile,
+)
 
 class HomeView(View):
     context = {
@@ -173,10 +174,11 @@ class UserProfileUpdateView(FormView):
 
     def form_valid(self, form):
         valid_data = form.cleaned_data
-
         oyu_user = self.request.user
-        oyu_user.background_image = valid_data.get('background_image', None)
-        oyu_user.avatar_image = valid_data.get('avatar_image', None)
+        if valid_data.get('background_image', None) != None:
+            oyu_user.background_image = valid_data.get('background_image', None)
+        if valid_data.get('avatar_image', None) != None:
+            oyu_user.avatar_image = valid_data.get('avatar_image', None)
         oyu_user.save()
 
         user_profile = OyuUserProfile.objects.filter(oyu_user=oyu_user).first()

@@ -6,7 +6,7 @@
 {% block content %}
 <section id="main" class="d-flex mb-5">
   <div class="container-fluid ml-5 mr-5 mt-4">
-    <form  method="post">{% csrf_token %}
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
           <div class="card">

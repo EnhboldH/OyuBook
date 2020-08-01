@@ -30,8 +30,8 @@ class OyuUser(AbstractUser, models.Model):
     user_type = models.CharField(max_length=100, default=USER_TYPE_NORMAL, choices=USER_TYPE_CHOICES)
     slug = models.SlugField(null=False, unique=True)
 
-    background_image = models.ImageField("Background Img", max_length=128, default=BACKGROUND_IMG_DEFAULT, upload_to='img/users/background')
-    avatar_image = models.ImageField("Avatar Img", max_length=128, default=AVATAR_IMG_DEFAULT, upload_to='img/users/avatar')
+    background_image = models.ImageField("Background Img", max_length=128, default=BACKGROUND_IMG_DEFAULT, upload_to='img/users/background', null=True)
+    avatar_image = models.ImageField("Avatar Img", max_length=128, default=AVATAR_IMG_DEFAULT, upload_to='img/users/avatar', null=True)
 
     created_date = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(auto_now=True)

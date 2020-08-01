@@ -15,13 +15,12 @@ from django.db.models import Q
 from modules.base.models import (
     OyuUser,
     OyuUserProfile,
-    CtfChallenge,
+        CtfChallenge,
     CtfChallengeRequest,
     UserChallenge,
 )
 from modules.base.forms import (
     CTFChallengeRequestForm,
-    CTFChallengeSubmitForm,
 )
 class CTFHomeView(View):
     context = {
@@ -49,7 +48,6 @@ class CTFHomeView(View):
 class CTFChallengesView(View):
     context = {
         'title': 'Бодлогууд | Capture The Flag',
-        'form': CTFChallengeSubmitForm,
     }
 
     def get(self, request, *args, **kwargs):

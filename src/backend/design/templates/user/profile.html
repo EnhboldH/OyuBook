@@ -19,7 +19,9 @@
         <div class="row">
           <div class="col-4 mt-3">
             {% if object.avatar_image == 'img/users/avatar/default.png' %}
-              <img src="{% static 'img/users/avatar/default.png' %}" class="rounded _profile-image">
+              <img src="{% static 'img/users/avatar/default.png' %}" class="rounded _profile-image" alt="profile image">
+            {% else %}
+              <img src="/media/{{ object.avatar_image }}" class="rounded _profile-image" alt="profile image">
             {% endif %}
           </div>
           <div class="col-8">
