@@ -149,6 +149,8 @@ class UserProfileUpdateView(FormView):
         self.user_profile = user_profile
 
     def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated or request.user.slug != self.kwargs.get('slug', None):
+            return redirect('home_index')
         self.view_prepare(request, *args, **kwargs)
         return super().get(request, *args, **kwargs)
 

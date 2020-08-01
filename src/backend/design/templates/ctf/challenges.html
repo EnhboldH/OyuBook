@@ -111,9 +111,9 @@
                               <div class="row text-light test mt-2">
                                 <div class="col-2"> 
                                   {% if top.oyu_user.avatar_image == 'img/users/avatar/default.png' %}
-                                    <img src="{% static 'img/users/avatar/default.png' %}" class="rounded-circle _active-users-img">
+                                    <img src="/static/{{ top.oyu_user.avatar_image }}" class="rounded-circle _active-users-img">
                                   {% else %}
-                                    <img src="" class="rounded-circle _active-users-img" alt="image not found">
+                                    <img src="/media/{{ top.oyu_user.avatar_image }}" class="rounded-circle _active-users-img">
                                   {% endif %}
                                 </div>
                                 <div class="col-7 ml-n3 align-self-center">

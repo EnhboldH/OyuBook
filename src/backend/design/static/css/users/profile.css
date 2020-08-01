@@ -1,6 +1,3 @@
-* {
-  color: white;
-}
 body {
   background-size: cover;
 }
@@ -32,7 +29,7 @@ body {
   font-size: 15px; 
   opacity: 0.9;
 }
-._profile-summary b {
+._profile-summary ._lbl {
   color: yellow;
 }
 ._profile-summary span {
@@ -47,6 +44,9 @@ body {
 }
 table td a {
   color: rgba(255, 255, 255, 0.8);
+}
+._profile-contacticon {
+  color: #fff;
 }
 ._profile-contacticon:hover {
   color: rgba(52, 60, 209, 0.9);

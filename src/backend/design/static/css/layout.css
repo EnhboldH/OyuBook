@@ -5,7 +5,7 @@ html {
 }
 body {
   font-family: "Open Sans", sans-serif;
-  color: #444444;
+  color: #fff;
   background-repeat: no-repeat;
   background: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.9) 100%), url("/static/img/base/default.svg") no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -58,6 +58,10 @@ h1, h2, h3, h4, h5, h6 {
   width: 0px;
   transition: all 0.3s ease-in-out 0s;
 }
+.nav-menu > ul > ._todo > a:before  {
+  background-color: #999999;
+}
+
 .nav-menu a:hover:before, .nav-menu li:hover > a:before, .nav-menu a:before {
   visibility: visible;
   width: 100%;

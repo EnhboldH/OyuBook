@@ -113,7 +113,7 @@
                 <div class="col-12 mt-3">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>{{ profile.first_blood }}</b></span>
+                      <span class="_lbl font-weight-bold">{{ profile.first_blood }}</span>
                     </div>
                     <div class="col-9">
                       <span>Түрүүлж бодсон</span>
@@ -123,7 +123,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>{{ profile.accepted_problem }}</b></span>
+                      <span class="_lbl font-weight-bold">{{ profile.accepted_problem }}</span>
                     </div>
                     <div class="col-9">
                       <span>Бодлого нэмсэн</span>
@@ -133,7 +133,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>{{ profile.given_money }}</b></span>
+                      <span class="_lbl font-weight-bold">{{ profile.given_money }}</span>
                     </div>
                     <div class="col-9">
                       <span>Хандив өгсөн</span>
@@ -144,7 +144,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>0</b></span>
+                      <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
                       <span>Коммент</span>
@@ -154,7 +154,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>0</b></span>
+                      <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
                       <span>Коммент</span>
@@ -165,7 +165,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>0</b></span>
+                      <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
                       <span>Коммент</span>
@@ -175,7 +175,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>0</b></span>
+                      <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
                       <span>Коммент</span>
@@ -185,7 +185,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>0</b></span>
+                      <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
                       <span>Коммент</span>
@@ -195,7 +195,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>0</b></span>
+                      <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
                       <span>Коммент</span>
@@ -205,7 +205,7 @@
                 <div class="col-12 mt-2">
                   <div class="row">
                     <div class="col-3">
-                      <span><b>0</b></span>
+                      <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
                       <span>Коммент</span>
@@ -217,17 +217,25 @@
           </div>
         {% if user.is_authenticated %}
           {% if user.username == object.username %}
-              <a href="{% url 'user_profile_update' user.slug %}"><i class="fas fa-cog fa-2x ml-4 mt-4 float-right _profile-contacticon"></i></a>
+            <a href="{% url 'user_profile_update' user.slug %}">
+              <i class="fas fa-cog fa-2x ml-4 mt-4 float-right _profile-contacticon"></i>
+            </a>
           {% endif %}
         {% endif %}
         {% if profile.insta_link %}
-          <a href="https://www.instagram.com/{{ profile.insta_link }}" target="_blank"><i class="fab fa-instagram fa-2x ml-4 mt-4 mb-3 float-right _profile-contacticon"></i>
+          <a href="https://www.instagram.com/{{ profile.insta_link }}" target="_blank">
+            <i class="fab fa-instagram fa-2x ml-4 mt-4 mb-3 float-right _profile-contacticon"></i>
+          </a>
         {% endif %}
         {% if profile.facebook_link %}
-          <a href="https://www.facebook.com//{{ profile.facebook_link }}" target="_blank"><i class="fab fa-facebook fa-2x ml-4 mt-4 mb-3 float-right _profile-contacticon"></i></a>
+          <a href="https://www.facebook.com//{{ profile.facebook_link }}" target="_blank">
+            <i class="fab fa-facebook fa-2x ml-4 mt-4 mb-3 float-right _profile-contacticon"></i>
+          </a>
         {% endif %}
         {% if profile.github_link %}
-          <a href="https://www.github.com/{{ profile.insta_link }}" target="_blank"><i class="fab fa-github fa-2x ml-4 mt-4 mb-3 float-right _profile-contacticon"></i></a>
+          <a href="https://www.github.com/{{ profile.insta_link }}" target="_blank">
+            <i class="fab fa-github fa-2x ml-4 mt-4 mb-3 float-right _profile-contacticon"></i>
+          </a>
         {% endif %}
         </div>
       </div>

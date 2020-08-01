@@ -52,12 +52,14 @@
                 <div class="form-group col-6">
                   <label class="control-label">
                     <span class="input-label">{{ form.avatar_image.label }}</span>
+                    <span class="_font-12 font-italic">(min 300x300)</span>
                   </label>
                   {{ form.avatar_image }}
                 </div>
                 <div class="form-group col-6">
                   <label class="control-label">
                     <span class="input-label">{{ form.background_image.label }}</span>
+                    <span class="_font-12 font-italic">(min 1000x1000)</span>
                   </label>
                   {{ form.background_image }}
                 </div>
@@ -205,22 +207,28 @@
             <div class="card-body">
               <div class="row">
                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                  <button class="btn btn-block btn-primary">
-                    <i class="fas fa-tools mr-1"></i>
-                    <span class="input-label">Санал, хүсэлт</span>
-                  </button>
+                  <a href="#">
+                    <button class="btn btn-block btn-primary" type="button">
+                      <i class="fas fa-tools mr-1"></i>
+                      <span class="input-label">Санал, хүсэлт</span>
+                    </button>
+                  </a>
                 </div>
                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                  <button class="btn btn-block btn-success">
-                    <i class="fas fa-gem mr-1"></i>
-                    <span class="input-label">Дэмжих</span>
-                  </button>
+                  <a href="{% url 'home_support' %}">
+                    <button class="btn btn-block btn-success" type="button">
+                      <i class="fas fa-gem mr-1"></i>
+                      <span class="input-label">Дэмжих</span>
+                    </button>
+                  </a>
                 </div>
                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                  <button class="btn btn-block btn-danger">
-                    <i class="fas fa-exclamation-triangle mr-1"></i>
-                    <span class="input-label">Хаягаа устгах</span>
-                  </button>
+                  <a href="#">
+                    <button class="btn btn-block btn-danger" type="button">
+                      <i class="fas fa-exclamation-triangle mr-1"></i>
+                      <span class="input-label">Хаягаа устгах</span>
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>
