@@ -10,6 +10,7 @@
     .test:hover {
       color: rgba(255, 255, 255, 0.5) !important;
     }
+    .collapsed
   </style>
 {% endblock %}
 {% block content %}
@@ -22,7 +23,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 mt-n3 challenges">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 mt-n3" id="challenges">
         {% if challenges %}
           {% for challenge in challenges %}
             <div class="accordion mt-3" id="challenge-{{ forloop.counter }}">
@@ -86,7 +87,7 @@
             {% endif %}
           </div>
           <div class="col-12">
-            <div id="scoreboard">
+            <div class="accordion" id="scoreboardPanel">
               <div class="card">
                 <div class="card-header">
                   <div class="row">
@@ -95,36 +96,43 @@
                         <i class="fas fa-star"></i>
                       </span>
                     </div>
-                    <div class="col-11 align-self-center">
+                    <div class="col-9 align-self-center">
                       <span class="_font-20">Онооны самбар</span>
                       <span class="_font-15">(Top 5)</span>
                     </div>
+                    <div class="col-2 align-self-center text-right">
+                      <span data-toggle="collapse" data-target="#scoreboardCollapse" aria-expanded="true" aria-controls="scoreboardCollapse" class="_font-20 ">
+                        <i class="fas fa-angle-down" type="button"></i>
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12 mt-n2">
-                        {% if tops %}
-                          {% for top in tops %}
-                            <a href="{% url 'user_profile' top.oyu_user.slug %}">
-                              <div class="row text-light test mt-2">
-                                <div class="col-2"> 
-                                  {% if top.oyu_user.avatar_image == 'img/users/avatar/default.png' %}
-                                    <img src="/static/{{ top.oyu_user.avatar_image }}" class="rounded-circle _active-users-img">
-                                  {% else %}
-                                    <img src="/media/{{ top.oyu_user.avatar_image }}" class="rounded-circle _active-users-img">
-                                  {% endif %}
+                <div id="scoreboardCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#scoreboardPanel">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 mt-n2">
+                          {% if tops %}
+                            {% for top in tops %}
+                              <a href="{% url 'user_profile' top.oyu_user.slug %}">
+                                <div class="row text-light test mt-2">
+                                  <div class="col-2"> 
+                                    {% if top.oyu_user.avatar_image == 'img/users/avatar/default.png' %}
+                                      <img src="/static/{{ top.oyu_user.avatar_image }}" class="rounded-circle _active-users-img">
+                                    {% else %}
+                                      <img src="/media/{{ top.oyu_user.avatar_image }}" class="rounded-circle _active-users-img">
+                                    {% endif %}
+                                  </div>
+                                  <div class="col-7 ml-n3 align-self-center">
+                                    <span class="font-weight-bold _font-15">{{ top.fullname }}</span>
+                                  </div>
+                                  <div class="col-3 align-self-center text-center">
+                                    <span class="font-weight-bold _font-15">{{ top.score }}</span>
+                                  </div>
                                 </div>
-                                <div class="col-7 ml-n3 align-self-center">
-                                  <span class="font-weight-bold _font-15">{{ top.fullname }}</span>
-                                </div>
-                                <div class="col-3 align-self-center text-center">
-                                  <span class="font-weight-bold _font-15">{{ top.score }}</span>
-                                </div>
-                              </div>
-                            </a>
-                          {% endfor %}
-                        {% endif %}
+                              </a>
+                            {% endfor %}
+                          {% endif %}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -133,6 +141,77 @@
                     <div class="col-12 text-center">
                       <span><a href="{% url 'ctf_scoreboard' %}" class="text-light">Онооны самбар бүтэн үзэх</a></span>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion" id="shortPanel">
+              <div class="card mt-3">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-1">
+                      <span class="_font-20">
+                        <i class="fas fa-link"></i>
+                      </span>
+                    </div>
+                    <div class="col-9 align-self-center">
+                      <span>Богино холбоос</span>
+                    </div>
+                    <div class="col-2 align-self-center text-right">
+                      <span data-toggle="collapse" data-target="#shortCollapse" aria-expanded="true" aria-controls="shortCollapse" class="_font-20 ">
+                        <i class="fas fa-angle-down" type="button"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div id="shortCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#shortPanel">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-6">
+                        <a href="{% url 'ctf_challenge_request' %}">
+                          <button class="btn btn-success btn-block">
+                            <span class="float-left"><i class="fas fa-khanda"></i></span>
+                            <span>Бодлого нэмэх</span>
+                          </button>
+                        </a>
+                      </div>
+                      <div class="col-6">
+                        <a href="{% url 'ctf_index' %}">
+                          <button class="btn btn-info btn-block">
+                            <span class="float-left"><i class="fas fa-home"></i></span>
+                            <span>Нүүр хуудас</span>
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion" id="hintPanel">
+              <div class="card mt-3">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-1">
+                      <span class="_font-20">
+                        <i class="fas fa-bookmark"></i>
+                      </span>
+                    </div>
+                    <div class="col-9 align-self-center">
+                      <span>Мэдэхэд илүүдэхгүй</span>
+                    </div>
+                    <div class="col-2 align-self-center text-right">
+                      <span data-toggle="collapse" data-target="#hintCollapse" aria-expanded="true" aria-controls="hintCollapse" class="collapsed_font-20">
+                        <i class="fas fa-angle-down" type="button"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div id="hintCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#hintPanel">
+                  <div class="card-body text-center">
+                    <span class="_font-15 _font-550">
+                      <span>Бодлогын нэр, тайлбар нь бусдад харагдана. Тайлбар нь <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">markup</a> дэмжинэ.</span>
                   </div>
                 </div>
               </div>
@@ -148,8 +227,11 @@
   <script src="{% static 'js/ctf/challenges.js' %}"></script>
   <script>
    $(document).ready(function(){
-      $('.collapse').on('show.bs.collapse', function () {
-        $('.collapse.show').each(function(){
+      $('i').click(function(){
+        $(this).toggleClass('fa-angle-up fa-angle-down');
+      });
+      $('#challenges .collapse').on('show.bs.collapse', function () {
+        $('#challenges .collapse.show').each(function(){
           $(this).collapse('hide');
         });
       });

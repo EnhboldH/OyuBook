@@ -38,6 +38,9 @@ h1, h2, h3 ,h4, h5, h6 {
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 _font-700 _font-15">
         <span class="text-success text-uppercase _font-700 _font-15">Capture The Flag</span><br>
         <span class="_font-20 text-light">Бодлого нэмэх</span>
+        {% if request.user.user_type == 'admin' %}
+          <span>(админ)</span>
+        {% endif %}
       </div>
     </div>
     <div class="row">
@@ -90,34 +93,87 @@ h1, h2, h3 ,h4, h5, h6 {
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 mt-4">
-        <div class="card">
-          <a type="button">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Амжилттай</strong><br>
+              <span>{{ message }}</span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        <div class="accordion" id="hintPanel">
+          <div class="card">
             <div class="card-header">
               <div class="row">
-                <div class="col-7 text-left">
-                  <span><i class="fas fa-bookmark"></i></span>
-                  <span class="ml-2">Мэдэхэд илүүдэхгүй</span>
+                <div class="col-1">
+                  <span class="_font-20">
+                    <i class="fas fa-bookmark"></i>
+                  </span>
                 </div>
-                <div class="col-5 text-right">
-                  <span class="angleSwitchActive _font-20">
-                    <i class="fas fa-angle-down"></i>
+                <div class="col-9 align-self-center">
+                  <span>Мэдэхэд илүүдэхгүй</span>
+                </div>
+                <div class="col-2 align-self-center text-right">
+                  <span data-toggle="collapse" data-target="#hintCollapse" aria-expanded="true" aria-controls="hintCollapse" class="angleSwitchHint _font-20 ">
+                    <i class="fas fa-angle-down" type="button"></i>
                   </span>
                 </div>
               </div>
             </div>
-          </a>
-          <div class="card-body text-center">
-            <span class="_font-15 _font-550">Бодлогын нэр, тайлбар нь бусдад харагдана. Тайлбар нь <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">markup</a> дэмжинэ.</span>
+            <div id="hintCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#hintPanel">
+              <div class="card-body text-center">
+                <span class="_font-15 _font-550">
+                  <span>Бодлогын нэр, тайлбар нь бусдад харагдана. Тайлбар нь <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">markup</a> дэмжинэ.</span>
+              </div>
+            </div>
           </div>
         </div>
-        {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-success mt-3" role="alert">
-              <strong>Амжилттай</strong><br>
-              <span class="_font-15">{{ message }}</span>
+        <div class="accordion" id="shortPanel">
+          <div class="card mt-3">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-1">
+                  <span class="_font-20">
+                    <i class="fas fa-link"></i>
+                  </span>
+                </div>
+                <div class="col-9 align-self-center">
+                  <span>Богино холбоос</span>
+                </div>
+                <div class="col-2 align-self-center text-right">
+                  <span data-toggle="collapse" data-target="#shortCollapse" aria-expanded="true" aria-controls="shortCollapse" class="angleSwitchShort _font-20 ">
+                    <i class="fas fa-angle-down" type="button"></i>
+                  </span>
+                </div>
+              </div>
             </div>
-          {% endfor %}
-        {% endif %}
+            <div id="shortCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#shortPanel">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-6">
+                    <a href="{% url 'ctf_challenges' %}">
+                      <button class="btn btn-success btn-block">
+                        <span><i class="fas fa-khanda"></i></span>
+                        <span class="_font-700 ml-2">Бодлогууд</span>
+                      </button>
+                    </a>
+                  </div>
+                  <div class="col-6">
+                    <a href="{% url 'ctf_index' %}">
+                      <button class="btn btn-info btn-block">
+                        <span><i class="fas fa-home"></i></span>
+                        <span class="_font-700 ml-2">Нүүр хуудас</span>
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -134,4 +190,26 @@ h1, h2, h3 ,h4, h5, h6 {
   <script src="{% static 'plugins/js/highlight.min.js' %}"></script>
   <script src="{% static 'plugins/js/resizable.min.js' %}"></script>
   <script src="{% static 'martor/js/martor.min.js' %}"></script>
+  <script type="text/javascript">
+    var up = "<i class='fas fa-angle-up' type='button'></i>";
+    var down = "<i class='fas fa-angle-down' type='button'></i>";
+    $("#hintCollapse").on("hide.bs.collapse", function() {
+      $(".angleSwitchHint").html(up);
+    });
+    $("#hintCollapse").on("show.bs.collapse", function() {
+      $(".angleSwitchHint").html(down);
+    });
+    $("#shortCollapse").on("hide.bs.collapse", function() {
+      $(".angleSwitchShort").html(up);
+    });
+    $("#shortCollapse").on("show.bs.collapse", function() {
+      $(".angleSwitchShort").html(down);
+    });
+    !(function($) {
+        window.setTimeout(function() {
+          $(".alert").fadeTo(300, 0).slideUp(300, function(){
+          });
+        }, 4000);
+      })(jQuery);
+  </script>
 {% endblock %}

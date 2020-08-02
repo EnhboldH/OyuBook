@@ -83,19 +83,28 @@ class CTFChallengeRequestView(SuccessMessageMixin, FormView):
     model = CtfChallengeRequest
     form_class = CTFChallengeRequestForm
     success_url = '/ctf/challenge/request'
-    success_message = "Бид таны бодлогыг шалгаж үзээд таньд мэдэгдэх болно"
     extra_context = {
         'title': 'Бодлого нэмэх | Capture The Flag',
     }
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            messages.add_message(request, messages.INFO, 'Бодлого нэмэхийн тулд та нэвтэрнэ үү',fail_silently=True)
+            messages.info(request, 'Бодлого нэмэхийн тулд та нэвтэрнэ үү')
             return redirect('user_login')
         return self.render_to_response(self.get_context_data())
 
     def form_valid(self, form):
         challenge_data = form.cleaned_data
+
+        if self.request.user.user_type == 'admin':
+            CtfChallenge.objects.create(
+                title=challenge_data.get('title'),
+                description=challenge_data.get('description'),
+                category=challenge_data.get('category'),
+                flag=challenge_data.get('flag'),
+            ).save()
+            messages.success(self.request, 'Бодлого амжилттай нэмлээ')
+            return super().form_valid(form)
         challenge_request = CtfChallengeRequest()
         challenge_request.title = challenge_data.get('title')
         challenge_request.description = challenge_data.get('description')
@@ -104,6 +113,7 @@ class CTFChallengeRequestView(SuccessMessageMixin, FormView):
         challenge_request.flag = challenge_data.get('flag')
         challenge_request.oyu_user = self.request.user
         challenge_request.save()
+        messages.success(self.request, 'Бид таны бодлогыг шалгаж үзээд таньд мэдэгдэх болно')
 
         return super().form_valid(form)
 
