@@ -15,7 +15,7 @@ from django.db.models import Q
 from modules.base.models import (
     OyuUser,
     OyuUserProfile,
-        CtfChallenge,
+    CtfChallenge,
     CtfChallengeRequest,
     UserChallenge,
 )
@@ -52,31 +52,37 @@ class CTFChallengesView(View):
     }
 
     def get(self, request, *args, **kwargs):
-        self.context['challenges'] = CtfChallenge.objects.all()
-        self.context['tops'] = OyuUserProfile.objects.order_by('-score')[:5]
+        self.prepare_context()
         return render(request, 'ctf/challenges.html', self.context)
 
     def post(self, request, *args, **kwargs):
-        self.context['challenges'] = CtfChallenge.objects.all()
-        self.context['tops'] = OyuUserProfile.objects.order_by('-score')[:5]
+        self.prepare_context()
         value = request.POST[list(request.POST)[1]]
         chall_id = list(request.POST)[1].split('-')[1]
         challenge = CtfChallenge.objects.get(pk=chall_id)
         if challenge.flag == value:
             messages.success(request, 'Хариулт зөв байна')
-            challenge.solved_users_count += 1
             if request.user.is_authenticated:
-                user = OyuUserProfile.objects.filter(oyu_user=request.user).first()
-                user.solved_problem += 1
-                user.score += challenge.value
-                user.save()
-            challenge.save()
-            return render(request, 'ctf/challenges.html', self.context)
+                # challenge.solved_users_count += 1
+                # user = OyuUserProfile.objects.filter(oyu_user=request.user).first()
+                # UserChallenge.objects.create(
+                #     oyu_user=request.user,
+                #     challenge=challenge,
+                #     status='solved',
+                # ).save()
+                # user.solved_problem += 1
+                # user.score += challenge.value
+                # user.save()
+                # challenge.save()
+                return render(request, 'ctf/challenges.html', self.context)
         else:
             messages.error(request, 'Хариулт буруу байна')
             return render(request, 'ctf/challenges.html', self.context)
 
         return render(request, 'ctf/challenges.html', self.context)
+    def prepare_context(self):
+        self.context['challenges'] = CtfChallenge.objects.all()
+        self.context['tops'] = OyuUserProfile.objects.order_by('-score')[:5]
 
 class CTFChallengeRequestView(SuccessMessageMixin, FormView):
     template_name = 'ctf/challenge-request.html'
@@ -150,6 +156,7 @@ class CTFAdminChallengeRequestsView(View):
             category=challenge.category,
             flag=challenge.flag
         ).save()
+
         challenge.delete()
         ctf_chall = CtfChallenge.objects.last()
         UserChallenge.objects.create(

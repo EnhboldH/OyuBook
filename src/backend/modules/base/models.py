@@ -7,7 +7,7 @@ from modules.base.consts import (
     USER_TYPE_NORMAL,
     USER_TYPE_CHOICES,
     USER_CHALLENGE_STATUS_CHOICES,
-    USER_CHALLENGE_STATUS_ATTEMPTED,
+    USER_CHALLENGE_STATUS_UNSOLVED,
     USER_BADGE_TYPE_CHOICES,
     USER_BADGE_TYPE_NORMAL,
     USER_REGION_CHOICES,
@@ -60,15 +60,15 @@ class OyuUserProfile(models.Model):
     REQUIRED_FIELDS = ["oyu_user"]
 
     oyu_user = models.ForeignKey(OyuUser, verbose_name="Oyu User", on_delete=models.CASCADE)
-    fullname = models.CharField("Бүтэн нэр", max_length=20)
+    fullname = models.CharField("Бүтэн нэр", max_length=20, null=True)
     region = models.CharField("Харьяа", max_length=100, blank=True, null=True, choices=USER_REGION_CHOICES, help_text="Сургууль эсвэл ажилладаг газар.")
-    respected = models.PositiveIntegerField("Хүндлэгдсэн", default=0)
-    solved_problem = models.PositiveIntegerField("Бодсон бодлогын тоо", default=0)
-    score = models.PositiveIntegerField("Цуглуулсан оноо", default=0)
-    badge_type = models.CharField("Цол", max_length=50, choices=USER_BADGE_TYPE_CHOICES, default=USER_BADGE_TYPE_NORMAL)
-    first_blood = models.PositiveIntegerField("Түрүүлж бодсон", default=0)
-    accepted_problem = models.PositiveIntegerField("Оруулсан бодлогын тоо", default=0)
-    given_money = models.PositiveIntegerField("Хандив", default=0)
+    respected = models.PositiveIntegerField("Хүндлэгдсэн", default=0, null=True)
+    solved_problem = models.PositiveIntegerField("Бодсон бодлогын тоо", default=0, null=True)
+    score = models.PositiveIntegerField("Цуглуулсан оноо", default=0, null=True)
+    badge_type = models.CharField("Цол", max_length=50, choices=USER_BADGE_TYPE_CHOICES, default=USER_BADGE_TYPE_NORMAL, null=True)
+    first_blood = models.PositiveIntegerField("Түрүүлж бодсон", default=0, null=True)
+    accepted_problem = models.PositiveIntegerField("Оруулсан бодлогын тоо", default=0, null=True)
+    given_money = models.PositiveIntegerField("Хандив", default=0, null=True)
 
     facebook_link = models.CharField("Facebook link", max_length=128, blank=True, null=True)
     insta_link = models.CharField("Insta link", max_length=128, blank=True, null=True)
@@ -114,7 +114,7 @@ class UserChallenge(models.Model):
     oyu_user = models.ForeignKey(OyuUser, verbose_name="Хэрэглэгч", on_delete=models.DO_NOTHING)
     challenge = models.ForeignKey(CtfChallenge, verbose_name="Challenge", on_delete=models.CASCADE)
 
-    status = models.CharField("Төлөв", max_length=100, choices=USER_CHALLENGE_STATUS_CHOICES, default=USER_CHALLENGE_STATUS_ATTEMPTED)
+    status = models.CharField("Төлөв", max_length=100, choices=USER_CHALLENGE_STATUS_CHOICES, default=USER_CHALLENGE_STATUS_UNSOLVED)
 
     def __str__(self):
         return "%s | %s" % (self.oyu_user.__str__(), self.challenge.__str__())

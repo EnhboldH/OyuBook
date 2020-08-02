@@ -9,6 +9,7 @@ from .models import (
     CtfChallenge,
     CtfChallengeRequest,
     OyuUserProfile,
+    UserChallenge,
 )
 
 
@@ -21,4 +22,5 @@ class CtfChallengeRequestAdmin(admin.ModelAdmin):
 admin.site.register(OyuUser)
 admin.site.register(CtfChallenge)
 admin.site.register(OyuUserProfile)
+admin.site.register(UserChallenge)
 admin.site.register(CtfChallengeRequest, CtfChallengeRequestAdmin)
