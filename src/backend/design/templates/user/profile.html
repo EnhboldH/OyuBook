@@ -4,11 +4,24 @@
   <link href="{% static 'css/users/profile.css' %}" rel="stylesheet">
   <style>
     body {
-    {% if object.background_image == 'img/users/background/default.svg' %}
-      background: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.9) 100%), url("/static/img/base/default.svg") no-repeat center center fixed; 
-    {% else %}
+    {% if object.background_image != 'img/users/background/default.svg' %}
       background: linear-gradient(45deg, rgba(20, 30, 56, 0.1) 0%, rgba(6, 26, 66, 0.9) 100%), url("/media/{{ object.background_image }}") no-repeat center center fixed; 
     {% endif %}
+    }
+    body {
+      font-family: "Open Sans", sans-serif;
+      color: #fff;
+      background-repeat: no-repeat;
+      {% if object.background_image == 'img/users/background/default.svg' %}
+        background: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.9) 100%), url("/static/img/base/default.svg") no-repeat center center fixed;
+      {% else %} 
+        background: linear-gradient(45deg, rgba(20, 30, 56, 0.1) 0%, rgba(6, 26, 66, 0.9) 100%), url("/media/{{ object.background_image }}") no-repeat center center fixed; 
+      {% endif %}
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
   </style>
 {% endblock %}
 {% block content %}
@@ -43,8 +56,14 @@
               </span>
             {% endif %}
             <div class="mt-3">
-              <span data-toggle="tooltip" data-placement="bottom" title="Хүндэтгэсэн хэрэглэгчид"><i class="fas fa-star ml-4"></i> {{ profile.respected }}</span>
-              <span data-toggle="tooltip" data-placement="bottom" title="Бодсон бодлого"><i class="fas fa-flag ml-4"></i> {{ profile.solved_problem }}</span>
+              <span data-toggle="tooltip" data-placement="bottom" title="Хүндэтгэсэн хэрэглэгчид">
+                <span><i class="fas fa-star ml-4"></i></span> 
+                <span>{{ profile.respected }}</span>
+              </span>
+              <span data-toggle="tooltip" data-placement="bottom" title="Бодсон бодлого">
+                <span><i class="fas fa-flag ml-4"></i></span>
+                <span>{{ profile.solved_problem }}</span>
+              </span>
             </div>
           </div>
         </div>
@@ -57,7 +76,7 @@
           </div>
           <div class="col-4">
             <span class="text-uppercase _profile-general">Өнгөрүүлсэн өдөр</span>
-            <h1 class="_profile-general-detail">52</h1>
+            <h1 class="_profile-general-detail">{{ days }}</h1>
           </div>
           <div class="col-4">
             <span class="text-uppercase _profile-general">Хэрэглэгч төрөл</span>
@@ -147,7 +166,7 @@
                       <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
-                      <span>Коммент</span>
+                      <span>Todo</span>
                     </div>
                   </div>
                 </div>
@@ -157,7 +176,7 @@
                       <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
-                      <span>Коммент</span>
+                      <span>Todo</span>
                     </div>
                   </div>
                 </div>
@@ -168,7 +187,7 @@
                       <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
-                      <span>Коммент</span>
+                      <span>Todo</span>
                     </div>
                   </div>
                 </div>
@@ -178,7 +197,7 @@
                       <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
-                      <span>Коммент</span>
+                      <span>Todo</span>
                     </div>
                   </div>
                 </div>
@@ -188,7 +207,7 @@
                       <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
-                      <span>Коммент</span>
+                      <span>Todo</span>
                     </div>
                   </div>
                 </div>
@@ -198,7 +217,7 @@
                       <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
-                      <span>Коммент</span>
+                      <span>Todo</span>
                     </div>
                   </div>
                 </div>
@@ -208,7 +227,7 @@
                       <span class="_lbl font-weight-bold">0</span>
                     </div>
                     <div class="col-9">
-                      <span>Коммент</span>
+                      <span>Todo</span>
                     </div>
                   </div>
                 </div>
@@ -220,6 +239,12 @@
             <a href="{% url 'user_profile_update' user.slug %}">
               <i class="fas fa-cog fa-2x ml-4 mt-4 float-right _profile-contacticon"></i>
             </a>
+          {% else %}
+            <form method="post">{% csrf_token %}
+              <button class="btn ml-2 mt-3 float-right _profile-contacticon">
+                <i class="fas fa-star fa-2x"></i>
+              </button>
+            </form>
           {% endif %}
         {% endif %}
         {% if profile.insta_link %}

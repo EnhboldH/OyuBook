@@ -131,8 +131,21 @@
                       <div class="row">
                         <div class="col-12">
                           <a href="{% url 'ctf_admin_challenge_requests' %}">
-                            <button class="btn btn-success btn-block">
-                              <span>Бодлогын хүсэлтүүд {{ challenge_request_count }}</span>
+                            <button class="btn btn-success btn-block" type="button">
+                              <span>Шинэ бодлогын хүсэлт </span>
+                              <span class="float-right _font-700">{{ challenge_request_count }}</span>
+                            </button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 mt-2">
+                      <div class="row">
+                        <div class="col-12">
+                          <a href="{% url 'ctf_admin_challenges' %}">
+                            <button class="btn btn-success btn-block" type="button">
+                              <span>Нийт бодлогууд </span>
+                              <span class="float-right _font-700">{{ challenge_count }}</span>
                             </button>
                           </a>
                         </div>

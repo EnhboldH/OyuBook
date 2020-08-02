@@ -32,6 +32,7 @@ class CTFHomeView(View):
             self.context['profile'] = self.get_profile_data(oyu_user=request.user)
             if request.user.user_type == 'admin':
                 self.context['challenge_request_count'] = CtfChallengeRequest.objects.count()
+                self.context['challenge_count'] = CtfChallenge.objects.count()
 
         return render(request, 'ctf/index.html', self.context)
 
@@ -117,13 +118,15 @@ class CTFScoreboardView(View):
         self.context['users'] = OyuUserProfile.objects.order_by('-score')
         return render(request, 'ctf/scoreboard.html', self.context)
 
-
+# Admin views
 class CTFAdminChallengeRequestsView(View):
     context = {
-        'title': 'Админ | Capture The Flag',
+        'title': 'Админ бодлогын хүсэлтүүд | Capture The Flag',
     }
 
     def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated or request.user.user_type != 'admin':
+            return redirect('home_index')
         self.context['challenges'] = CtfChallengeRequest.objects.all()
         return render(request, 'ctf/admin/admin-challenge-requests.html', self.context)
 
@@ -144,4 +147,23 @@ class CTFAdminChallengeRequestsView(View):
             challenge=ctf_chall,
         ).save()
         self.context['challenges'] = CtfChallengeRequest.objects.all()
+        messages.success(request, 'Бодлого амжилттай нэмлээ')
         return render(request, 'ctf/admin/admin-challenge-requests.html', self.context)
+
+class CTFAdminChallengesView(View):
+    context = {
+        'title': 'Админ нийт бодлогууд | Capture The Flag',
+    }
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated or request.user.user_type != 'admin':
+            return redirect('home_index')
+        self.context['challenges'] = CtfChallenge.objects.all()
+        return render(request, 'ctf/admin/admin-challenges.html', self.context)
+
+    def post(self, request, *args, **kwargs):
+        challenge_id = request.POST['challenge']
+        challenge = CtfChallenge.objects.get(pk=challenge_id).delete()
+        messages.success(request, 'Бодлого амжилттай устлаа')
+        self.context['challenges'] = CtfChallenge.objects.all()
+        return render(request, 'ctf/admin/admin-challenges.html', self.context)

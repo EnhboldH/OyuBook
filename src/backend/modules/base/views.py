@@ -24,6 +24,7 @@ from .models import (
     OyuUser,
     OyuUserProfile,
 )
+import datetime
 
 class HomeView(View):
     context = {
@@ -105,6 +106,10 @@ class UserProfileView(DetailView):
         obj = self.get_object()
         context['title'] = obj.username
         context['profile'] = self.get_profile_data(oyu_user=obj)
+        try:
+            context['days'] = (datetime.date.today() - context['profile'].created_date.date()).days
+        except: pass
+        # print(context['profile'].created_date)
         return context
 
     def get_object(self, queryset=None):
@@ -129,12 +134,17 @@ class UserProfileView(DetailView):
         return obj
 
     def get_profile_data(self, oyu_user):
-
         profile = OyuUserProfile.objects.filter(oyu_user=oyu_user).first()
+
         if not profile:
             return {}
         return profile
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        print('RESPECRED gsh')
+        return self.render_to_response(context)
 
 class UserProfileUpdateView(FormView):
     template_name = 'user/profile-update.html'

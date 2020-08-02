@@ -33,8 +33,8 @@ class OyuUser(AbstractUser, models.Model):
     background_image = models.ImageField("Background Img", max_length=128, default=BACKGROUND_IMG_DEFAULT, upload_to='img/users/background', null=True)
     avatar_image = models.ImageField("Avatar Img", max_length=128, default=AVATAR_IMG_DEFAULT, upload_to='img/users/avatar', null=True)
 
-    created_date = models.DateTimeField(auto_now_add=True)
-    last_updated_date = models.DateTimeField(auto_now=True)
+    created_date = models.DateField(auto_now_add=True)
+    last_updated_date = models.DateField(auto_now=True)
 
     class Meta:
         verbose_name = "OyuUser"
@@ -112,7 +112,8 @@ class UserChallenge(models.Model):
     REQUIRED_FIELDS = ["oyu_user", "challenge"]
 
     oyu_user = models.ForeignKey(OyuUser, verbose_name="Хэрэглэгч", on_delete=models.DO_NOTHING)
-    challenge = models.ForeignKey(CtfChallenge, verbose_name="Challenge", on_delete=models.DO_NOTHING)
+    challenge = models.ForeignKey(CtfChallenge, verbose_name="Challenge", on_delete=models.CASCADE)
+
     status = models.CharField("Төлөв", max_length=100, choices=USER_CHALLENGE_STATUS_CHOICES, default=USER_CHALLENGE_STATUS_ATTEMPTED)
 
     def __str__(self):

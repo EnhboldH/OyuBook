@@ -18,7 +18,7 @@
     <div class="row text-center">
       <div class="col-12 mb-5 _font-700 _font-15">
         <span class="text-success text-uppercase _font-700 _font-15">Capture The Flag Admin</span><br>
-        <span class="_font-20">Бодлогын хүсэлтүүд</span>
+        <span class="_font-20">Бодлогуудын жагсаалт</span>
       </div>
     </div>
     <div class="row">
@@ -37,7 +37,8 @@
                         </div>
                         <div class="col-6 text-right">
                           <span class="badge badge-pill badge-info">{{ challenge.category }}</span>
-                          <span class="badge badge-pill badge-success">{{ challenge.oyu_user }}</span>
+                          <span class="badge badge-pill badge-secondary">{{ challenge.value }}</span>
+                          <span class="badge badge-pill badge-dark">{{ challenge.solved_users_count }}</span>
                         </div>
                       </div>
                     </div>
@@ -46,8 +47,6 @@
                     <div class="card-body">
                       <div class="col-12">
                         <span>{{ challenge.description|markdown|safe }}</span>
-                        <hr>
-                        Бодох: <span class="text-success _font-700">{{ challenge.solution }}
                       </div>
                       <div class="mt-3">
                         <div class="input-group">
@@ -56,8 +55,8 @@
                           </div>
                           <input type="text" class="form-control" placeholder="{{ challenge.flag }}" aria-label="" aria-describedby="basic-addon1" disabled="">
                           <div class="input-group-append">
-                            <button class="btn btn-success" type="submit" value="{{ challenge.id }}" name="challenge">
-                              <span>Нэмэх</span>
+                            <button class="btn btn-danger" type="submit" value="{{ challenge.id }}" name="challenge">
+                              <span>Устгах</span>
                             </button>
                           </div>
                         </div>
