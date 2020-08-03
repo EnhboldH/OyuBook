@@ -186,8 +186,14 @@ class CTFChallengeRequestView(FormView):
                 flag=challenge_data.get('flag'),
                 author=user,
             ).save()
+
+            user_profile = OyuUserProfile.objects.filter(oyu_user=user).first()
+            user_profile.accepted_problem += 1
+            user_profile.save()
+
             messages.success(self.request, 'Бодлого амжилттай нэмлээ')
             return super().form_valid(form)
+
         challenge_request = CtfChallengeRequest()
         challenge_request.title = challenge_data.get('title')
         challenge_request.description = challenge_data.get('description')
@@ -248,6 +254,10 @@ class CTFAdminChallengeRequestsView(View):
             oyu_user=req_user,
             challenge=ctf_chall,
         ).save()
+        user_profile = OyuUserProfile.objects.filter(oyu_user=req_user).first()
+        user_profile.accepted_problem += 1
+        user_profile.save()
+
         self.context['challenges'] = CtfChallengeRequest.objects.all()
         messages.success(request, 'Бодлого амжилттай нэмлээ')
         return render(request, 'ctf/admin/admin-challenge-requests.html', self.context)
