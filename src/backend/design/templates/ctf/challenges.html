@@ -24,11 +24,12 @@
                   <div class="card-header">
                     <div class="row">
                       <div class="col-6">
-                        <span class="_font-16">{{ challenge.title }}</span>
+                        <span class="text-left">{{ challenge.title }}</span>
+                        <span class="font-italic _font-12">({{ challenge.author.username }})</span>
                       </div>
                       <div class="col-6 text-right">
                         <span class="badge badge-pill badge-info">{{ challenge.category }}</span>
-                        <span class="badge badge-pill {% if challenge.is_solved is True %}badge-success{% else %}badge-danger{% endif %}">{% if challenge.is_solved is True %}solved{% else %}unsolved{% endif %}</span>
+                        <span class="badge badge-pill {% if challenge.is_solved or challenge.is_author %}badge-success{% else %}badge-danger{% endif %}">{% if challenge.is_solved %}solved{% elif challenge.is_author %}author{% elif challenge.is_attempted %}attempted{% else %}unsolved{% endif %}</span>
                         <span class="badge badge-pill badge-secondary">{{ challenge.value }}</span>
                         <span class="badge badge-pill badge-dark">{{ challenge.solved_users_count }}</span>
                       </div>
@@ -41,14 +42,23 @@
                       <span>{{ challenge.description|markdown|safe }}</span>
                     </div>
                     <div class="mt-3">
-                      <form method="POST">{% csrf_token %}
+                      {% if challenge.is_author or challenge.is_solved %}
                         <div class="input-group">
-                          <input type="text" class="form-control text-center _input" placeholder="Флагаа оруулна уу" name="challenge-{{ forloop.counter }}">
+                          <input type="text" class="form-control text-center _input" placeholder="{% if challenge.is_author %}Амжилттай нэмсэн{% else %}Амжилттай бодсон{% endif %}" disabled="">
                           <div class="input-group-append">
-                            <button class="btn btn-success" type="submit">Илгээх</button>
+                            <button class="btn btn-success" type="button" disabled="">Илгээх</button>
                           </div>
                         </div>
-                      </form>
+                      {% else %}
+                        <form method="POST">{% csrf_token %}
+                          <div class="input-group">
+                            <input type="text" class="form-control text-center _input" placeholder="Флагаа оруулна уу" name="challenge-{{ forloop.counter }}">
+                            <div class="input-group-append">
+                              <button class="btn btn-success" type="submit">Илгээх</button>
+                            </div>
+                          </div>
+                        </form>
+                      {% endif %}
                     </div>
                   </div>
                 </div>

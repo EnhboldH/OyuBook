@@ -86,7 +86,10 @@ class OyuUserProfile(models.Model):
 
 
 class CtfChallenge(models.Model):
-    title = models.CharField("Гарчиг", max_length=100, unique=True)
+    REQUIRED_FIELDS = ['oyu_user']
+
+    title = models.CharField("Гарчиг", max_length=30, unique=True)
+    author = models.ForeignKey(OyuUser, verbose_name='Нэмсэн', on_delete=models.DO_NOTHING, null=True)
     description = MartorField()
     value = models.PositiveIntegerField("Бодлогын оноо", default=500, null=True)
     category = models.CharField("Төрөл", max_length=100, choices=CTF_CHALLENGE_CATEGORY_CHOICES, null=True)
@@ -99,7 +102,7 @@ class CtfChallenge(models.Model):
 
 
 class CtfChallengeRequest(models.Model):
-    title = models.CharField("Гарчиг", max_length=100, unique=True)
+    title = models.CharField("Гарчиг", max_length=30, unique=True)
     oyu_user = models.ForeignKey(OyuUser, verbose_name="Хэрэглэгч", on_delete=models.DO_NOTHING)
     description = MartorField()
     category = models.CharField("Төрөл", choices=CTF_CHALLENGE_CATEGORY_CHOICES, max_length=100)

@@ -79,7 +79,7 @@
                 <span class="text-uppercase _profile-detail">
                   {% if user.is_authenticated %}
                     {% if profile %}
-                      {{ profile.solved_problem }}
+                      {{ profile.score }}
                     {% else %}
                       <span class="_font-15 text-danger font-weight-bold">No profile</span>
                     {% endif %}
