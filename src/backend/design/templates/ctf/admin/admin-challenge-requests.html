@@ -1,17 +1,6 @@
 {% extends "layout.html" %}
 {% load static %}
 {% load markdown_extras %}
-{% block style %}
-  <link href="{% static 'css/ctf/index.css' %}" rel="stylesheet">
-  <style>
-    table {
-      color: white !important;
-    }
-    .test:hover {
-      color: rgba(255, 255, 255, 0.5) !important;
-    }
-  </style>
-{% endblock %}
 {% block content %}
 <section id="main" class="d-flex">
   <div class="container-fluid ml-5 mr-5 mb-5">
@@ -22,11 +11,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 mt-n3 challenges">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 mt-n3" id="challenges">
         {% if challenges %}
           {% for challenge in challenges %}
-            <form method="post">
-              {% csrf_token %}
+            <form method="post">{% csrf_token %}
               <div class="accordion mt-3" id="challenge-{{ forloop.counter }}">
                 <div class="card">
                   <a data-toggle="collapse" data-target="#challenge-{{ forloop.counter }}-collapse" class="text-light" type="button">
@@ -56,8 +44,11 @@
                           </div>
                           <input type="text" class="form-control" placeholder="{{ challenge.flag }}" aria-label="" aria-describedby="basic-addon1" disabled="">
                           <div class="input-group-append">
-                            <button class="btn btn-success" type="submit" value="{{ challenge.id }}" name="challenge">
+                            <button class="btn btn-success" type="submit" value="add-{{ challenge.id }}" name="challenge">
                               <span>Нэмэх</span>
+                            </button>
+                            <button class="btn btn-danger" type="submit" value="delete-{{ challenge.id }}" name="challenge">
+                              <span>Устгах</span>
                             </button>
                           </div>
                         </div>
@@ -97,13 +88,6 @@
 </section>
 {% endblock %}
 {% block script %}
-  <script>
-   $(document).ready(function(){
-      $('.collapse').on('show.bs.collapse', function () {
-        $('.collapse.show').each(function(){
-          $(this).collapse('hide');
-        });
-      });
-    });
-  </script>
+  <script src="{% static 'js/ctf/layout.js' %}"></script>  
+  <script src="{% static 'js/ctf/challenges.js' %}"></script>
 {% endblock %}

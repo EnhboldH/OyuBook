@@ -2,16 +2,8 @@
 {% load static %}
 {% load markdown_extras %}
 {% block style %}
+  <link href="{% static 'css/ctf/layout.css' %}" rel="stylesheet">
   <link href="{% static 'css/ctf/index.css' %}" rel="stylesheet">
-  <style>
-    table {
-      color: white !important;
-    }
-    .test:hover {
-      color: rgba(255, 255, 255, 0.5) !important;
-    }
-    .collapsed
-  </style>
 {% endblock %}
 {% block content %}
 <section id="main" class="d-flex">
@@ -49,10 +41,9 @@
                       <span>{{ challenge.description|markdown|safe }}</span>
                     </div>
                     <div class="mt-3">
-                      <form method="POST">
-                        {% csrf_token %}
+                      <form method="POST">{% csrf_token %}
                         <div class="input-group">
-                          <input type="text" class="form-control text-center" placeholder="Флагаа оруулна уу" aria-label="" aria-describedby="basic-addon1" style="color: #2d2f31; font-weight: 600;" name="challenge-{{ forloop.counter }}">
+                          <input type="text" class="form-control text-center _input" placeholder="Флагаа оруулна уу" name="challenge-{{ forloop.counter }}">
                           <div class="input-group-append">
                             <button class="btn btn-success" type="submit">Илгээх</button>
                           </div>
@@ -114,7 +105,7 @@
                           {% if tops %}
                             {% for top in tops %}
                               <a href="{% url 'user_profile' top.oyu_user.slug %}">
-                                <div class="row text-light test mt-2">
+                                <div class="row text-light _users-link mt-2">
                                   <div class="col-2"> 
                                     {% if top.oyu_user.avatar_image == 'img/users/avatar/default.png' %}
                                       <img src="/static/{{ top.oyu_user.avatar_image }}" class="rounded-circle _active-users-img">
@@ -224,17 +215,6 @@
 </section>
 {% endblock %}
 {% block script %}
+  <script src="{% static 'js/ctf/layout.js' %}"></script>  
   <script src="{% static 'js/ctf/challenges.js' %}"></script>
-  <script>
-   $(document).ready(function(){
-      $('i').click(function(){
-        $(this).toggleClass('fa-angle-up fa-angle-down');
-      });
-      $('#challenges .collapse').on('show.bs.collapse', function () {
-        $('#challenges .collapse.show').each(function(){
-          $(this).collapse('hide');
-        });
-      });
-    }); 
-  </script>
 {% endblock %}

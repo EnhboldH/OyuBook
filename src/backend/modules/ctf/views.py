@@ -158,7 +158,13 @@ class CTFAdminChallengeRequestsView(View):
         return render(request, 'ctf/admin/admin-challenge-requests.html', self.context)
 
     def post(self, request, *args, **kwargs):
-        challenge_id = request.POST['challenge']
+        action, challenge_id = request.POST['challenge'].split('-')
+        if action == 'delete':
+            challenge = CtfChallengeRequest.objects.get(pk=challenge_id).delete()
+            messages.success(request, 'Бодлого амжилттай устгагдлаа')
+            self.context['challenges'] = CtfChallengeRequest.objects.all()
+            return render(request, 'ctf/admin/admin-challenge-requests.html', self.context)
+
         challenge = CtfChallengeRequest.objects.get(pk=challenge_id)
         req_user = challenge.oyu_user
         CtfChallenge.objects.create(
@@ -192,6 +198,6 @@ class CTFAdminChallengesView(View):
     def post(self, request, *args, **kwargs):
         challenge_id = request.POST['challenge']
         challenge = CtfChallenge.objects.get(pk=challenge_id).delete()
-        messages.success(request, 'Бодлого амжилттай устлаа')
+        messages.success(request, 'Бодлого амжилттай устгагдлаа')
         self.context['challenges'] = CtfChallenge.objects.all()
         return render(request, 'ctf/admin/admin-challenges.html', self.context)

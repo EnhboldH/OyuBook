@@ -23,14 +23,6 @@
   font-family:Open Sans, sans-serif; 
   font-weight: 550;
 }
-form ._input {
-  color: #2d2f31;
-  font-weight: 600; 
-}
-form ._input:focus {
-  color: #2d2f31;
-  font-weight: 600; 
-}
 .register-submit {
   border: none !important;
   margin: 0px 0px 0px 0px !important;

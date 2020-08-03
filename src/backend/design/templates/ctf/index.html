@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% load static %}
 {% block style %}
+  <link href="{% static 'css/ctf/layout.css' %}" rel="stylesheet">
   <link href="{% static 'css/ctf/index.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
@@ -38,11 +39,17 @@
                 <span>
                   {% if user.is_authenticated %}
                     {% if user.user_type == 'admin' %}
-                      <i class="fas fa-users-cog fa-2x"></i>
+                      <a href="{% url 'user_profile' user.slug %}" class="text-light">
+                        <i class="fas fa-users-cog fa-2x"></i>
+                      </a>
                     {% elif user.user_type == 'normal' %}
-                      <i class="far fa-user fa-2x"></i>
+                      <a href="{% url 'user_profile' user.slug %}" class="text-light">
+                        <i class="far fa-user fa-2x"></i>
+                      </a>
                     {% elif user.user_type == 'sponser' %}
-                      <i class="far fa-gem fa-2x"></i>
+                      <a href="{% url 'user_profile' user.slug %}" class="text-light" >
+                        <i class="far fa-gem fa-2x"></i>
+                      </a>
                     {% endif %}
                   {% else %}
                       <i class="fas fa-user-secret fa-2x"></i>
@@ -179,7 +186,7 @@
                     {% if active_users %}
                       {% for user in active_users %}
                         <a href="{% url 'user_profile' user.slug %}">
-                          <div class="row text-light mt-3">
+                          <div class="row text-light _users-link mt-3">
                             <div class="col-2">
                               {% if user.avatar_image == 'img/users/avatar/default.png' %}
                                 <img src="/static/{{ user.avatar_image }}" class="rounded-circle _active-users-img">
@@ -393,5 +400,6 @@
 </section>
 {% endblock %}
 {% block script %}
+  <script src="{% static 'js/ctf/layout.js' %}"></script>
   <script src="{% static 'js/ctf/index.js' %}"></script>
 {% endblock %}
