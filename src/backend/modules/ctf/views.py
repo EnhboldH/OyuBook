@@ -9,6 +9,8 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.sessions.models import Session
+from django.utils import timezone
 
 from django.db.models import Q
 
@@ -23,9 +25,11 @@ from modules.base.forms import (
     CTFChallengeRequestForm,
 )
 class CTFHomeView(View):
-    context = {
-        'title': 'Нүүр Хуудас | Capture The Flag',
-    }
+    def __init__(self):
+        self.context = {
+            'title': 'Нүүр Хуудас | Capture The Flag',
+            'active_users': self.get_current_users(),
+        }
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -40,11 +44,18 @@ class CTFHomeView(View):
         return render(request, 'ctf/index.html', self.context)
 
     def get_profile_data(self, oyu_user):
-
         profile = OyuUserProfile.objects.filter(oyu_user=oyu_user).first()
         if not profile:
             return {}
         return profile
+
+    def get_current_users(self):
+        active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
+        user_id_list = []
+        for session in active_sessions:
+            data = session.get_decoded()
+            user_id_list.append(data.get('_auth_user_id', None))
+        return OyuUser.objects.filter(id__in=user_id_list)
 
 class CTFChallengesView(View):
     context = {
