@@ -97,6 +97,7 @@ class CtfChallenge(models.Model):
     def __str__(self):
         return "%s | %s" % (self.title, self.category)
 
+
 class CtfChallengeRequest(models.Model):
     title = models.CharField("Гарчиг", max_length=100, unique=True)
     oyu_user = models.ForeignKey(OyuUser, verbose_name="Хэрэглэгч", on_delete=models.DO_NOTHING)
@@ -107,6 +108,7 @@ class CtfChallengeRequest(models.Model):
 
     def __str__(self):
         return "%s | %s" % (self.oyu_user.__str__(), self.title)
+
 
 class UserChallenge(models.Model):
     REQUIRED_FIELDS = ["oyu_user", "challenge"]

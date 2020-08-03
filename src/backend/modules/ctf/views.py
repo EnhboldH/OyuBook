@@ -24,6 +24,8 @@ from modules.base.models import (
 from modules.base.forms import (
     CTFChallengeRequestForm,
 )
+
+
 class CTFHomeView(View):
     def __init__(self):
         self.context = {
@@ -57,6 +59,7 @@ class CTFHomeView(View):
             user_id_list.append(data.get('_auth_user_id', None))
         return OyuUser.objects.filter(id__in=user_id_list)
 
+
 class CTFChallengesView(View):
     context = {
         'title': 'Бодлогууд | Capture The Flag',
@@ -71,29 +74,70 @@ class CTFChallengesView(View):
         value = request.POST[list(request.POST)[1]]
         chall_id = list(request.POST)[1].split('-')[1]
         challenge = CtfChallenge.objects.get(pk=chall_id)
+
         if challenge.flag == value:
             messages.success(request, 'Хариулт зөв байна')
+
             if request.user.is_authenticated:
-                # challenge.solved_users_count += 1
-                # user = OyuUserProfile.objects.filter(oyu_user=request.user).first()
-                # UserChallenge.objects.create(
-                #     oyu_user=request.user,
-                #     challenge=challenge,
-                #     status='solved',
-                # ).save()
-                # user.solved_problem += 1
-                # user.score += challenge.value
-                # user.save()
-                # challenge.save()
+                challenge.solved_users_count += 1
+                user = OyuUserProfile.objects.filter(oyu_user=request.user).first()
+
+                user_challenge = UserChallenge.objects.filter(oyu_user=request.user, challenge=challenge).first()
+                if user_challenge:
+                    # Өмнө нь бодоогүй байвал л оноо нэмэх хэрэгтэй байх
+                    if user_challenge.status != 'solved':
+                        user.solved_problem += 1
+                        user.score += challenge.value
+
+                    user_challenge.status = 'solved'
+                    user_challenge.save()
+                else:
+                    UserChallenge.objects.create(
+                        oyu_user=request.user,
+                        challenge=challenge,
+                        status='solved',
+                    ).save()
+
+                    # Анхны оролдлогоор шууд бодсон
+                    user.solved_problem += 1
+                    user.score += challenge.value
+
+                user.save()
+                challenge.save()
                 return render(request, 'ctf/challenges.html', self.context)
         else:
+            """
+            TODO
+                Хэрвээ системд нэвтэрцэн хэрэглэгч буруу бодсон байвал
+                уулна энэ бодлого дээр оролдлого хийлээ гэсэн төлөвтэй
+                UserChallenge модель үүсгэнэ.
+                Гэхдээ аль хэдийнээ үүсцэн бас өмнө нь зөв бодсон байвал оролдохгүй.
+            """
             messages.error(request, 'Хариулт буруу байна')
             return render(request, 'ctf/challenges.html', self.context)
 
         return render(request, 'ctf/challenges.html', self.context)
+
     def prepare_context(self):
-        self.context['challenges'] = CtfChallenge.objects.all()
+        clist = []
+        for cll in CtfChallenge.objects.all():
+            is_solved = False
+            user_challenge = UserChallenge.objects.filter(oyu_user=self.request.user, challenge=cll, status='solved').first()
+            if user_challenge:
+                is_solved = True
+            clist.append({
+                'title': cll.title,
+                'category': cll.category,
+                'value': cll.value,
+                'solved_users_count': cll.solved_users_count,
+                'description': cll.description,
+                'is_solved': is_solved,
+            })
+
+        self.context['challenges'] = clist
         self.context['tops'] = OyuUserProfile.objects.order_by('-score')[:5]
+        print (self.context)
+
 
 class CTFChallengeRequestView(SuccessMessageMixin, FormView):
     template_name = 'ctf/challenge-request.html'
@@ -135,7 +179,6 @@ class CTFChallengeRequestView(SuccessMessageMixin, FormView):
         return super().form_valid(form)
 
 
-
 class CTFScoreboardView(View):
     context = {
         'title': 'Онооны самбар | Capture The Flag',
@@ -146,6 +189,8 @@ class CTFScoreboardView(View):
         return render(request, 'ctf/scoreboard.html', self.context)
 
 # Admin views
+
+
 class CTFAdminChallengeRequestsView(View):
     context = {
         'title': 'Админ бодлогын хүсэлтүүд | Capture The Flag',
@@ -183,6 +228,7 @@ class CTFAdminChallengeRequestsView(View):
         self.context['challenges'] = CtfChallengeRequest.objects.all()
         messages.success(request, 'Бодлого амжилттай нэмлээ')
         return render(request, 'ctf/admin/admin-challenge-requests.html', self.context)
+
 
 class CTFAdminChallengesView(View):
     context = {
