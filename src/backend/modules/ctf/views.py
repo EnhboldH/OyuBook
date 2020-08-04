@@ -8,7 +8,6 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 
@@ -53,8 +52,8 @@ class CTFHomeView(View):
     def get_current_users(self):
         active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
         user_id_list = []
-        for session in active_sessions:
-            data = session.get_decoded()
+        for ses in active_sessions:
+            data = ses.get_decoded()
             user_id_list.append(data.get('_auth_user_id', None))
         return OyuUser.objects.filter(id__in=user_id_list)
 
@@ -123,10 +122,7 @@ class CTFChallengesView(View):
     def prepare_context(self):
         user = self.request.user
         
-        author_clist = []
-        solved_clist = []
-        attempt_clist = []
-        unsolved_clist = []
+        author_clist, solved_clist, attempt_clist, unsolved_clist = [], [], [], []
 
         if user.is_authenticated:
             for cll in CtfChallenge.objects.all():
@@ -139,19 +135,11 @@ class CTFChallengesView(View):
                     'author': cll.author,
                     'hid': cll.reference_id,
                 }
-                print(cll)
-                if cll.author.username == user.username:
-                    print('auth')
-                    author_clist.append(data)
-                elif UserChallenge.objects.filter(oyu_user=user, challenge=cll, status='solved').first():
-                    print('solved')
-                    solved_clist.append(data)
-                elif UserChallenge.objects.filter(oyu_user=user, challenge=cll, status='attempted').first():
-                    print('att')
-                    attempt_clist.append(data)
-                else:
-                    print('unsolv')
-                    unsolved_clist.append(data)
+                
+                if cll.author.username == user.username: author_clist.append(data)
+                elif UserChallenge.objects.filter(oyu_user=user, challenge=cll, status='solved').first(): solved_clist.append(data)
+                elif UserChallenge.objects.filter(oyu_user=user, challenge=cll, status='attempted').first(): attempt_clist.append(data)
+                else: unsolved_clist.append(data)
 
             self.context['author_clist'] = author_clist
             self.context['solved_clist'] = solved_clist
@@ -178,11 +166,9 @@ class CTFChallengeRequestView(FormView):
         return self.render_to_response(self.get_context_data())
 
     def form_valid(self, form):
-        user = self.request.user
-        challenge_data = form.cleaned_data
+        user, challenge_data = self.request.user, form.cleaned_data
 
         if user.user_type == 'admin':
-
             CtfChallenge.objects.create(
                 title=challenge_data.get('title'),
                 description=challenge_data.get('description'),
@@ -202,14 +188,14 @@ class CTFChallengeRequestView(FormView):
             messages.success(self.request, 'Бодлого амжилттай нэмлээ')
             return super().form_valid(form)
 
-        challenge_request = CtfChallengeRequest()
-        challenge_request.title = challenge_data.get('title')
-        challenge_request.description = challenge_data.get('description')
-        challenge_request.category = challenge_data.get('category')
-        challenge_request.solution = challenge_data.get('solution')
-        challenge_request.flag = challenge_data.get('flag')
-        challenge_request.oyu_user = user
-        challenge_request.save()
+        challenge_request = CtfChallengeRequest.create(
+            title = challenge_data.get('title'),
+            description = challenge_data.get('description'),
+            category = challenge_data.get('category'),
+            solution = challenge_data.get('solution'),
+            flag = challenge_data.get('flag'),
+            oyu_user = user
+        ).save()
         messages.success(self.request, 'Бид таны бодлогыг шалгаж үзээд таньд мэдэгдэх болно')
 
         return super().form_valid(form)
@@ -233,8 +219,7 @@ class CTFAdminChallengeRequestsView(View):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        if not user.is_authenticated or user.user_type != 'admin':
-            return redirect('home_index')
+        if not user.is_authenticated or user.user_type != 'admin': return redirect('home_index')
         self.context['challenges'] = CtfChallengeRequest.objects.all()
         return render(request, 'ctf/admin/admin-challenge-requests.html', self.context)
 
@@ -281,8 +266,7 @@ class CTFAdminChallengesView(View):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        if not user.is_authenticated or user.user_type != 'admin':
-            return redirect('home_index')
+        if not user.is_authenticated or user.user_type != 'admin': return redirect('home_index')
         self.context['challenges'] = CtfChallenge.objects.all()
         return render(request, 'ctf/admin/admin-challenges.html', self.context)
 

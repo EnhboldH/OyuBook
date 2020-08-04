@@ -116,5 +116,8 @@
     time: 1000
   });
 
+  $('i').click(function(){
+    $(this).toggleClass('fa-angle-up fa-angle-down');
+  });
 
 })(jQuery);

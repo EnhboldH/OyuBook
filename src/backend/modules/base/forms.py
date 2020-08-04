@@ -1,7 +1,6 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import AuthenticationForm
-from martor.fields import MartorFormField
 
 from .models import (
     OyuUser,
@@ -13,6 +12,9 @@ from .consts import (
     USER_REGION_CHOICES,
     CTF_CHALLENGE_CATEGORY_CHOICES,
 )
+# Third party
+from martor.fields import MartorFormField
+
 class UserRegistrationForm(ModelForm):
 
     password = forms.CharField(widget=forms.PasswordInput)
@@ -39,23 +41,21 @@ class UserRegistrationForm(ModelForm):
         self.fields['email'].widget.attrs['placeholder'] = u"И-мэйл хаяг"
         self.fields['password'].widget.attrs['placeholder'] = u"Нууц үг"
 
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control _input'
+        for vis in self.visible_fields(): vis.field.widget.attrs['class'] = 'form-control _input'
 
 
 class LoginForm(AuthenticationForm):
 
     def __init__(self, request=None, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs['class'] = "form-control _input"
-        self.fields['password'].widget.attrs['class'] = "form-control _input"
-        self.fields['username'].widget.attrs['placeholder'] = u"И-мэйл хаяг"
-        self.fields['password'].widget.attrs['placeholder'] = u"Нууц үг"
+        for vis in self.visible_fields(): vis.field.widget.attrs['class'] = 'form-control _input'
+
+        self.fields['username'].widget.attrs['placeholder'] = u'И-мэйл хаяг'
+        self.fields['password'].widget.attrs['placeholder'] = u'Нууц үг'
 
     def clean_username(self, ):
         uname = self.cleaned_data.get("username")
-        if uname:
-            uname = uname.strip()
+        if uname: uname = uname.strip()
         return uname
 
 class UserProfileUpdateForm(forms.Form):
@@ -74,8 +74,8 @@ class UserProfileUpdateForm(forms.Form):
     def __init__(self, request=None, *args, **kwargs):
         super(UserProfileUpdateForm, self).__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = "form-control _input"
-            self.fields[field].widget.attrs['placeholder'] = ". . ."
+            self.fields[field].widget.attrs['class'] = 'form-control _input'
+            self.fields[field].widget.attrs['placeholder'] = '. . .'
 
         self.fields['avatar_image'].widget.attrs['class'] = "form-control-file"
         self.fields['background_image'].widget.attrs['class'] = "form-control-file"
@@ -91,8 +91,7 @@ class CTFChallengeRequestForm(ModelForm):
     def __init__(self, request=None, *args, **kwargs):
         super(CTFChallengeRequestForm, self).__init__(*args, **kwargs)
 
-        for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control _input'
+        for field in self.fields: self.fields[field].widget.attrs['class'] = 'form-control _input'
 
         self.fields['title'].widget.attrs['placeholder'] = u"Бодлогын нэрийг оруулна уу"
         self.fields['solution'].widget.attrs['placeholder'] = u"Бид таны бодлогыг шалгахын тулд заавал бөглөнө үү"

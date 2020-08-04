@@ -1,3 +1,4 @@
+# OyuUser
 USER_TYPE_NORMAL = "normal"
 USER_TYPE_ADMIN = "admin"
 
@@ -6,7 +7,46 @@ USER_TYPE_CHOICES = (
     (USER_TYPE_ADMIN, "админ"),
 )
 
+USER_BADGE_TYPE_NORMAL = "normal"
+USER_BADGE_TYPE_ADMIN = "admin"
+USER_BADGE_TYPE_SPONSER = "sponser"
 
+USER_BADGE_TYPE_CHOICES = (
+    (USER_BADGE_TYPE_NORMAL, "Энгийн"),
+    (USER_BADGE_TYPE_ADMIN, "Админ"),
+    (USER_BADGE_TYPE_SPONSER, "Ивээн тэтгэгч"),
+)
+# User Profile
+USER_REGION_MUST = "must"
+USER_REGION_MUST_SICT = "must-sict"
+USER_REGION_NUM = "num"
+USER_REGION_STUDENT = "student"
+USER_REGION_EMPLOYEE = "employee"
+
+USER_REGION_CHOICES = (
+    (USER_REGION_MUST, "ШУТИС"),
+    (USER_REGION_MUST_SICT, "ШУТИС-МХТС"),
+    (USER_REGION_NUM, "МУИС"),
+    (USER_REGION_STUDENT, "Сурагч"),
+    (USER_REGION_EMPLOYEE, "Ажилчин"),
+)
+
+# User Challenge
+USER_CHALLENGE_STATUS_SOLVED = "solved"
+USER_CHALLENGE_STATUS_UNSOLVED = "unsolved"
+USER_CHALLENGE_STATUS_ATTEMPTED = "attempted"
+
+USER_CHALLENGE_STATUS_CHOICES = (
+    (USER_CHALLENGE_STATUS_SOLVED, "Бодсон"),
+    (USER_CHALLENGE_STATUS_UNSOLVED, "Бодоогүй"),
+    (USER_CHALLENGE_STATUS_ATTEMPTED, "Оролдлого хийсэн"),
+)
+
+
+BACKGROUND_IMG_DEFAULT = "img/users/background/default.svg"
+AVATAR_IMG_DEFAULT = "img/users/avatar/default.png"
+
+# CTF
 CTF_CHALLENGE_CATEGORY_MISCELLANEOUS = 'misc'
 CTF_CHALLENGE_CATEGORY_CRYPTOGRAPHY = 'crypto'
 CTF_CHALLENGE_CATEGORY_FORENSICS = 'forensics'
@@ -22,42 +62,3 @@ CTF_CHALLENGE_CATEGORY_CHOICES = (
     (CTF_CHALLENGE_CATEGORY_WEB_EXPLOITATION, 'Web exploitation'),
     (CTF_CHALLENGE_CATEGORY_BINARY_EXPLOITATION, 'Binary exploitation'),
 )
-
-
-USER_BADGE_TYPE_NORMAL = "normal"
-USER_BADGE_TYPE_ADMIN = "admin"
-USER_BADGE_TYPE_SPONSER = "sponser"
-
-USER_BADGE_TYPE_CHOICES = (
-    (USER_BADGE_TYPE_NORMAL, "Энгийн"),
-    (USER_BADGE_TYPE_ADMIN, "Админ"),
-    (USER_BADGE_TYPE_SPONSER, "Ивээн тэтгэгч"),
-)
-
-USER_REGION_MUST = "must"
-USER_REGION_MUST_SICT = "must-sict"
-USER_REGION_NUM = "num"
-USER_REGION_STUDENT = "student"
-USER_REGION_EMPLOYEE = "employee"
-
-USER_REGION_CHOICES = (
-    (USER_REGION_MUST, "ШУТИС"),
-    (USER_REGION_MUST_SICT, "ШУТИС-МХТС"),
-    (USER_REGION_NUM, "МУИС"),
-    (USER_REGION_STUDENT, "Сурагч"),
-    (USER_REGION_EMPLOYEE, "Ажилчин"),
-)
-
-USER_CHALLENGE_STATUS_SOLVED = "solved"
-USER_CHALLENGE_STATUS_UNSOLVED = "unsolved"
-USER_CHALLENGE_STATUS_ATTEMPTED = "attempted"
-
-USER_CHALLENGE_STATUS_CHOICES = (
-    (USER_CHALLENGE_STATUS_SOLVED, "Бодсон"),
-    (USER_CHALLENGE_STATUS_UNSOLVED, "Бодоогүй"),
-    (USER_CHALLENGE_STATUS_ATTEMPTED, "Оролдлого хийсэн"),
-)
-
-
-BACKGROUND_IMG_DEFAULT = "img/users/background/default.svg"
-AVATAR_IMG_DEFAULT = "img/users/avatar/default.png"

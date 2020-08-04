@@ -3,6 +3,7 @@ from modules.base.models import (
     CtfChallenge,
 )
 
+# For future
 class CTFChallengeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CtfChallenge

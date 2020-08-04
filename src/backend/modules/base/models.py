@@ -26,14 +26,17 @@ class OyuUser(AbstractUser, models.Model):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
 
+    # General
     email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=100, unique=True)
     user_type = models.CharField(max_length=100, default=USER_TYPE_NORMAL, choices=USER_TYPE_CHOICES)
     slug = models.SlugField(null=False, unique=True)
 
+    # Extra
     background_image = models.ImageField("Background Img", max_length=128, default=BACKGROUND_IMG_DEFAULT, upload_to='img/users/background', null=True)
     avatar_image = models.ImageField("Avatar Img", max_length=128, default=AVATAR_IMG_DEFAULT, upload_to='img/users/avatar', null=True)
 
+    # System
     created_date = models.DateField(auto_now_add=True)
     last_updated_date = models.DateField(auto_now=True)
 
@@ -59,8 +62,11 @@ class OyuUser(AbstractUser, models.Model):
 
 class OyuUserProfile(models.Model):
     REQUIRED_FIELDS = ["oyu_user"]
-
+    
+    # Relationships
     oyu_user = models.ForeignKey(OyuUser, verbose_name="Oyu User", on_delete=models.CASCADE)
+    
+    # General
     fullname = models.CharField("Бүтэн нэр", max_length=20, null=True, blank=True)
     region = models.CharField("Харьяа", max_length=100, blank=True, null=True, choices=USER_REGION_CHOICES, help_text="Сургууль эсвэл ажилладаг газар.")
     respected = models.PositiveIntegerField("Хүндлэгдсэн", default=0, null=True)
@@ -71,10 +77,12 @@ class OyuUserProfile(models.Model):
     accepted_problem = models.PositiveIntegerField("Оруулсан бодлогын тоо", default=0, null=True)
     given_money = models.PositiveIntegerField("Хандив", default=0, null=True)
 
+    # Social accounts
     facebook_link = models.CharField("Facebook link", max_length=128, blank=True, null=True)
     insta_link = models.CharField("Insta link", max_length=128, blank=True, null=True)
     github_link = models.CharField("Github link", max_length=128, blank=True, null=True)
 
+    # System data
     created_date = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(auto_now=True)
 
@@ -89,9 +97,11 @@ class OyuUserProfile(models.Model):
 class CtfChallenge(models.Model):
     REQUIRED_FIELDS = ['oyu_user']
 
+    # Relationships
+    author = models.ForeignKey(OyuUser, verbose_name='Нэмсэн', on_delete=models.DO_NOTHING, null=True)
+    
     # General
     title = models.CharField("Гарчиг", max_length=30, unique=True)
-    author = models.ForeignKey(OyuUser, verbose_name='Нэмсэн', on_delete=models.DO_NOTHING, null=True)
     description = MartorField()
     value = models.PositiveIntegerField("Бодлогын оноо", default=500, null=True)
     category = models.CharField("Төрөл", max_length=100, choices=CTF_CHALLENGE_CATEGORY_CHOICES, null=True)
@@ -109,8 +119,11 @@ class CtfChallenge(models.Model):
 
 
 class CtfChallengeRequest(models.Model):
-    title = models.CharField("Гарчиг", max_length=30, unique=True)
+    # Relationship
     oyu_user = models.ForeignKey(OyuUser, verbose_name="Хэрэглэгч", on_delete=models.DO_NOTHING)
+    
+    # General
+    title = models.CharField("Гарчиг", max_length=30, unique=True)
     description = MartorField()
     category = models.CharField("Төрөл", choices=CTF_CHALLENGE_CATEGORY_CHOICES, max_length=100)
     solution = models.CharField("Хэрхэн бодох", max_length=300)
@@ -122,9 +135,11 @@ class CtfChallengeRequest(models.Model):
 class UserChallenge(models.Model):
     REQUIRED_FIELDS = ["oyu_user", "challenge"]
 
+    # Relationship
     oyu_user = models.ForeignKey(OyuUser, verbose_name="Хэрэглэгч", on_delete=models.DO_NOTHING)
     challenge = models.ForeignKey(CtfChallenge, verbose_name="Challenge", on_delete=models.CASCADE)
 
+    # General
     status = models.CharField("Төлөв", max_length=100, choices=USER_CHALLENGE_STATUS_CHOICES, default=USER_CHALLENGE_STATUS_UNSOLVED)
 
     def __str__(self):
