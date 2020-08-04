@@ -58,6 +58,9 @@ urlpatterns = [
     # Network module
     path('network/', NetworkView.as_view(), name='network_index'),
 
+    # API
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/ctf/', include('modules.ctf.api.urls')),
     # Third part module
     path('martor/', include('martor.urls')), # Don't delete this if you don't know
 ]

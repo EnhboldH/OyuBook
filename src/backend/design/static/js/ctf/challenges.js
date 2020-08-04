@@ -8,5 +8,12 @@
       $(this).collapse('hide');
     });
   });
+  $.ajax({
+    url : "http://localhost:8000/api/ctf/challenges",
+    dataType: "json",
+    success : function (data) {
+      console.log(data);
+    }
+  });
 })(jQuery);
 

@@ -74,7 +74,7 @@ class UserProfileUpdateForm(forms.Form):
     def __init__(self, request=None, *args, **kwargs):
         super(UserProfileUpdateForm, self).__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = "form-control profile-input"
+            self.fields[field].widget.attrs['class'] = "form-control _input"
             self.fields[field].widget.attrs['placeholder'] = ". . ."
 
         self.fields['avatar_image'].widget.attrs['class'] = "form-control-file"

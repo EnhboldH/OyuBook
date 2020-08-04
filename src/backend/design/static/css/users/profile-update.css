@@ -1,14 +1,6 @@
 body {
   color: rgba(255, 255, 255, 1);
 }
-.profile-input {
-  box-shadow: none;
-  color: #2d2f31;
-  font-weight: 600;
-  border-radius: 4px;
-  background-color: rgba(245, 245, 245, 1);
-  border: none;
-}
 .input-label {
   font-family: Open Sans, sans-serif; 
   font-weight: 550;

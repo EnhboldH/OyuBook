@@ -25,7 +25,6 @@ from modules.base.forms import (
     CTFChallengeRequestForm,
 )
 
-
 class CTFHomeView(View):
     def __init__(self):
         self.context = {
@@ -161,7 +160,6 @@ class CTFChallengesView(View):
         else:
             self.context['challenges'] = CtfChallenge.objects.all()
         self.context['tops'] = OyuUserProfile.objects.order_by('-score')[:5]
-
 
 class CTFChallengeRequestView(FormView):
     template_name = 'ctf/challenge-request.html'

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'modules.mathematics',
     'modules.network',
 
+    'rest_framework',
     'martor',                           # Нэмэлт, CTF -ийн бодлого нэмэх хэсэг дээр markdown утга авна
 ]
 
@@ -87,6 +88,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-secondary',
