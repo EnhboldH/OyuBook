@@ -20,6 +20,7 @@ from django.template.defaultfilters import slugify
 
 from django.urls import reverse
 from martor.models import MartorField
+from hashid_field import HashidField
 
 class OyuUser(AbstractUser, models.Model):
     USERNAME_FIELD = "email"
@@ -60,7 +61,7 @@ class OyuUserProfile(models.Model):
     REQUIRED_FIELDS = ["oyu_user"]
 
     oyu_user = models.ForeignKey(OyuUser, verbose_name="Oyu User", on_delete=models.CASCADE)
-    fullname = models.CharField("Бүтэн нэр", max_length=20, null=True)
+    fullname = models.CharField("Бүтэн нэр", max_length=20, null=True, blank=True)
     region = models.CharField("Харьяа", max_length=100, blank=True, null=True, choices=USER_REGION_CHOICES, help_text="Сургууль эсвэл ажилладаг газар.")
     respected = models.PositiveIntegerField("Хүндлэгдсэн", default=0, null=True)
     solved_problem = models.PositiveIntegerField("Бодсон бодлогын тоо", default=0, null=True)
@@ -88,6 +89,7 @@ class OyuUserProfile(models.Model):
 class CtfChallenge(models.Model):
     REQUIRED_FIELDS = ['oyu_user']
 
+    # General
     title = models.CharField("Гарчиг", max_length=30, unique=True)
     author = models.ForeignKey(OyuUser, verbose_name='Нэмсэн', on_delete=models.DO_NOTHING, null=True)
     description = MartorField()
@@ -95,7 +97,12 @@ class CtfChallenge(models.Model):
     category = models.CharField("Төрөл", max_length=100, choices=CTF_CHALLENGE_CATEGORY_CHOICES, null=True)
     state = models.CharField("Төлөв", max_length=100, null=True, default='active')
     flag = models.CharField("Flag", max_length=100, null=False)
+
+    # Additional
     solved_users_count = models.PositiveIntegerField("Бодсон хэрэглэгчдийн тоо", null=True, default=0)
+
+    # Security
+    reference_id = HashidField(allow_int_lookup=True, null=True, salt='CHANGEMEINFUTURE', min_length=15)
 
     def __str__(self):
         return "%s | %s" % (self.title, self.category)
@@ -111,7 +118,6 @@ class CtfChallengeRequest(models.Model):
 
     def __str__(self):
         return "%s | %s" % (self.oyu_user.__str__(), self.title)
-
 
 class UserChallenge(models.Model):
     REQUIRED_FIELDS = ["oyu_user", "challenge"]

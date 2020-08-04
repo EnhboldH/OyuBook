@@ -73,8 +73,7 @@ class CTFChallengesView(View):
         user = request.user
         value = request.POST[list(request.POST)[1]]
         chall_id = list(request.POST)[1].split('-')[1]
-        challenge = CtfChallenge.objects.get(pk=chall_id)
-
+        challenge = CtfChallenge.objects.filter(reference_id=chall_id).first()
         if challenge.flag == value:
             can_fb = False
             if user.is_authenticated:
@@ -112,46 +111,53 @@ class CTFChallengesView(View):
             messages.error(request, 'Хариулт буруу байна')
             if user.is_authenticated:
                 user_profile = OyuUserProfile.objects.filter(oyu_user=user).first()
-                user_challenge = UserChallenge.objects.filter(oyu_user=user, challenge=challenge).first()
-                if user_challenge:
-                    if user_challenge.status == 'unsolved':
-                        user_challenge.status = 'attempted'
-                        user_challenge.save()
-                else:
-                    UserChallenge.objects.create(
-                        oyu_user=request.user,
-                        challenge=challenge,
-                        status='attempted',
-                    ).save()
+                UserChallenge.objects.create(
+                    oyu_user=request.user,
+                    challenge=challenge,
+                    status='attempted',
+                ).save()
                 user_profile.score = max(user_profile.score - 100, 0)
                 user_profile.save()
-
         self.prepare_context()
         return render(request, 'ctf/challenges.html', self.context)
 
     def prepare_context(self):
         user = self.request.user
-        clist = []
+        
+        author_clist = []
+        solved_clist = []
+        attempt_clist = []
+        unsolved_clist = []
+
         if user.is_authenticated:
             for cll in CtfChallenge.objects.all():
-                is_solved, is_author, is_attempted = False, False, False
-                user_challenge_solved = UserChallenge.objects.filter(oyu_user=user, challenge=cll, status='solved').first()
-                user_challenge_attempted = UserChallenge.objects.filter(oyu_user=user, challenge=cll, status='attempted').first()
-                if cll.author.username == user.username: is_author, is_solved  = True, False
-                elif user_challenge_solved: is_author, is_solved = False, True
-                elif user_challenge_attempted: is_attempted = True
-                clist.append({
+                data = {
                     'title': cll.title,
                     'category': cll.category,
                     'value': cll.value,
                     'solved_users_count': cll.solved_users_count,
                     'description': cll.description,
                     'author': cll.author,
-                    'is_solved': is_solved,
-                    'is_author': is_author,
-                    'is_attempted': is_attempted,
-                })
-            self.context['challenges'] = clist
+                    'hid': cll.reference_id,
+                }
+                print(cll)
+                if cll.author.username == user.username:
+                    print('auth')
+                    author_clist.append(data)
+                elif UserChallenge.objects.filter(oyu_user=user, challenge=cll, status='solved').first():
+                    print('solved')
+                    solved_clist.append(data)
+                elif UserChallenge.objects.filter(oyu_user=user, challenge=cll, status='attempted').first():
+                    print('att')
+                    attempt_clist.append(data)
+                else:
+                    print('unsolv')
+                    unsolved_clist.append(data)
+
+            self.context['author_clist'] = author_clist
+            self.context['solved_clist'] = solved_clist
+            self.context['attempt_clist'] = attempt_clist
+            self.context['unsolved_clist'] = unsolved_clist
         else:
             self.context['challenges'] = CtfChallenge.objects.all()
         self.context['tops'] = OyuUserProfile.objects.order_by('-score')[:5]
@@ -186,6 +192,10 @@ class CTFChallengeRequestView(FormView):
                 flag=challenge_data.get('flag'),
                 author=user,
             ).save()
+            # Adding `reference_id`
+            ctf_chall = CtfChallenge.objects.last()
+            ctf_chall.reference_id = ctf_chall.id
+            ctf_chall.save()
 
             user_profile = OyuUserProfile.objects.filter(oyu_user=user).first()
             user_profile.accepted_problem += 1
@@ -247,6 +257,9 @@ class CTFAdminChallengeRequestsView(View):
             flag=challenge.flag,
             author=req_user,
         ).save()
+        ctf_chall = CtfChallenge.objects.last()
+        ctf_chall.reference_id = ctf_chall.id
+        ctf_chall.save()
 
         challenge.delete()
         ctf_chall = CtfChallenge.objects.last()

@@ -24,6 +24,7 @@ martor = "*"
 markdown = "==3.1"
 requests = "*"
 django-session-timeout = "*"
+django-hashid-field = "*"
 
 [requires]
 python_version = "3.6"

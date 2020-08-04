@@ -144,3 +144,6 @@ MARTOR_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.smarty',
     'markdown.extensions.fenced_code',
 ]
+
+# HashID
+HASHID_FIELD_SALT = "a long and secure salt value that is not the same as SECRET_KEY"
