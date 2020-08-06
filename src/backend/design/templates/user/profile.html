@@ -3,20 +3,11 @@
 {% block style %}
   <link href="{% static 'css/users/profile.css' %}" rel="stylesheet">
   <style>
-    {% if object.background_image != 'img/users/background/default.svg' %}
-      body {
-        background: linear-gradient(45deg, rgba(20, 30, 56, 0.1) 0%, rgba(6, 26, 66, 0.9) 100%), url("/media/{{ object.background_image }}") no-repeat center center fixed; 
-      }
-    {% endif %}
     body {
       font-family: "Open Sans", sans-serif;
       color: #fff;
       background-repeat: no-repeat;
-      {% if object.background_image == 'img/users/background/default.svg' %}
-        background: linear-gradient(45deg, rgba(20, 30, 56, 0.9) 0%, rgba(6, 26, 66, 0.9) 100%), url("/static/img/base/default.svg") no-repeat center center fixed;
-      {% else %} 
-        background: linear-gradient(45deg, rgba(20, 30, 56, 0.1) 0%, rgba(6, 26, 66, 0.9) 100%), url("/media/{{ object.background_image }}") no-repeat center center fixed; 
-      {% endif %}
+        background: linear-gradient(45deg, rgba(20, 30, 56, 0.1) 0%, rgba(6, 26, 66, 0.9) 100%), url("/static/img/base/{{ object.background_image }}") no-repeat center center fixed; 
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -99,22 +90,25 @@
           <table class="table table-hover table-borderless _profile-recentaction mt-3">
             <tbody>
               <tr>
-                <td><a href="#">Бодсон <b>Can you bypass me ?</b></a></td>
+                <td><a href="#">Here goes recent actions <b>TO DO</b></a></td>
               </tr>
               <tr>
-                <td><a href="#">Бодсон <b>Can you bypass me ?</b></a></td>
+                <td><a href="#">Here goes recent actions <b>TO DO</b></a></td>
               </tr>
               <tr>
-                <td><a href="#">Бодсон <b>Can you bypass me ?</b></a></td>
+                <td><a href="#">Here goes recent actions <b>TO DO</b></a></td>
               </tr>
               <tr>
-                <td><a href="#">Бодсон <b>Can you bypass me ?</b></td>
+                <td><a href="#">Here goes recent actions <b>TO DO</b></a></td>
               </tr>
               <tr>
-                <td><a href="#">Бодсон <b>Can you bypass me ?</b></td>
+                <td><a href="#">Here goes recent actions <b>TO DO</b></a></td>
               </tr>
               <tr>
-                <td><a href="#">Бодсон <b>Can you bypass me ?</b></td>
+                <td><a href="#">Here goes recent actions <b>TO DO</b></a></td>
+              </tr>
+              <tr>
+                <td><a href="#">Here goes recent actions <b>TO DO</b></a></td>
               </tr>
             </tbody>
           </table>

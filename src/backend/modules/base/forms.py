@@ -66,7 +66,7 @@ class LoginForm(AuthenticationForm):
 class UserProfileUpdateForm(forms.Form):
 
     email = forms.EmailField(label="Е-мэйл хаяг", max_length=100, required=False)
-    password = forms.CharField(label="Нууц үг", widget=forms.PasswordInput, required=False)
+    password = forms.CharField(label="Нууц үг", widget=forms.PasswordInput, required=False,)
     background_image = forms.ImageField(label="Арын зураг", max_length=128, required=False)
     avatar_image = forms.ImageField(label="Нүүр зураг", max_length=128, required=False)
 
@@ -81,7 +81,13 @@ class UserProfileUpdateForm(forms.Form):
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control _input'
             self.fields[field].widget.attrs['placeholder'] = '. . .'
-
+        
+        # Disabling extra thing on heroku
+        self.fields['password'].widget.attrs['disabled'] = True
+        self.fields['email'].widget.attrs['disabled'] = True
+        self.fields['background_image'].widget.attrs['disabled'] = True
+        self.fields['avatar_image'].widget.attrs['disabled'] = True
+        
         self.fields['avatar_image'].widget.attrs['class'] = "form-control-file"
         self.fields['background_image'].widget.attrs['class'] = "form-control-file"
 

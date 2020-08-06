@@ -8,9 +8,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "design", "static"),
 )
 
-SECRET_KEY = '6sgy3tg4j4vm%&_(@2s_3699u3v^7=_-txpp+j8keks#xtkt!x'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 

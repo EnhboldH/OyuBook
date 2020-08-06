@@ -15,7 +15,9 @@
               <div class="col-2">
                 {% if user.is_authenticated %}
                   {% if user.avatar_image == 'img/users/avatar/default.png' %}
-                    <img src="{% static 'img/users/avatar/default.png' %}" class="rounded _profile-image">
+                    <img src="/static/{{ user.avatar_image }}" class="rounded _profile-image">
+                  {% else %}
+                    <img src="/media/{{ user.avatar_image }}" class="rounded _profile-image">
                   {% endif %}
                 {% else %}
                   <img src="{% static 'img/users/avatar/anonymous.svg' %}" class="rounded _profile-image">

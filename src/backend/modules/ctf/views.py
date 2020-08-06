@@ -77,6 +77,7 @@ class CTFChallengesView(View):
             if user.is_authenticated:
                 user_challenge = UserChallenge.objects.filter(oyu_user=user, challenge=challenge).first()
                 user_profile = OyuUserProfile.objects.filter(oyu_user=user).first()
+
                 if challenge.solved_users_count == 0: can_fb = True
 
                 if user_challenge:
@@ -147,6 +148,7 @@ class CTFChallengesView(View):
             self.context['unsolved_clist'] = unsolved_clist
         else:
             self.context['challenges'] = CtfChallenge.objects.all()
+
         self.context['tops'] = OyuUserProfile.objects.order_by('-score')[:5]
 
 class CTFChallengeRequestView(FormView):
@@ -167,7 +169,6 @@ class CTFChallengeRequestView(FormView):
 
     def form_valid(self, form):
         user, challenge_data = self.request.user, form.cleaned_data
-
         if user.user_type == 'admin':
             CtfChallenge.objects.create(
                 title=challenge_data.get('title'),
@@ -188,14 +189,15 @@ class CTFChallengeRequestView(FormView):
             messages.success(self.request, 'Бодлого амжилттай нэмлээ')
             return super().form_valid(form)
 
-        challenge_request = CtfChallengeRequest.create(
-            title = challenge_data.get('title'),
-            description = challenge_data.get('description'),
-            category = challenge_data.get('category'),
-            solution = challenge_data.get('solution'),
-            flag = challenge_data.get('flag'),
-            oyu_user = user
-        ).save()
+        challenge_request = CtfChallengeRequest()
+        challenge_request.title = challenge_data.get('title')
+        challenge_request.description = challenge_data.get('description')
+        challenge_request.category = challenge_data.get('category')
+        challenge_request.solution = challenge_data.get('solution')
+        challenge_request.flag = challenge_data.get('flag')
+        challenge_request.oyu_user = user
+        challenge_request.save()
+        
         messages.success(self.request, 'Бид таны бодлогыг шалгаж үзээд таньд мэдэгдэх болно')
 
         return super().form_valid(form)

@@ -24,6 +24,7 @@ from .models import (
     OyuUserProfile,
 )
 import datetime
+from random import choice
 
 class HomeView(View):
     context = {
@@ -68,9 +69,9 @@ class UserCreateView(FormView):
             user = OyuUser()
             user.email = user_data.get('email')
             user.username = user_data.get('username')
+            user.background_image=choice(['wallpaper1.jpg', 'wallpaper2.jpg', 'wallpaper3.jpg', 'wallpaper4.jpg', 'wallpaper5.jpg', 'wallpaper6.jpg'])
             user.set_password(user_data.get('password'))
             user.save()
-
             OyuUserProfile.objects.create(
                 oyu_user=user,
                 fullname=user.username,
@@ -103,7 +104,7 @@ class UserProfileView(DetailView):
         context = super().get_context_data(**kwargs)
         obj = self.get_object()
         context['title'] = obj.username
-        context['profile'] = self.get_profile_data(oyu_user=obj)
+        context['profile'] = self.get_data(oyu_user=obj)
         try: context['days'] = (datetime.date.today() - context['profile'].created_date.date()).days
         except: pass
         return context
@@ -121,10 +122,8 @@ class UserProfileView(DetailView):
         except queryset.model.DoesNotExist: raise Http404("Model дээрх slug аар хайсан өгөгдөл олдсонгүй.")
         return obj
 
-    def get_profile_data(self, oyu_user):
+    def get_data(self, oyu_user):
         profile = OyuUserProfile.objects.filter(oyu_user=oyu_user).first()
-
-        if not profile: return {}
         return profile
 
     def post(self, request, *args, **kwargs):

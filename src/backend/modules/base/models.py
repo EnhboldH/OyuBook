@@ -59,7 +59,6 @@ class OyuUser(AbstractUser, models.Model):
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'slug': self.slug})
 
-
 class OyuUserProfile(models.Model):
     REQUIRED_FIELDS = ["oyu_user"]
     
@@ -92,6 +91,7 @@ class OyuUserProfile(models.Model):
     def save(self, *args, **kwargs):
         self.last_updated_date = datetime.datetime.now()
         super(OyuUserProfile, self).save(*args, **kwargs)
+
 
 
 class CtfChallenge(models.Model):
