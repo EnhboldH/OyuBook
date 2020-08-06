@@ -106,7 +106,7 @@ MESSAGE_TAGS = {
 AUTH_USER_MODEL = "base.OyuUser"
 
 LOGIN_URL = '/user/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/ctf'
 
 LANGUAGE_CODE = 'mn'
 

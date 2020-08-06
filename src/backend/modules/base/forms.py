@@ -46,12 +46,17 @@ class UserRegistrationForm(ModelForm):
 
 class LoginForm(AuthenticationForm):
 
+    username = forms.EmailField(label="Е-мэйл хаяг", max_length=100, required=True)
+
     def __init__(self, request=None, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
-        for vis in self.visible_fields(): vis.field.widget.attrs['class'] = 'form-control _input'
+        self.fields['username'].widget.attrs.update({'autofocus': ''})
+        for vis in self.visible_fields(): 
+            vis.field.widget.attrs['class'] = 'form-control _input'
 
         self.fields['username'].widget.attrs['placeholder'] = u'И-мэйл хаяг'
         self.fields['password'].widget.attrs['placeholder'] = u'Нууц үг'
+
 
     def clean_username(self, ):
         uname = self.cleaned_data.get("username")
